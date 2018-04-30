@@ -1,0 +1,10 @@
+language: node_js # Для сборки нужен будет NodeJS
+node_js:
+  - stable # Выбираем последню стабильную версию NodeJS
+script:
+  - npm run prod # Запускаем продакшен-сборку, скрипт из `package.json`
+deploy:
+  provider: pages # Используем возможности GithubPages
+  skip_cleanup: true # Не чистим рабочую директорию
+  github_token: $GITHUB_TOKEN
+  local_dir: dist # название директории, из которой будут отдаваться файлы на сервере
