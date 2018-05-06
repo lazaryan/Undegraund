@@ -11,6 +11,8 @@ const cleanCSS 		= require('gulp-clean-css');
 const imgmin 		= require('gulp-imagemin');
 const cache 		= require('gulp-cache');
 const browserSync   = require('browser-sync');
+const csso          = require('gulp-csso');
+const plumber       = require('gulp-plumber');
 
 const IsDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV ==='production';
 
@@ -53,15 +55,21 @@ gulp.task('img', () => {
 
 gulp.task('styles', () => {
 	gulp.src('src/less/**/*.less')
+        .pipe(plumber())
 		.pipe(gulpif(!IsDevelopment, sourcemaps.init()))
 		.pipe(less())
-		.pipe(autoprefixer())
-		.pipe(gulpif(IsDevelopment, cleanCSS({compatibility: 'ie8'})))
+		.pipe(autoprefixer(['last 15 versions']))
+        .pipe(gulpif(IsDevelopment, csso({
+            restructure: true,
+            sourceMap: true,
+            debug: true
+        })))
 		.pipe(rename({
         	suffix: ".min"
         }))
 		.pipe(gulpif(!IsDevelopment, sourcemaps.write()))
-		.pipe(gulp.dest('./dist/css'));  
+		.pipe(gulp.dest('./dist/css'))
+        .pipe(gulpif(!IsDevelopment, browserSync.reload({stream: true})));  
 });
 
 // Отслеживание изменений в файлах, нужно только при локальной разработке
