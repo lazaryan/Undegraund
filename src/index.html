@@ -5,11 +5,44 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/normalize.min.css">
     <link rel="stylesheet" href="css/main.min.css">
+    <link rel="stylesheet" href="css/navigation.min.css">
 </head>
-<body>
-    <div>  
+<body class="body">
+  <!--Боковое меню-->
+    <div class="nav" id="nav-js">
+        <!--Пункты меню-->
+        <a href="#1">
+            <div class="nav-item nav-item_register">
+                <div class="nav-item_text">Регистрация</div>
+                <div class="nav-item_label"></div>
+            </div>
+        </a>
+        <a href="#2">
+            <div class="nav-item nav-item_product">
+                <div class="nav-item_text">Товары</div>
+                <div class="nav-item_label"></div>
+            </div>
+        </a> 
+        <a href="#3"> 
+            <div class="nav-item nav-item_prise">
+                <div class="nav-item_text">Цена</div>
+                <div class="nav-item_label"></div>
+            </div>
+        </a>
+
+        <!--Бургер-->
+        <div class="nav__burger">
+            <div class="nav__burger_label"></div>
+            <div class="nav__burger_text">Меню</div>
+        </div>
+    </div>
+
+    <!--Наимнование заведения-->
+
+    <!--Столы-->
+    <div class="content">  
         <a href="#" class = "button button_table1">
-           <p class="table-text"> Стол 1</p>
+            <p class="table-text"> Стол 1</p>
         </a>
 
         <a href="#" class = "button button_table2">
@@ -24,6 +57,9 @@
              Стол 4
         </a>
     </div>
+
+    <!--Скрипты-->
+    <script src="js/main.min.js"></script>
 
 </body>
 </html>
