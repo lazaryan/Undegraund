@@ -6,8 +6,19 @@
 
 @height_table: 28vh;
 @width_table: 30vw;
-@margin_table: 20vh;
-@margin_wall: 15vh; 
+@margin_table: 22vh;
+@margin_wall: 15vh;
+
+.body{
+    background-color: rgb( 255, 247, 152);
+}
+
+.content{
+    width: 90vw;
+    height: 100vh;
+    position: relative;
+    float: right;
+}
 
 @width_futter: 100vw;
 @height_futter: 12vh;
@@ -50,26 +61,26 @@
     position: fixed; 
 
     &_table1{
-        margin-left: 20vw;
+        margin-left: 10vw;
         margin-top: @margin_table;
         border-radius: 50vmax;
 
     }
 
     &_table2{
-        margin-left: 60vw;
+        margin-left: 50vw;
         margin-top: @margin_table;
         border-radius: 50vmax;
     }
 
     &_table3{
-        margin-left: 20vw;
+        margin-left: 10vw;
         margin-top: @height_table + @margin_table + @margin_wall;
         border-radius: 50vmax;
     }
 
     &_table4{
-         margin-left: 60vw;
+         margin-left: 50vw;
          margin-top: @height_table + @margin_table + @margin_wall;
          border-radius: 50vmax;
     }
