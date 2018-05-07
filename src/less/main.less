@@ -9,6 +9,31 @@
 @margin_table: 20vh;
 @margin_wall: 15vh; 
 
+@width_futter: 100vw;
+@height_futter: 12vh;
+@font_size_futter_name: 10.5vh;
+.futter{
+    display: block; 
+    position: absolute;
+    width: @width_futter;
+    height: @height_futter;
+    background: url('../img/image1.jpg');
+    background-size: cover;
+    text-decoration: none;
+
+    &_name-text{
+        color: #2a0063;
+        opacity: 0.77;
+        text-align: center;
+        text-decoration: none;
+        font-size: @font_size_futter_name;
+        font-weight: bold;
+        margin-left: 12vw;
+    }
+    
+}
+
+
 .button{
     display: block; 
     background-color: #4d59a1;
@@ -28,6 +53,7 @@
         margin-left: 20vw;
         margin-top: @margin_table;
         border-radius: 50vmax;
+
     }
 
     &_table2{
@@ -48,6 +74,9 @@
          border-radius: 50vmax;
     }
 }
+
+
+
 
 
 
