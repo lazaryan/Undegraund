@@ -10,20 +10,11 @@ const combine       = require('stream-combiner2').obj;
 /*styles*/
 const less          = require('gulp-less');
 const autoprefixer  = require('gulp-autoprefixer');
-<<<<<<< HEAD
 const sourcemaps    = require('gulp-sourcemaps');
 const csso          = require('gulp-csso');
 
 /*js*/
 const uglify        = require('gulp-uglify-es').default;
-=======
-const cleanCSS 		= require('gulp-clean-css');
-const imgmin 		= require('gulp-imagemin');
-const cache 		= require('gulp-cache');
-const browserSync   = require('browser-sync');
-const csso          = require('gulp-csso');
-const plumber       = require('gulp-plumber');
->>>>>>> #3
 
 /*images*/
 const imgmin        = require('gulp-imagemin');
@@ -78,7 +69,6 @@ gulp.task('img', () => {
         .pipe(gulp.dest('./dist/img'));
 });
 
-<<<<<<< HEAD
 gulp.task('js', () => {
     gulp.src('src/js/**/*.*')
         .pipe(plumber())
@@ -96,26 +86,6 @@ gulp.task('html', () => {
             collapseWhitespace: true
         })))
         .pipe(gulp.dest('./dist'));
-=======
-gulp.task('styles', () => {
-	gulp.src('src/less/**/*.less')
-        .pipe(plumber())
-		.pipe(gulpif(!IsDevelopment, sourcemaps.init()))
-		.pipe(less())
-		.pipe(autoprefixer(['last 15 versions']))
-        .pipe(gulpif(IsDevelopment, csso({
-            restructure: true,
-            sourceMap: true,
-            debug: true
-        })))
-		.pipe(rename({
-        	suffix: ".min"
-        }))
-		.pipe(gulpif(!IsDevelopment, sourcemaps.write()))
-		.pipe(gulp.dest('./dist/css'))
-        .pipe(browserSync.reload({stream: true}));  
->>>>>>> #3
-});
 
 // Отслеживание изменений в файлах, нужно только при локальной разработке
 gulp.task('watch', () => {
