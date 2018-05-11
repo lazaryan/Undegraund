@@ -86,6 +86,7 @@ gulp.task('html', () => {
             collapseWhitespace: true
         })))
         .pipe(gulp.dest('./dist'));
+});
 
 // Отслеживание изменений в файлах, нужно только при локальной разработке
 gulp.task('watch', () => {
