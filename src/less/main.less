@@ -1,25 +1,96 @@
 @import (less) './_media';
+
 *{
     margin: 0;
     padding: 0;
 }
-.test{
-    background-color: #E3F35B;
-    width: 80vw;
+
+
+@height_table: 28vh;
+@width_table: 30vw;
+@margin_table: 22vh;
+@margin_wall: 15vh;
+
+.body{
+    background-color: rgb( 255, 247, 152);
+}
+
+.content{
+    width: 90vw;
     height: 100vh;
-    margin-left: 10vw;
+    position: relative;
+    float: right;
+}
 
-    &__message{
-        width: 50vw;
-        height: 20vh;
-        background-color: #3354B2;
-        margin-left: 15vw;
-        margin-top: 40vh;
-        position: fixed;
+@width_header: 100vw;
+@height_header: 12vh;
+@font_size_header_name: 10.5vh;
+.header{
+    display: block; 
+    position: absolute;
+    width: @width_header;
+    height: @height_header;
+    background: url('../img/image1.jpg');
+    background-size: cover;
+    text-decoration: none;
 
-        &-text{
-            text-align: center;
-            line-height: 20vh;
-        }
+    &_name-text{
+        color: #2a0063;
+        opacity: 0.77;
+        text-align: center;
+        text-decoration: none;
+        font-size: @font_size_header_name;
+        font-weight: bold;
+        margin-left: 12vw;
+    }
+    
+}
+
+
+.button{
+    display: block; 
+    background-color: #4d59a1;
+    width: @width_table;
+    height: @height_table;
+    color: #ffcc00;
+    color: rgba(255,255,255,.5);
+    opacity: 0.9;
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    line-height: @height_table;
+    position: fixed; 
+
+    &_table1{
+        margin-left: 10vw;
+        margin-top: @margin_table;
+        border-radius: 50vmax;
+
+    }
+
+    &_table2{
+        margin-left: 50vw;
+        margin-top: @margin_table;
+        border-radius: 50vmax;
+    }
+
+    &_table3{
+        margin-left: 10vw;
+        margin-top: @height_table + @margin_table + @margin_wall;
+        border-radius: 50vmax;
+    }
+
+    &_table4{
+         margin-left: 50vw;
+         margin-top: @height_table + @margin_table + @margin_wall;
+         border-radius: 50vmax;
     }
 }
+
+
+
+
+
+
+

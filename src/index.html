@@ -1,18 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
+    <meta   charset="UTF-8">
+    <meta   name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta   http-equiv="X-UA-Compatible"
+            content="ie=edge">
+
+    <title>Underground</title>
+    
+    <link rel="stylesheet" href="header.min.css">
     <link rel="stylesheet" href="css/normalize.min.css">
     <link rel="stylesheet" href="css/main.min.css">
+    <link rel="stylesheet" href="css/navigation.min.css">
 </head>
-<body>
-    <div class="test">
-        <div class="test__message">
+<body class="body">
+    <!--Боковое меню-->
+  <!--Боковое меню-->
+    <div class="nav" id="nav-js">
+        <!--Пункты меню-->
+        <a href="#1">
+            <div class="nav-item nav-item_register">
+                <div class="nav-item_text">Регистрация</div>
+                <div class="nav-item_label"></div>
+            </div>
+        </a>
+        <a href="#2">
+            <div class="nav-item nav-item_product">
+                <div class="nav-item_text">Товары</div>
+                <div class="nav-item_label"></div>
+            </div>
+        </a> 
+        <a href="#3"> 
+            <div class="nav-item nav-item_prise">
+                <div class="nav-item_text">Цена</div>
+                <div class="nav-item_label"></div>
+            </div>
+        </a>
 
-        	
-            <h2 class = "test__message-text">Тестовая страница</h2>
+        <!--Бургер-->
+        <div class="nav__burger">
+            <div class="nav__burger_label"></div>
+            <div class="nav__burger_text">Меню</div>
         </div>
     </div>
+
+    <!--Наимнование заведения-->
+
+    <!--Столы-->
+
+    <!--Скрипты-->
+    <div class="content">  
+        <a href="#" class = "button button_table1">
+            <p class="table-text"> Стол 1</p>
+        </a>
+
+        <a href="#" class = "button button_table2">
+              Стол 2
+        </a>
+
+        <a href="#" class = "button button_table3">
+              Стол 3
+        </a>
+
+        <a href="#" class = "button button_table4">
+             Стол 4
+        </a>
+</div>
+
+    <div>
+        <a href="#" class = "header">
+            <p class = "header_name-text">
+                 UNDERGROUND
+            </p>
+        </a>  
+
+    </div>
+
+    <!--Скрипты-->
+    <script src="js/main.min.js"></script>
 </body>
 </html>
