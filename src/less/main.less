@@ -1,15 +1,12 @@
 @import (less) './_media';
 
+@color_bth: #b5b6da;
+@color_text: #2a0063;
+
 *{
     margin: 0;
     padding: 0;
 }
-
-
-@height_table: 28vh;
-@width_table: 30vw;
-@margin_table: 22vh;
-@margin_wall: 15vh;
 
 .body{
     background-color: rgb( 255, 247, 152);
@@ -17,55 +14,144 @@
 
 .content{
     width: 90vw;
-    height: 100vh;
+    min-height: 70vh;
     position: relative;
     float: right;
+    padding-top: 30vh;
 }
 
+.table{
+    width: 530px;
+    height: 230px;
+    background-color: #fff;
+    border-radius: 100px;
+    border: 4px solid @color_bth;
+    box-shadow: 0 0 25px @color_bth;
+    filter: blur(0.5px);
+    margin-bottom: 50px;
 
-.button{
-    display: block; 
-    background-color: #4d59a1;
-    width: @width_table;
-    height: @height_table;
-    color: #ffcc00;
-    color: rgba(255,255,255,.5);
-    opacity: 0.9;
-    text-decoration: none;
-    font-size: 25px;
-    font-weight: bold;
-    text-align: center;
-    line-height: @height_table;
-    position: fixed; 
-
-    &_table1{
-        margin-left: 10vw;
-        margin-top: @margin_table;
-        border-radius: 50vmax;
-
+    &_pos{
+        width: 44vw;
+        display: inline-block;
     }
 
-    &_table2{
-        margin-left: 50vw;
-        margin-top: @margin_table;
-        border-radius: 50vmax;
+    &_left{
+        float: right;
+        margin-right: 40px;
     }
 
-    &_table3{
-        margin-left: 10vw;
-        margin-top: @height_table + @margin_table + @margin_wall;
-        border-radius: 50vmax;
+    &_right{
+        float: left;
+        margin-left: 50px;
     }
 
-    &_table4{
-         margin-left: 50vw;
-         margin-top: @height_table + @margin_table + @margin_wall;
-         border-radius: 50vmax;
+    &__number{
+        width: 70%;
+        height: 45px;
+        margin: 0 auto;
+
+        &-i{
+            color: @color_text;
+            text-align: center;
+            line-height: 45px;
+            font-size: 30px;
+            font-weight: 700;
+        }
+    }
+
+    &__info{
+        height: 100px;
+        width: 100%;
+
+        &-i{
+            height: 100%;
+            width: 50%;
+            display: inline-block;
+        }
+
+        &_left{
+            float: left;
+        }
+
+        &_right{
+            float: left;
+        }
+
+        &_name{
+            width: 100%;
+            height: 40px;
+
+            &-i{
+                color: @color_text;
+                text-align: center;
+                line-height: 40px;
+                font-size: 30px;
+                font-weight: 500;
+            }
+        }
+
+        &_value{
+            width: 100%;
+            height: 60px;
+            padding-top: 10px;
+
+            &-i{
+                display: block;
+                width: 80%;
+                height: 50px;
+                margin: 0 auto;
+                background-color: @color_bth;
+                border-radius: 20px;
+            }
+        }
+    }
+
+    &__change{
+        width: 100%;
+        height: 90px;
+
+        &-i{
+            height: 100%;
+            width: 50%;
+            display: inline-block;
+        }
+
+        &_extend{
+            float: left;
+        }
+
+        &_remove{
+            float: right;
+        }
+
+        &_bth{
+            width: 150px;
+            height: 40px;
+            background-color: @color_bth;
+            border: none;
+            margin-top: 20px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        &_text{
+            text-align: center;
+            font-size: 25px;
+            color: @color_text;
+            line-height: 50px;
+        }
+    }
+
+    &__extend{
+        float: right;
+        margin-right: 25px;
+    }
+
+    &__remove{
+        float: left;
+        margin-left: 25px;
     }
 }
-
-
-
 
 
 
