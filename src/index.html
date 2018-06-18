@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/main.min.css">
     <link rel="stylesheet" href="css/navigation.min.css">
     <link rel="stylesheet" href="css/table.min.css">
+    <link rel="stylesheet" href="css/popup.min.css">
 </head>
 <body class="body">
 	<!--Наимнование заведения-->
@@ -50,12 +51,41 @@
             <div class="nav__burger_text">Меню</div>
         </div>
     </div>
+    <!--Popup окно-->
+    <div class="add-visit _none js-add-visit">
+    	<span class="_none" id="number_table"></span>
+       	<header class="header_popup">
+       	    <span class="close_popup js-close_popup"></span>
+       	</header>
+       	<div class="popup__enter_date">
+       	    <label for="enter_name" class="popup__name">
+       	        <p class="popup__name_text">Введите имя посетителя</p>
+       	    </label>
+       	    <div class="enter-name_size">
+       	        <input type="text" id="enter_name" class="enter-name">
+       	    </div>
+       	</div>
+       	<div class="popup__enter_date">
+       	    <div class="popup__enter-time">
+       	        <label for="enter-time" class="enter-time_message">
+       	            <p class="enter-date_text">введите время</p>
+       	        </label>
+       	        <input type="text" id="enter_time" class="enter_add-time">
+       	    </div>
+       	    <div class="enter-date">
+       	        <button class="enter-date_click js-enter-date_click">
+       	            <p class="enter-date_text js-enter-date_text">Подтвердить</p>
+       	        </button>
+       	    </div>
+       	</div>
+    </div>
 
     <!--Основа сайта-->
     <div class="content js-content">  
+    	<!--Столы-->
     	<!--Стол1-->
     	<div class="table_pos">
-			<div class="table table-i table_left">
+			<div class="table table-i table_left" id="table_1">
 				<div class="table table_cap table_cap__number js-table_cap">
     				Стол №1
     			</div>
@@ -68,7 +98,7 @@
 							<p class="table__info_name-i">Клиент</p>
 						</div>
 						<div class="table__info_value">
-							<span class="table__info_value-i"></span>
+							<span class="table__info_value-i js-table__info_name"></span>
 						</div>
 					</div>
 					<div class="table__info-i table__info_right">
@@ -76,7 +106,7 @@
 							<p class="table__info_name-i">Таймер</p>
 						</div>
 						<div class="table__info_value">
-							<span class="table__info_value-i"></span>
+							<span class="table__info_value-i js-table__info_time"></span>
 						</div>
 					</div>
 				</div>
@@ -96,7 +126,7 @@
 		</div>
 		<!--Стол2-->
     	<div class="table_pos">
-			<div class="table table-i table_right">
+			<div class="table table-i table_right" id="table_2">
 				<div class="table table_cap table_cap__number js-table_cap">
     				Стол №2
     			</div>
@@ -109,7 +139,7 @@
 							<p class="table__info_name-i">Клиент</p>
 						</div>
 						<div class="table__info_value">
-							<span class="table__info_value-i"></span>
+							<span class="table__info_value-i js-table__info_name"></span>
 						</div>
 					</div>
 					<div class="table__info-i table__info_right">
@@ -117,7 +147,7 @@
 							<p class="table__info_name-i">Таймер</p>
 						</div>
 						<div class="table__info_value">
-							<span class="table__info_value-i"></span>
+							<span class="table__info_value-i js-table__info_time"></span>
 						</div>
 					</div>
 				</div>
@@ -137,7 +167,7 @@
 		</div>
 		<!--Стол3-->
     	<div class="table_pos">
-			<div class="table table-i table_left">
+			<div class="table table-i table_left" id="table_3">
 				<div class="table table_cap table_cap__number js-table_cap">
     				Стол №3
     			</div>
@@ -150,7 +180,7 @@
 							<p class="table__info_name-i">Клиент</p>
 						</div>
 						<div class="table__info_value">
-							<span class="table__info_value-i"></span>
+							<span class="table__info_value-i js-table__info_name"></span>
 						</div>
 					</div>
 					<div class="table__info-i table__info_right">
@@ -158,7 +188,7 @@
 							<p class="table__info_name-i">Таймер</p>
 						</div>
 						<div class="table__info_value">
-							<span class="table__info_value-i"></span>
+							<span class="table__info_value-i js-table__info_time"></span>
 						</div>
 					</div>
 				</div>
@@ -178,7 +208,7 @@
 		</div>
 		<!--Стол4-->
     	<div class="table_pos">
-			<div class="table table-i table_right">
+			<div class="table table-i table_right" id="table_4">
 				<div class="table table_cap table_cap__number js-table_cap">
     				Стол №4
     			</div>
@@ -191,7 +221,7 @@
 							<p class="table__info_name-i">Клиент</p>
 						</div>
 						<div class="table__info_value">
-							<span class="table__info_value-i"></span>
+							<span class="table__info_value-i js-table__info_name"></span>
 						</div>
 					</div>
 					<div class="table__info-i table__info_right">
@@ -199,7 +229,7 @@
 							<p class="table__info_name-i">Таймер</p>
 						</div>
 						<div class="table__info_value">
-							<span class="table__info_value-i"></span>
+							<span class="table__info_value-i js-table__info_time"></span>
 						</div>
 					</div>
 				</div>

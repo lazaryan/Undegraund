@@ -1,0 +1,137 @@
+.add-visit {
+  position: fixed;
+  z-index: 50;
+  width: 964px;
+  height: 400px;
+  background-color: #f1f0ea;
+  margin-top: 50vh;
+  margin-left: 50vw;
+  transform: translateY(-200px) translateX(-482px);
+  border: 4px solid #b5b6da;
+  border-radius: 10px;
+  box-shadow: 0 0 25px #b5b6da;
+  filter: blur(0.5px);
+}
+.close_popup {
+  width: 65px;
+  height: 65px;
+  float: right;
+  border-left: 4px solid #b5b6da;
+  border-bottom: 4px solid #b5b6da;
+  border-radius: 0 5px 0 10px;
+  cursor: pointer;
+
+  &::before{
+    content: '';
+    display: block;
+    width: 4px;
+    height: 70px;
+    background-color: #a22;
+    margin: 0 auto;
+    transform: rotate(45deg);
+  }
+
+  &::after{
+    content: '';
+    display: block;
+    width: 70px;
+    height: 4px;
+    background-color: #a22;
+    margin-top: -35px;
+    transform: rotate(45deg);
+  }
+}
+
+.header_popup {
+  width: 100%;
+  height: 70px;
+}
+.popup__enter {
+
+  &_date{
+    width: 830px;
+    height: 170px;
+    margin: 0 auto;
+  }
+
+  &-time{
+    width: 420px;
+    height: 65px;
+    float: left;
+    margin-top: 55px;
+    border: 4px solid #9496d1;
+    border-radius: 20px;
+  }
+}
+.popup__name {
+  display: block;
+  width: 100%;
+  height: 50px;
+
+  &_text{
+    font-size: 45px;
+    font-family: "Sitka";
+    color: #2a0063;
+  }
+}
+
+.enter-name {
+  border: none;
+  border-bottom: 3px solid #fff;
+  background-color: #9496d1;
+  width: 700px;
+  height: 60px;
+  margin-left: 65px;
+  margin-top: 20px;
+  font-size: 40px;
+  color: #fff;
+
+  &_size{
+    height: 100px;
+    width: 100%;
+    background-color: #9496d1;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+}
+
+.enter-time_message {
+  width: 185px;
+  height: 65px;
+  float: left;
+  background-color: #9496d1;
+  border-radius: 10px 0 0 10px;
+}
+.enter_add-time {
+  border: none;
+  border-bottom: 2px solid #9496d1;
+  margin-left: 20px;
+  width: 200px;
+  margin-top: 20px;
+  font-size: 20px;
+  color: #2a0063;
+  background-color: transparent;
+}
+.enter-date {
+  width: 260px;
+  height: 65px;
+  float: right;
+  margin-top: 55px;
+
+  &_click{
+    width: 100%;
+    height: 100%;
+    background-color: #9496d1;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+  }
+
+  &_text{
+    color: #2a0063;
+    font-size: 20px;
+    line-height: 65px;
+    font-weight: bold;
+    text-align: center;
+  }
+}
