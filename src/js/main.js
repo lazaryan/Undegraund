@@ -1,3 +1,11 @@
+/*Для IE8*/
+if (typeof Element.prototype.addEventListener === 'undefined') {
+    Element.prototype.addEventListener = function (e, callback) {
+      e = 'on' + e;
+      return this.attachEvent(e, callback);
+    };
+}
+
 /*Для бокового меню*/
 const nav 		= document.querySelector('#nav-js');
 
