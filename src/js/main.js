@@ -35,6 +35,8 @@ content.addEventListener('click', (data) => {
 
 		let table = document.getElementById('number_table');
 		table.innerHTML = +number_table;
+	}else if(target.classList.contains('js-table__remove')) {
+		console.log('Убрать посетителя');
 	}
 });
 
