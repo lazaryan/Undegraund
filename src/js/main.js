@@ -46,7 +46,7 @@ popup.addEventListener('click', (data) => {
 
 	if(target.classList.contains('js-close_popup')){
 		closePopup();
-	}else if(target.classList.contains('js-enter-date_text')){
+	}else if(target.classList.contains('js-enter-date_text') || target.classList.contains('js-enter-date_click')){
 		getDataPopup();
 	}
 });
