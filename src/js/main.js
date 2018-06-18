@@ -17,3 +17,15 @@ function ShowNav(a, b){
 		}
 	}
 }
+
+/*столы*/
+
+let content = document.querySelector('.js-content');
+
+content.addEventListener('click', (data) => {
+	let target = data.target;
+
+	if(target.classList.contains('js-table_cap')){
+		target.classList.add('_none');
+	}
+});
