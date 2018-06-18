@@ -5,10 +5,10 @@
 
 @size_icons: 4vw;
 
-@color_nav: #2a0063;
-@color_nav-grad: #686aad;
-@color_icons: rgba( 45, 12, 78 , 1);
-@color_items: rgba( 45, 12, 78 , 1);
+@color_nav: #f1f0ea;
+@color_border: #9496d1;
+@color_icons: #9496d1;
+@color_items: #9496d1;
 @color_items-border: #fff;
 
 .nav{
@@ -16,10 +16,8 @@
 	height: 100vh;
 	position: fixed;
 	background: @color_nav;
-	background: -webkit-linear-gradient(left, @color_nav, @color_nav-grad);
-	background: -o-linear-gradient(left, @color_nav, @color_nav-grad);
-	background: -moz-linear-gradient(left, @color_nav, @color_nav-grad);
-	background: linear-gradient(to right, @color_nav, @color_nav-grad);
+	border-right: 4px solid @color_border;
+	box-shadow: 4px 0 25px @color_border;
 	transition:  .6s;
 	z-index: 10;
 
@@ -102,22 +100,19 @@
 
 	&__burger{
 		width: @size_icons;
-		height: @size_icons + 1.5vw;
+		height: @size_icons;
 		position: absolute;
 		margin-top: 85vh;
 		margin-left: .5vw;
 		transition: .5s;
+		background-color: @color_icons;
+		border-radius: 10px;
 
 		&_label{
 			width: @size_icons;
 			height: @size_icons;
 			background: url('../img/icons/menu-options.svg') no-repeat center;
 			background-size: 80%;
-		}
-
-		&_text{
-			text-align: center;
-			font-size: 19px;
 		}
 	}
 }
