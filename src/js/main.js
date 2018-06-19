@@ -73,15 +73,18 @@ function getDataPopup(){
 	let name = document.getElementById('enter_name').value;
 	let time = document.getElementById('enter_time').value;
 
-	ClearPopup();
+	if(name){
 
-	let number = document.getElementById('number_table').innerHTML;
+		ClearPopup();
 
-	document.querySelector('#table_' + number + ' .js-table__info_name').innerHTML = name;
+		let number = document.getElementById('number_table').innerHTML;
 
-	popup.classList.add('_none');
+		document.querySelector('#table_' + number + ' .js-table__info_name').innerHTML = name;
 
-	initClock(time, 'table-time_' + number);
+		popup.classList.add('_none');
+
+		initClock(time, 'table-time_' + number);
+	}
 }
 
 function ClearPopup(){
@@ -98,3 +101,26 @@ function getString(s, pos_st, pos_fn){
 
 	return st;
 }
+
+/*отслеживаем ввод данных на корректность*/
+let enter_time = document.querySelector('#enter_time');
+let enter_name = document.querySelector('#enter_name');
+
+enter_time.addEventListener('input', function() {
+	if (this.value.match(/[^0-9]/g ))
+        	this.value = this.value.replace(/[^0-9]/g, '');
+	   
+    if(this.value > 10) this.value = 10;  	   
+});
+
+enter_time.addEventListener('blur', function () {
+	if(!this.value || this.value < 1) this.value = 1;
+});
+
+enter_name.addEventListener('input', function() {
+	if (this.value.match(/[^A-Za-zА-Яа-яЁё,_-. 0-9]/g ))
+        	this.value = this.value.replace(/[^A-Za-zА-Яа-яЁё,_-. 0-9]/g, '');
+
+    if(this.value.length > 30)
+    	this.value = this.value.slice(0, 30);   	   
+});
