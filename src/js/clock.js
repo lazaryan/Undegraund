@@ -34,9 +34,9 @@ Clock.prototype = {
 	clearClock : function(){
 		this.el.innerHTML = "";
 
-		this.el = "";
-		this.hours = 0;
-		this.minutes = 0;
+		this.el 		= "";
+		this.hours 		= 0;
+		this.minutes 	= 0;
 	},
 	addHours : function(h){
 		this.hours = +this.hours + h;

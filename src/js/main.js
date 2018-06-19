@@ -118,8 +118,8 @@ enter_time.addEventListener('blur', function () {
 });
 
 enter_name.addEventListener('input', function() {
-	if (this.value.match(/[^A-Za-zА-Яа-яЁё,_-. 0-9]/g ))
-        	this.value = this.value.replace(/[^A-Za-zА-Яа-яЁё,_-. 0-9]/g, '');
+	if (this.value.match(/[^A-Za-zА-Яа-яЁё,. 0-9]/g ))
+        	this.value = this.value.replace(/[^A-Za-zА-Яа-яЁё,. 0-9]/g, '');
 
     if(this.value.length > 30)
     	this.value = this.value.slice(0, 30);   	   
