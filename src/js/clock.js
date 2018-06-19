@@ -8,10 +8,10 @@ Clock.prototype = {
 	startClock : function(){
 
 		if(+this.minutes == 0){
-			+this.hours--;
+			this.hours--;
 			this.minutes = 59;
 		}else{
-			+this.minutes--;
+			this.minutes--;
 		}
 
 		let h =  this.checkCount(this.hours);
@@ -39,7 +39,7 @@ Clock.prototype = {
 		this.minutes = 0;
 	},
 	addHours : function(h){
-		this.hours += +h;
+		this.hours = +this.hours + h;
 	},
 	checkCount : function(i){
 		if( i < 10) i = '0' + i;
@@ -53,4 +53,8 @@ function initClock(hours, elem){
     window[elem] = new Clock(hours, document.getElementById(elem));
 
   	window[elem].startClock();
+}
+
+function addHours(hours, elem){
+	window[elem].addHours(hours);
 }
