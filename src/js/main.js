@@ -34,19 +34,34 @@ let popup   = document.querySelector('.js-add-visit');
 content.addEventListener('click', function (data) {
 	let target = data.target;
 
-	if(target.classList.contains('js-table_cap')){
+	if(target.classList.contains('js-table_cap')){		//добавить посетителя
 		target.classList.add('_none');
 		popup.classList.remove('_none');
 
 		let number_table = target.parentNode.getAttribute('id');
-		number_table = +getString(number_table, number_table.indexOf('_') + 1, number_table.length);
+		number_table = +number_table.slice(number_table.indexOf('_') + 1, number_table.length);
 
 		let table = document.getElementById('number_table');
 		table.innerHTML = +number_table;
-	}else if(target.classList.contains('js-table__remove')) {
-		console.log('Убрать посетителя');
+	}else if(target.classList.contains('js-table__remove')) {	//убрать посетителя
+		let number_table = target.parentElement;
+		while((number_table = number_table.parentNode) && !number_table.classList.contains('js-table'));
+
+		number_table = number_table.getAttribute('id');
+		number_table = +number_table.slice(number_table.indexOf('_') + 1, number_table.length);
+
+		removePeople(number_table);
 	}
 });
+
+function removePeople(num){
+	stopClock('table-time_' + num);
+
+	let table = document.querySelector('#table_' + num);
+
+	table.querySelector('.js-table__info_name').innerHTML = '';
+	table.querySelector('.js-table_cap').classList.remove('_none');
+}
 
 /*Popup*/
 popup.addEventListener('click', function (data)  {
@@ -54,7 +69,7 @@ popup.addEventListener('click', function (data)  {
 
 	if(target.classList.contains('js-close_popup')){
 		closePopup();
-	}else if(target.classList.contains('js-enter-date_text') || target.classList.contains('js-enter-date_click')){
+	}else if(target.classList.contains('js-enter-date_click')){
 		getDataPopup();
 	}
 });
@@ -92,16 +107,6 @@ function ClearPopup(){
 	document.getElementById('enter_time').value = 1;
 }
 
-function getString(s, pos_st, pos_fn){
-	let st = "";
-
-	for(let i = pos_st; i < pos_fn; i++){
-		st += s[i];
-	}
-
-	return st;
-}
-
 /*отслеживаем ввод данных на корректность*/
 let enter_time = document.querySelector('#enter_time');
 let enter_name = document.querySelector('#enter_name');
@@ -114,6 +119,7 @@ enter_time.addEventListener('input', function() {
 });
 
 enter_time.addEventListener('blur', function () {
+	if(this.value > 10) this.value = 10;
 	if(!this.value || this.value < 1) this.value = 1;
 });
 

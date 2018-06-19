@@ -58,3 +58,10 @@ function initClock(hours, elem){
 function addHours(hours, elem){
 	window[elem].addHours(hours);
 }
+
+function stopClock(elem){
+	window[elem].stopClock();
+	window[elem].clearClock();
+
+	delete window[elem];
+}
