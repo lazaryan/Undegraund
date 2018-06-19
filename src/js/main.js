@@ -78,14 +78,15 @@ function getDataPopup(){
 	let number = document.getElementById('number_table').innerHTML;
 
 	document.querySelector('#table_' + number + ' .js-table__info_name').innerHTML = name;
-	document.querySelector('#table_' + number + ' .js-table__info_time').innerHTML = time;
 
 	popup.classList.add('_none');
+
+	initClock(time, 'table-time_' + number);
 }
 
 function ClearPopup(){
 	document.getElementById('enter_name').value = "";
-	document.getElementById('enter_time').value = "";
+	document.getElementById('enter_time').value = 1;
 }
 
 function getString(s, pos_st, pos_fn){
