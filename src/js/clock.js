@@ -31,12 +31,15 @@ Clock.prototype = {
 
 		this.el.innerHTML = h + ' : ' + m;
 	},
-	clearClock: function(){
+	clearClock : function(){
 		this.el.innerHTML = "";
 
 		this.el = "";
 		this.hours = 0;
 		this.minutes = 0;
+	},
+	addHours : function(h){
+		this.hours += +h;
 	},
 	checkCount : function(i){
 		if( i < 10) i = '0' + i;
