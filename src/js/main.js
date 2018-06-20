@@ -130,3 +130,27 @@ enter_name.addEventListener('input', function() {
     if(this.value.length > 30)
     	this.value = this.value.slice(0, 30);   	   
 });
+
+/*при загрузке страницы если кто-то еще сидит в кафе*/
+window.onload = function(){
+	let timer = document.querySelectorAll('.js-table__info_time');
+
+	timer.forEach(function(item){
+		if(item.innerHTML){
+			let id = item.getAttribute('id');
+
+			let second = getSecond(item.innerHTML);
+			initClock(second, id);
+		}
+	});
+}
+
+function getSecond(a){
+	let h = +a.slice(0, a.indexOf(':'));
+	a = a.slice(a.indexOf(':') + 1, a.length);
+
+	let m = +a.slice(0, a.indexOf(':'));
+	let s = +a.slice(a.indexOf(':') + 1, a.length);
+
+	return (h * 3600 + m * 60 + s);
+}

@@ -27,7 +27,7 @@ Clock.prototype = {
 		let m =  this.checkCount(this.minutes);
 		let s =  this.checkCount(this.second);
 
-		this.el.innerHTML = h + ' : ' + m + ' : ' + s;
+		this.el.innerHTML = h + ':' + m + ':' + s;
 
 		let that = this;
 		if(this.hours != 0 || this.minutes != 0)
