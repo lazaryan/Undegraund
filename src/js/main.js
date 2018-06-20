@@ -1,8 +1,16 @@
+/*Для IE8*/
+if (typeof Element.prototype.addEventListener === 'undefined') {
+    Element.prototype.addEventListener = function (e, callback) {
+      e = 'on' + e;
+      return this.attachEvent(e, callback);
+    };
+}
+
 /*Для бокового меню*/
 const nav 		= document.querySelector('#nav-js');
 
-nav.addEventListener("mouseout", (event) => {ShowNav(event.target, "out")});	//убрали курсор
-nav.addEventListener("mouseover", (event) => {ShowNav(event.target, "over")});	//навели
+nav.addEventListener("mouseout", function (event)  {ShowNav(event.target, "out")});	//убрали курсор
+nav.addEventListener("mouseover", function (event)  {ShowNav(event.target, "over")});	//навели
 
 function ShowNav(a, b){
 	const nav_elem 	= document.querySelectorAll('.nav-item');
@@ -23,7 +31,7 @@ function ShowNav(a, b){
 let content = document.querySelector('.js-content');
 let popup   = document.querySelector('.js-add-visit');
 
-content.addEventListener('click', (data) => {
+content.addEventListener('click', function (data) {
 	let target = data.target;
 
 	if(target.classList.contains('js-table_cap')){
@@ -41,12 +49,12 @@ content.addEventListener('click', (data) => {
 });
 
 /*Popup*/
-popup.addEventListener('click', (data) => {
+popup.addEventListener('click', function (data)  {
 	let target = data.target;
 
 	if(target.classList.contains('js-close_popup')){
 		closePopup();
-	}else if(target.classList.contains('js-enter-date_text')){
+	}else if(target.classList.contains('js-enter-date_text') || target.classList.contains('js-enter-date_click')){
 		getDataPopup();
 	}
 });
