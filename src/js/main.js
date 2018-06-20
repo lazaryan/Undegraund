@@ -98,7 +98,7 @@ function getDataPopup(){
 
 		popup.classList.add('_none');
 
-		initClock(time, 'table-time_' + number);
+		initClock(time * 3600, 'table-time_' + number);
 	}
 }
 
