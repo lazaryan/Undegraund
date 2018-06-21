@@ -51,6 +51,15 @@ content.addEventListener('click', function (data) {
 		number_table = +number_table.slice(number_table.indexOf('_') + 1, number_table.length);
 
 		removePeople(number_table);
+	}else if(target.classList.contains('js-table__change_text')){
+		let list = target.parentNode.querySelector('.js-table__extend_bth');
+
+		list.classList.toggle('table__extend_bth_active');
+
+		let items = list.querySelectorAll('.js-table__extend_item');
+		items.forEach(function(item){
+			item.classList.toggle('table__extend_item_active');
+		})
 	}
 });
 
