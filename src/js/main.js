@@ -53,11 +53,21 @@ content.addEventListener('click', function (data) {
 		removePeople(number_table);
 	}else if(target.classList.contains('js-table__change_text')){	//добавить время
 		showListAddHours(target);
+	}else if(target.classList.contains('js-table__extend_item')){
+		showListAddHours(target);
+		let count = target.dataset.value;
+		
+		while((target = target.parentNode) && !target.getAttribute('id'));
+		let number_table = target.getAttribute('id');
+		number_table = +number_table.slice(number_table.indexOf('_') + 1, number_table.length);
+
+		addHours(+count, 'table-time_' + number_table);
 	}
 });
 
 function showListAddHours(target){
-	let list = target.parentNode.querySelector('.js-table__extend_bth');
+	let list;
+	while((target = target.parentNode) && !(list = target.querySelector('.js-table__extend_bth')));
 
 	list.classList.toggle('table__extend_bth_active');
 
