@@ -35,6 +35,10 @@ content.addEventListener('click', function (data) {
 	let target = data.target;
 
 	if(target.classList.contains('js-table_cap')){		//добавить посетителя
+		if(content.querySelector('.js-table_cap._none')){
+			content.querySelector('.js-table_cap._none').classList.remove('_none');
+		}
+		
 		target.classList.add('_none');
 		popup.classList.remove('_none');
 
