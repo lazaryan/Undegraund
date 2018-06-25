@@ -7,7 +7,7 @@ if (typeof Element.prototype.addEventListener === 'undefined') {
 }
 
 /*Для бокового меню*/
-const nav 		= document.querySelector('#nav-js');
+const nav = document.querySelector('#nav-js');
 
 nav.addEventListener("mouseout", function (event)  {ShowNav(event.target, "out")});	//убрали курсор
 nav.addEventListener("mouseover", function (event)  {ShowNav(event.target, "over")});	//навели
@@ -35,10 +35,16 @@ content.addEventListener('click', function (data) {
 	let target = data.target;
 
 	if(target.classList.contains('js-table_cap')){		//добавить посетителя
-		if(content.querySelector('.js-table_cap._none')){
-			content.querySelector('.js-table_cap._none').classList.remove('_none');
+		if(content.querySelectorAll('.js-table_cap._none')){
+			let cap = content.querySelectorAll('.js-table_cap._none');
+
+			cap.forEach(function(item) {
+				if(item.parentNode.querySelector('.js-prise_table').dataset.hours == 0){
+					item.classList.remove('_none');
+				}
+			});
 		}
-		
+
 		target.classList.add('_none');
 		popup.classList.remove('_none');
 
@@ -51,13 +57,15 @@ content.addEventListener('click', function (data) {
 		let number_table = target.parentElement;
 		while((number_table = number_table.parentNode) && !number_table.classList.contains('js-table'));
 
+		number_table.querySelector('.js-prise_table').dataset.hours = 0;
+
 		number_table = number_table.getAttribute('id');
 		number_table = +number_table.slice(number_table.indexOf('_') + 1, number_table.length);
 
 		removePeople(number_table);
 	}else if(target.classList.contains('js-table__change_text')){	//добавить время
 		showListAddHours(target);
-	}else if(target.classList.contains('js-table__extend_item')){
+	}else if(target.classList.contains('js-table__extend_item')){	//на сколько продлеваем
 		showListAddHours(target);
 		let count = target.dataset.value;
 		
@@ -66,6 +74,9 @@ content.addEventListener('click', function (data) {
 		number_table = +number_table.slice(number_table.indexOf('_') + 1, number_table.length);
 
 		addHours(+count, 'table-time_' + number_table);
+
+		let h = +target.querySelector('.js-prise_table').dataset.hours;
+		target.querySelector('.js-prise_table').dataset.hours = Number(h) + Number(count);
 	}
 });
 
@@ -126,6 +137,8 @@ function getDataPopup(){
 		popup.classList.add('_none');
 
 		initClock(time * 3600, 'table-time_' + number);
+
+		document.querySelector('#table_' + number + ' .js-prise_table').dataset.hours = +time;
 	}
 }
 
