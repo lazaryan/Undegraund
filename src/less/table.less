@@ -1,15 +1,16 @@
 @color_bth: #b5b6da;
 @color_text: #2a0063;
+@color_fill: #f1f0ea;
 
 .table{
     width: 530px;
     height: 230px;
-    background-color: #f1f0ea;
+    background-color: @color_fill;
     border-radius: 100px;
     border: 1px solid @color_bth;
     box-shadow: 0 0 25px @color_bth;
     filter: blur(0.5px);
-    margin-bottom: 50px;
+    margin-bottom: 120px;
     position: relative;
 
     &-i{
@@ -17,9 +18,15 @@
     }
 
     &_cap{
-        z-index: 2;
+        z-index: 3;
         cursor: pointer;
         position: absolute;
+
+        &_extend{
+            z-index: 2;
+            cursor: pointer;
+            position: absolute;
+        }
 
         &__number{
             line-height: 230px;
@@ -151,17 +158,62 @@
             }
         }
 
+        &_back{
+            background-color: @color_bth;
+            border-radius: 20px;
+        }
+
         &_text{
             text-align: center;
             font-size: 25px;
             color: @color_text;
             line-height: 50px;
+            width: 150px;
         }
     }
 
     &__extend{
         float: right;
         margin-right: 25px;
+
+        &_bth{
+            border-radius: 20px 20px 20px 20px;
+            padding-top: 50px;
+            transform: scaleY(0);
+            transform-origin: center top;
+            background-color: transparent;
+            transition: .5s;
+            width: 80%;
+            margin: 0 auto;
+
+            &_active{
+                transform: scaleY(1);
+            }
+        }
+
+        &_item{
+            opacity: 0;
+            transition: .5s;
+            width: 100%;
+            height: 40px;
+            border-radius: 10px;
+
+            &_active{
+                opacity: 1;
+            }
+
+            &-bth{
+                width: 100%;
+                height: 100%;
+                border: none;
+                background-color: @color_fill;
+                border-radius: 10px;
+                border: 2px solid @color_bth;
+                box-shadow: 0 0 25px @color_bth;
+                cursor: pointer;
+                color: @color_text;
+            }
+        }
     }
 
     &__remove{

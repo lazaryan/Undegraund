@@ -7,7 +7,7 @@ if (typeof Element.prototype.addEventListener === 'undefined') {
 }
 
 /*Для бокового меню*/
-const nav 		= document.querySelector('#nav-js');
+const nav = document.querySelector('#nav-js');
 
 nav.addEventListener("mouseout", function (event)  {ShowNav(event.target, "out")});	//убрали курсор
 nav.addEventListener("mouseover", function (event)  {ShowNav(event.target, "over")});	//навели
@@ -35,6 +35,16 @@ content.addEventListener('click', function (data) {
 	let target = data.target;
 
 	if(target.classList.contains('js-table_cap')){		//добавить посетителя
+		if(content.querySelectorAll('.js-table_cap._none')){
+			let cap = content.querySelectorAll('.js-table_cap._none');
+
+			cap.forEach(function(item) {
+				if(item.parentNode.querySelector('.js-prise_table').dataset.hours == 0){
+					item.classList.remove('_none');
+				}
+			});
+		}
+
 		target.classList.add('_none');
 		popup.classList.remove('_none');
 
@@ -47,12 +57,40 @@ content.addEventListener('click', function (data) {
 		let number_table = target.parentElement;
 		while((number_table = number_table.parentNode) && !number_table.classList.contains('js-table'));
 
+		number_table.querySelector('.js-prise_table').dataset.hours = 0;
+
 		number_table = number_table.getAttribute('id');
 		number_table = +number_table.slice(number_table.indexOf('_') + 1, number_table.length);
 
 		removePeople(number_table);
+	}else if(target.classList.contains('js-table__change_text')){	//добавить время
+		showListAddHours(target);
+	}else if(target.classList.contains('js-table__extend_item')){	//на сколько продлеваем
+		showListAddHours(target);
+		let count = target.dataset.value;
+		
+		while((target = target.parentNode) && !target.getAttribute('id'));
+		let number_table = target.getAttribute('id');
+		number_table = +number_table.slice(number_table.indexOf('_') + 1, number_table.length);
+
+		addHours(+count, 'table-time_' + number_table);
+
+		let h = +target.querySelector('.js-prise_table').dataset.hours;
+		target.querySelector('.js-prise_table').dataset.hours = Number(h) + Number(count);
 	}
 });
+
+function showListAddHours(target){
+	let list;
+	while((target = target.parentNode) && !(list = target.querySelector('.js-table__extend_bth')));
+
+	list.classList.toggle('table__extend_bth_active');
+
+	let items = list.querySelectorAll('.js-table__extend_item');
+	items.forEach(function(item){
+		item.classList.toggle('table__extend_item_active');
+	})
+}
 
 function removePeople(num){
 	stopClock('table-time_' + num);
@@ -98,7 +136,9 @@ function getDataPopup(){
 
 		popup.classList.add('_none');
 
-		initClock(time, 'table-time_' + number);
+		initClock(time * 3600, 'table-time_' + number);
+
+		document.querySelector('#table_' + number + ' .js-prise_table').dataset.hours = +time;
 	}
 }
 
@@ -130,3 +170,27 @@ enter_name.addEventListener('input', function() {
     if(this.value.length > 30)
     	this.value = this.value.slice(0, 30);   	   
 });
+
+/*при загрузке страницы если кто-то еще сидит в кафе*/
+window.onload = function(){
+	let timer = document.querySelectorAll('.js-table__info_time');
+
+	timer.forEach(function(item){
+		if(item.innerHTML){
+			let id = item.getAttribute('id');
+
+			let second = getSecond(item.innerHTML);
+			initClock(second, id);
+		}
+	});
+}
+
+function getSecond(a){
+	let h = +a.slice(0, a.indexOf(':'));
+	a = a.slice(a.indexOf(':') + 1, a.length);
+
+	let m = +a.slice(0, a.indexOf(':'));
+	let s = +a.slice(a.indexOf(':') + 1, a.length);
+
+	return (h * 3600 + m * 60 + s);
+}

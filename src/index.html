@@ -102,6 +102,7 @@
     	<!--Стол1-->
     	<div class="table_pos">
 			<div class="table table-i table_left js-table" id="table_1">
+				<span class="js-prise_table _none" data-value="500" data-hours="0"></span>
 				<div class="table table_cap table_cap__number js-table_cap">
     				Стол №1
     			</div>
@@ -128,9 +129,22 @@
 				</div>
 				<div class="table__change">
 					<div class="table__change-i table__change_extend">
-						<button class="table__change_bth table__extend">
-							<p class="table__change_text">Продлить</p>
-						</button>
+						<div class="table__change_bth table__extend">
+							<div class="table__change_text table_cap_extend table__change_back js-table__change_text">
+								Продлить
+							</div>
+							<div class="table__extend_bth js-table__extend_bth">
+								<div class="table__extend_item js-table__extend_item">
+									<button class="table__extend_item-bth js-table__extend_item" data-value="1">на 1 час</button>
+								</div>
+								<div class="table__extend_item js-table__extend_item">
+									<button class="table__extend_item-bth js-table__extend_item" data-value="2">на 2 часа</button>
+								</div>
+								<div class="table__extend_item js-table__extend_item">
+									<button class="table__extend_item-bth js-table__extend_item" data-value="3">на 3 часа</button>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="table__change-i table__change_remove">
 						<button class="table__change_bth table__remove table__change_text js-table__remove">
@@ -140,129 +154,171 @@
 				</div>
 			</div>
 		</div>
-		<!--Стол2-->
-    	<div class="table_pos">
-			<div class="table table-i table_right js-table" id="table_2">
-				<div class="table table_cap table_cap__number js-table_cap">
-    				Стол №2
-    			</div>
-				<div class="table__number">
-					<p class="table__number-i">Стол №2</p>
-				</div>
-				<div class="table__info">
-					<div class="table__info-i table__info_left">
-						<div class="table__info_name">
-							<p class="table__info_name-i">Клиент</p>
-						</div>
-						<div class="table__info_value">
-							<span class="table__info_value-i js-table__info_name"></span>
-						</div>
-					</div>
-					<div class="table__info-i table__info_right">
-						<div class="table__info_name">
-							<p class="table__info_name-i">Таймер</p>
-						</div>
-						<div class="table__info_value">
-							<span class="table__info_value-i js-table__info_time" id="table-time_2"></span>
-						</div>
-					</div>
-				</div>
-				<div class="table__change">
-					<div class="table__change-i table__change_extend">
-						<button class="table__change_bth table__extend">
-							<p class="table__change_text">Продлить</p>
-						</button>
-					</div>
-					<div class="table__change-i table__change_remove">
-						<button class="table__change_bth table__remove table__change_text js-table__remove">
-							Убрать
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!--Стол3-->
-    	<div class="table_pos">
-			<div class="table table-i table_left js-table" id="table_3">
-				<div class="table table_cap table_cap__number js-table_cap">
-    				Стол №3
-    			</div>
-				<div class="table__number">
-					<p class="table__number-i">Стол №3</p>
-				</div>
-				<div class="table__info">
-					<div class="table__info-i table__info_left">
-						<div class="table__info_name">
-							<p class="table__info_name-i">Клиент</p>
-						</div>
-						<div class="table__info_value">
-							<span class="table__info_value-i js-table__info_name"></span>
-						</div>
-					</div>
-					<div class="table__info-i table__info_right">
-						<div class="table__info_name">
-							<p class="table__info_name-i">Таймер</p>
-						</div>
-						<div class="table__info_value">
-							<span class="table__info_value-i js-table__info_time" id="table-time_3"></span>
-						</div>
-					</div>
-				</div>
-				<div class="table__change">
-					<div class="table__change-i table__change_extend">
-						<button class="table__change_bth table__extend">
-							<p class="table__change_text">Продлить</p>
-						</button>
-					</div>
-					<div class="table__change-i table__change_remove">
-						<button class="table__change_bth table__remove table__change_text js-table__remove">
-							Убрать
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!--Стол4-->
-    	<div class="table_pos">
-			<div class="table table-i table_right js-table" id="table_4">
-				<div class="table table_cap table_cap__number js-table_cap">
-    				Стол №4
-    			</div>
-				<div class="table__number">
-					<p class="table__number-i">Стол №4</p>
-				</div>
-				<div class="table__info">
-					<div class="table__info-i table__info_left">
-						<div class="table__info_name">
-							<p class="table__info_name-i">Клиент</p>
-						</div>
-						<div class="table__info_value">
-							<span class="table__info_value-i js-table__info_name"></span>
-						</div>
-					</div>
-					<div class="table__info-i table__info_right">
-						<div class="table__info_name">
-							<p class="table__info_name-i">Таймер</p>
-						</div>
-						<div class="table__info_value">
-							<span class="table__info_value-i js-table__info_time" id="table-time_4"></span>
-						</div>
-					</div>
-				</div>
-				<div class="table__change">
-					<div class="table__change-i table__change_extend">
-						<button class="table__change_bth table__extend">
-							<p class="table__change_text">Продлить</p>
-						</button>
-					</div>
-					<div class="table__change-i table__change_remove">
-						<button class="table__change_bth table__remove table__change_text js-table__remove">
-							Убрать
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
+        <!--Стол2-->
+        <div class="table_pos">
+            <div class="table table-i table_right js-table" id="table_2">
+                <span class="js-prise_table _none" data-value="500" data-hours="0"></span>
+                <div class="table table_cap table_cap__number js-table_cap">
+                    Стол №2
+                </div>
+                <div class="table__number">
+                    <p class="table__number-i">Стол №2</p>
+                </div>
+                <div class="table__info">
+                    <div class="table__info-i table__info_left">
+                        <div class="table__info_name">
+                            <p class="table__info_name-i">Клиент</p>
+                        </div>
+                        <div class="table__info_value">
+                            <span class="table__info_value-i js-table__info_name"></span>
+                        </div>
+                    </div>
+                    <div class="table__info-i table__info_right">
+                        <div class="table__info_name">
+                            <p class="table__info_name-i">Таймер</p>
+                        </div>
+                        <div class="table__info_value">
+                            <span class="table__info_value-i js-table__info_time" id="table-time_2"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="table__change">
+                    <div class="table__change-i table__change_extend">
+                        <div class="table__change_bth table__extend">
+                            <div class="table__change_text table_cap_extend table__change_back js-table__change_text">
+                                Продлить
+                            </div>
+                            <div class="table__extend_bth js-table__extend_bth">
+                                <div class="table__extend_item js-table__extend_item">
+                                    <button class="table__extend_item-bth js-table__extend_item" data-value="1">на 1 час</button>
+                                </div>
+                                <div class="table__extend_item js-table__extend_item">
+                                    <button class="table__extend_item-bth js-table__extend_item" data-value="2">на 2 часа</button>
+                                </div>
+                                <div class="table__extend_item js-table__extend_item">
+                                    <button class="table__extend_item-bth js-table__extend_item" data-value="3">на 3 часа</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table__change-i table__change_remove">
+                        <button class="table__change_bth table__remove table__change_text js-table__remove">
+                            Убрать
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Стол3-->
+        <div class="table_pos">
+            <div class="table table-i table_left js-table" id="table_3">
+                <span class="js-prise_table _none" data-value="500" data-hours="0"></span>
+                <div class="table table_cap table_cap__number js-table_cap">
+                    Стол №3
+                </div>
+                <div class="table__number">
+                    <p class="table__number-i">Стол №3</p>
+                </div>
+                <div class="table__info">
+                    <div class="table__info-i table__info_left">
+                        <div class="table__info_name">
+                            <p class="table__info_name-i">Клиент</p>
+                        </div>
+                        <div class="table__info_value">
+                            <span class="table__info_value-i js-table__info_name"></span>
+                        </div>
+                    </div>
+                    <div class="table__info-i table__info_right">
+                        <div class="table__info_name">
+                            <p class="table__info_name-i">Таймер</p>
+                        </div>
+                        <div class="table__info_value">
+                            <span class="table__info_value-i js-table__info_time" id="table-time_3"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="table__change">
+                    <div class="table__change-i table__change_extend">
+                        <div class="table__change_bth table__extend">
+                            <div class="table__change_text table_cap_extend table__change_back js-table__change_text">
+                                Продлить
+                            </div>
+                            <div class="table__extend_bth js-table__extend_bth">
+                                <div class="table__extend_item js-table__extend_item">
+                                    <button class="table__extend_item-bth js-table__extend_item" data-value="1">на 1 час</button>
+                                </div>
+                                <div class="table__extend_item js-table__extend_item">
+                                    <button class="table__extend_item-bth js-table__extend_item" data-value="2">на 2 часа</button>
+                                </div>
+                                <div class="table__extend_item js-table__extend_item">
+                                    <button class="table__extend_item-bth js-table__extend_item" data-value="3">на 3 часа</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table__change-i table__change_remove">
+                        <button class="table__change_bth table__remove table__change_text js-table__remove">
+                            Убрать
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Стол4-->
+        <div class="table_pos">
+            <div class="table table-i table_right js-table" id="table_4">
+                <span class="js-prise_table _none" data-value="550" data-hours="0"></span>
+                <div class="table table_cap table_cap__number js-table_cap">
+                    Стол №4
+                </div>
+                <div class="table__number">
+                    <p class="table__number-i">Стол №4</p>
+                </div>
+                <div class="table__info">
+                    <div class="table__info-i table__info_left">
+                        <div class="table__info_name">
+                            <p class="table__info_name-i">Клиент</p>
+                        </div>
+                        <div class="table__info_value">
+                            <span class="table__info_value-i js-table__info_name"></span>
+                        </div>
+                    </div>
+                    <div class="table__info-i table__info_right">
+                        <div class="table__info_name">
+                            <p class="table__info_name-i">Таймер</p>
+                        </div>
+                        <div class="table__info_value">
+                            <span class="table__info_value-i js-table__info_time" id="table-time_4"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="table__change">
+                    <div class="table__change-i table__change_extend">
+                        <div class="table__change_bth table__extend">
+                            <div class="table__change_text table_cap_extend table__change_back js-table__change_text">
+                                Продлить
+                            </div>
+                            <div class="table__extend_bth js-table__extend_bth">
+                                <div class="table__extend_item js-table__extend_item">
+                                    <button class="table__extend_item-bth js-table__extend_item" data-value="1">на 1 час</button>
+                                </div>
+                                <div class="table__extend_item js-table__extend_item">
+                                    <button class="table__extend_item-bth js-table__extend_item" data-value="2">на 2 часа</button>
+                                </div>
+                                <div class="table__extend_item js-table__extend_item">
+                                    <button class="table__extend_item-bth js-table__extend_item" data-value="3">на 3 часа</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table__change-i table__change_remove">
+                        <button class="table__change_bth table__remove table__change_text js-table__remove">
+                            Убрать
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 	</div>	
     <!--Скрипты-->
     <script type="text/javascript" src="js/clock.min.js"></script>
