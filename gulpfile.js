@@ -15,6 +15,7 @@ const csso          = require('gulp-csso');
 
 /*js*/
 const uglify        = require('gulp-uglify-es').default;
+const babel         = require('gulp-babel');
 
 /*images*/
 const imgmin        = require('gulp-imagemin');
@@ -55,9 +56,6 @@ gulp.task('styles', () => {
             sourceMap: true,
             debug: true
         })))
-        .pipe(rename({
-            suffix: ".min"
-        }))
         .pipe(gulp.dest('./dist/css'));
 });
 
@@ -72,10 +70,10 @@ gulp.task('img', () => {
 gulp.task('js', () => {
     gulp.src('src/js/**/*.*')
         .pipe(plumber())
-        .pipe(gulpif(!IsDevelopment, uglify()))
-        .pipe(rename({
-            suffix: ".min"
+        .pipe(babel({
+            presets: ['env']
         }))
+        .pipe(gulpif(!IsDevelopment, uglify()))
         .pipe(gulp.dest('./dist/js'));
 });
 

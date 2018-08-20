@@ -2,141 +2,156 @@
 @color_text: #2a0063;
 @fill: #f1f0ea;
 
-.add-visit {
-  position: fixed;
-  z-index: 50;
-  width: 964px;
-  height: 400px;
-  background-color: @fill;
-  margin-top: 50vh;
-  margin-left: 50vw;
-  transform: translateY(-200px) translateX(-482px);
-  border: 4px solid @color_bth;
-  border-radius: 10px;
-  box-shadow: 0 0 25px @color_bth;
-  filter: blur(0.5px);
-}
-.close_popup {
-  width: 65px;
-  height: 65px;
-  float: right;
-  border-left: 4px solid @color_bth;
-  border-bottom: 4px solid @color_bth;
-  border-radius: 0 5px 0 10px;
-  cursor: pointer;
-
-  &::before{
-    content: '';
-    display: block;
-    width: 4px;
-    height: 70px;
-    background-color: #a22;
-    margin: 0 auto;
-    transform: rotate(45deg);
-  }
-
-  &::after{
-    content: '';
-    display: block;
-    width: 70px;
-    height: 4px;
-    background-color: #a22;
-    margin-top: -35px;
-    transform: rotate(45deg);
-  }
-}
-
-.header_popup {
-  width: 100%;
-  height: 70px;
-}
-.popup__enter {
-
-  &_date{
-    width: 830px;
-    height: 170px;
-    margin: 0 auto;
-  }
-
-  &-time{
-    width: 350px;
-    height: 65px;
-    float: left;
-    margin-top: 55px;
+.add-client {
+    position: fixed;
+    z-index: 10;
+    width: 964px;
+    height: 400px;
+    background-color: @fill;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     border: 4px solid @color_bth;
-    border-radius: 20px;
-  }
-}
-.popup__name {
-  display: block;
-  width: 100%;
-  height: 50px;
+    border-radius: 10px;
+    box-shadow: 0 0 25px @color_bth;
+    filter: blur(0.5px);
 
-  &_text{
-    font-size: 45px;
-    font-family: "Sitka";
-    color: @color_text;
-  }
+    &__header {
+        height: 70px;
+
+        &::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+    }
+
+    &__close {
+        width: 65px;
+        height: 65px;
+        float: right;
+        background-color: @fill;
+        border-left: 4px solid @color_bth;
+        border-bottom: 4px solid @color_bth;
+        border-radius: 0 5px 0 10px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 85%;
+            height: 4px;
+            margin: auto;
+            background-color: #a22;
+        }
+
+        &::before {
+            transform: rotate(45deg);
+        }
+
+        &::after {
+            transform: rotate(-45deg);
+        }
+    }
+
+    &__body {
+        width: 830px;
+        height: 300px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    &__enter-name {
+        width: 100%;
+    }
+
+    &__enter-hours {
+        width: 350px;
+        height: 65px;
+        margin-top: 55px;
+        border: 4px solid @color_bth;
+        border-radius: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__enter {
+        width: 260px;
+        height: 65px;
+        margin-top: 55px;
+        background-color: @color_bth;
+        border-radius: 15px;
+        border: none;
+        cursor: pointer;
+        color: @color_text;
+        font-size: 20px;
+        line-height: 65px;
+        font-weight: bold;
+        text-align: center;
+    }
 }
 
 .enter-name {
-  border: none;
-  border-bottom: 3px solid @fill;
-  background-color: @color_bth;
-  width: 700px;
-  height: 60px;
-  margin-left: 65px;
-  margin-top: 20px;
-  font-size: 40px;
-  color: #fff;
+    &__title {
+        font-size: 45px;
+        line-height: 70px;
+        font-family: "Sitka";
+        color: @color_text;
+    }
 
-  &_size{
-    height: 100px;
-    width: 100%;
-    background-color: @color_bth;
-    border-radius: 10px;
-    margin-top: 20px;
-  }
+    &__block {
+        height: 100px;
+        width: 100%;
+        background-color: @color_bth;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__input {
+        border: none;
+        border-bottom: 3px solid @fill;
+        background-color: @color_bth;
+        width: 80%;
+        height: 60px;
+        font-size: 40px;
+        color: #fff;
+    }
 }
 
-.enter-time_message {
-  width: 185px;
-  height: 65px;
-  float: left;
-  background-color: @color_bth;
-  border-radius: 10px 0 0 10px;
-}
-.enter_add-time {
-  border: none;
-  border-bottom: 2px solid @color_bth;
-  margin-left: 20px;
-  width: 130px;
-  margin-top: 20px;
-  font-size: 20px;
-  color: @color_text;
-  background-color: transparent;
-  text-align: center;
-}
-.enter-date {
-  width: 260px;
-  height: 65px;
-  float: right;
-  margin-top: 55px;
+.enter-time {
+    &__title {
+        width: 185px;
+        height: 65px;
+        background-color: @color_bth;
+        border-radius: 10px 0 0 10px;
+        color: @color_text;
+        font-size: 20px;
+        line-height: 65px;
+        font-weight: bold;
+        text-align: center;
+    }
 
-  &_click{
-    width: 100%;
-    height: 100%;
-    background-color: @color_bth;
-    border-radius: 15px;
-    border: none;
-    cursor: pointer;
-  }
-
-  &_text{
-    color: @color_text;
-    font-size: 20px;
-    line-height: 65px;
-    font-weight: bold;
-    text-align: center;
-  }
+    &__input {
+        border: none;
+        border-bottom: 2px solid @color_bth;
+        width: 130px;
+        height: 40px;
+        margin-top: 10px;
+        margin-right: 10px;
+        font-size: 20px;
+        line-height: 40px;
+        color: @color_text;
+        background-color: @fill;
+        text-align: center;
+    }
 }
