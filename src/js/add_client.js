@@ -281,7 +281,7 @@ AddClient.prototype = {
 	* {Object} body - in which block to generate the object
 	* {String} type - type element
 	* {String} className - element class list
-	* id - element id
+	* {String} id - element id
 	* {String} text - text in element
 	* {String} html_text - html markup inside the element
 	* {Boolean} generate - creation condition

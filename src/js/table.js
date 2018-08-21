@@ -52,114 +52,107 @@ Tabel.prototype = {
 
 		if(this.name) {
 			this._active = true;
+
 		}
 
-		let cap = {
-			class_element: 'table__cap',
-			text: `Стол № ${this.Number}`,
-			generate: !this._active,
-			save: {
-				active: true,
-				name: '_cap'
+		this._create = {
+			cap: {
+				setting: {
+					className: 'table__cap',
+					text: `Стол № ${this.Number}`,
+					generate: !this._active,
+					save: {
+						active: true,
+						name: '_cap'
+					},
+					on: {
+						active: true,
+						type: 'click',
+						callback: this.showPopup
+					}
+				}
 			},
-			on: {
-				active: true,
-				type: 'click',
-				callback: this.showPopup
-			}
-		};
-
-		let title = {
-			class_element: 'table__title',
-			text: `Стол № ${this.number}`
-		};
-
-		let information_name = {
-			type: 'span',
-			class_element: 'information__value',
-			id_element: `${this.Number}_name`,
-			text: this.Name,
-			save: {
-				active: true,
-				name: '_name'
-			}
-		};
-
-		let information_timer = {
-			type: 'span',
-			class_element: 'information__value',
-			id_element: `${this.Number}_timer`,
-			text: '00:00',
-			save: {
-				active: true,
-				name: '_timer'
-			}
-		};
-
-		let change_add = {
-			type: 'button',
-			class_element: 'information__button',
-			text: 'Добавить',
-			save: {
-				active: true,
-				name: '_add_hours'
-			}
-		};
-
-		let change_remove = {
-			type: 'button',
-			class_element: 'information__button',
-			text: 'Убрать',
-			save: {
-				active: true,
-				name: '_add_remove'
+			title: {
+				setting: {
+					className: 'table__title',
+					text: `Стол № ${this.number}`
+				}
 			},
-			on: {
-				active: true,
-				type: 'click',
-				callback: this.showPay
-			}
-		};
-
-		let information = {
-			class_element: 'table__information',
-			elements : [
-				{
-					class_element : 'information__field',
+			information: {
+				setting: {
+					className: 'table__information',
 					elements : [
 						{
-							class_element: 'information__title',
-							text: 'Клиент'
+							className : 'information__field',
+							elements : [
+								{
+									className: 'information__title',
+									text: 'Клиент'
+								},
+								{
+									type: 'span',
+									className: 'information__value',
+									id: `${this.Number}_name`,
+									text: this.Name,
+									save: {
+										active: true,
+										name: '_name'
+									}
+								}
+							]
 						},
-						information_name
-					]
-				},
-				{
-					class_element : 'information__field',
-					elements : [
 						{
-							class_element: 'information__title',
-							text: 'Таймер'
-						},
-						information_timer
+							className : 'information__field',
+							elements : [
+								{
+									className: 'information__title',
+									text: 'Таймер'
+								},
+								{
+									type: 'span',
+									className: 'information__value',
+									id: `${this.Number}_timer`,
+									text: '00:00',
+									save: {
+										active: true,
+										name: '_timer'
+									}
+								}
+							]
+						}
 					]
 				}
-			]
-		};
-
-		let change = {
-			class_element : 'table__change',
-			elements: [
-				change_add,
-				change_remove
-			]
-		};
-
-		this._create = {
-			cap : {setting : cap},
-			title : {setting: title},
-			information : {setting : information},
-			change : {setting : change}
+			},
+			change: {
+				setting: {
+					className : 'table__change',
+					elements: [
+						{
+							type: 'button',
+							className: 'information__button',
+							text: 'Добавить',
+							save: {
+								active: true,
+								name: '_add_hours'
+							}
+						},
+						{
+							type: 'button',
+							className: 'information__button',
+							text: 'Убрать',
+							save: {
+								active: true,
+								name: '_add_remove'
+							},
+							on: {
+								active: true,
+								type: 'click',
+								callback: this.showPay
+							}
+						}
+					]
+				}
+			}
 		}
 
 		this.createTable();
@@ -207,6 +200,26 @@ Tabel.prototype = {
 
 		this._active = true;
 		this._elements._cap = undefined;
+	},
+
+	checkClient () {
+		if (this.Name && this.Hours) {
+			this.startTable();
+		}
+	},
+
+	startTable () {
+		let time = new Date();
+		let minutes_order = time.getHours() * 60 + time.getMinutes();
+		let order = this.order.split(':').reduce((s, c) => s * 60 + +c );
+		
+		let minutes = (this.Hours * 60 + order) - minutes_order;
+
+		if (minutes > 0) {
+			this.controller.startTimer(this.Number,	minutes);
+		} else {
+			this.showPay(this);
+		}
 	},
 
 	/**
@@ -287,29 +300,32 @@ Tabel.prototype = {
 
 	/**
 	* @param
-	* body - куда генерировать
-	* type - что за блок
-	* class - class
-	* id - id
-	* text - текст в блоку
-	* html_text - html
-	* generate - генерировать при определенном условии
-	* elements - дочерние элементы
-	* save - созранить как элемент
-	** {boolean} active - сохранять или нет
-	** {String} name - имя для сохранения
-	* on - слушатели
-	** type - что слушаем
-	** param - принимает ли параметры
-	** callback - функция самовызова
+	* {Object} body - in which block to generate the object
+	* {String} type - type element
+	* {String} className - element class list
+	* {String} id - element id
+	* {String} text - text in element
+	* {String} html_text - html markup inside the element
+	* {Boolean} generate - creation condition
+	* {Object} elements - children
+	* {Object} save - save element
+	** @param
+	** {Boolean} active - attendance
+	** {String} name - name to save
+	* {Object} on - слушатели
+	** @param
+	** {Boolean} active - attendance
+	** {String} type - type of listener
+	** {Boolean} param - whether the function takes arguments
+	** {Function} callback - function callback
 	*/
 
 	createElement(
 		body = document.querySelector('body'),
 		{
 			type = 'div',
-			class_element,
-			id_element,
+			className,
+			id,
 			text,
 			html_text,
 			generate =  true,
@@ -329,8 +345,8 @@ Tabel.prototype = {
 		if (generate) {
 			let elem = document.createElement(type);
 
-			if (class_element) elem.className = class_element;
-			if (id_element) elem.id = id_element;
+			if (className) elem.className = className;
+			if (id) elem.id = id;
 			if(text) elem.innerText = text;
 			if(html_text) elem.innerHTML = html_text;
 

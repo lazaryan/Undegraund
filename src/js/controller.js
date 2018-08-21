@@ -1,12 +1,12 @@
 'use strict';
 
-function Controller ({content, tabels, popupAddClient, popupPay}) {
+function Controller ({content = 'body', styles, tabels}) {
 	this.content = undefined;
 	this.tabels = [];
 	this.clock = [];
 	this.pay = [];
 
-	this.init(content, tabels, popupAddClient, popupPay);
+	this.init(content, styles, tabels);
 
 	return this;
 }
@@ -16,57 +16,43 @@ Controller.prototype = {
 	_count_tabels: 0,
 	_popupAddClient: undefined,
 
-	init (content, tabels, popupAddClient) {
+	init (content, styles, tabels) {
 		if (content) {
 			this._init_content(content);
 		} else {
 			throw new Error('Not app body!');
 		}
 
+		if (styles) {
+			for(let key in styles) {
+				this.createStyle(styles[key]);
+			}
+		}
+
 		if (tabels) {
-			if (tabels.items instanceof Array) {
-				for (let tabel of tabels.items) {
+			if (tabels instanceof Array) {
+				for (let i = 0; i < tabels.length; i++) {
 					this._count_tabels++;
-					this._init_tabels(this._count_tabels, tabel, this);
+					this._init_tabels(this._count_tabels, tabels[i], this);
 				}
 			} else {
-				this._count_tabels++;
-				this._init_tabels(this._count_tabels, tabels.items, this);
+				this._init_tabels(this._count_tabels, tabels, this);
 			}
-
-			if (tabels.style) {
-				this.createStyle(tabels.style);
-			}
-		}
-
-		if (popupAddClient.style) {
-			this.createStyle(popupAddClient.style);
-		}
-		if (popupPay.style) {
-			this.createStyle(popupPay.style);
 		}
 
 		return this;
 	},
 
 	_init_content (content) {
-		if (content.el) {
-			if (typeof content.el == 'object') {
-				this.content = content.el;
-			} else {
-				this.content = document.querySelector(content.el);
-			}
-		}
-
-		if (content.style) {
-			this.createStyle(content.style);
-		}
+		this.content = typeof content == 'object' ? content : document.querySelector(content);
 	},
 
 	_init_tabels (id_tabel, param, controller) {
-		this.tabels[id_tabel] = new Tabel(id_tabel, param, controller);
 		this.clock[id_tabel] = new Clock(controller, id_tabel);
+		this.tabels[id_tabel] = new Tabel(id_tabel, param, controller);
+		
 		this.createBlock(this.tabels[id_tabel].Body, this.content);
+		this.tabels[id_tabel].checkClient();
 	},
 
 	createStyle (style) {
@@ -125,13 +111,18 @@ Controller.prototype = {
 		if (name) {
 			this.tabels[number].activeTable(name, hours);
 
-			this.clock[number].addMinutes(hours * 60);
-			this.clock[number].start();
+			this.startTimer(number, hours * 60);
 
 			this._popupAddClient.removePopup(this._popupAddClient);
 			this._popupAddClient = undefined;
 			this._activePopupAddClient = false;
 		}
+	},
+
+	startTimer(number, minutes) {
+		console.log(number, this.clock[number]);
+		this.clock[number].addMinutes(minutes);
+		this.clock[number].start();
 	},
 
 	showPay(number, hours, prise) {
@@ -147,6 +138,7 @@ Controller.prototype = {
 	},
 
 	changeTime(number, time) {
+		console.log(this.tabels);
 		this.tabels[number].changeTimer(time);
 	},
 

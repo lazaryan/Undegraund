@@ -20,75 +20,53 @@
     <script src="js/table.js"></script>
     <script src="js/controller.js"></script>
     <script>
-        /**
-        * @param {Array Objects}
-        * {Number} prise - prise tabel
-        * {String} name - name client
-        * {Number} hours - how many hours the table was ordered
-        * {String} order - table order time. format : hh:mm:ss
-        */
-        let content = {
-            el: '#content',
-            style: {
-                type: 'link',
+        let content = document.querySelector('#content');
+
+        let styles = {
+        	content: {
+        		type: 'link',
                 body: 'css/main.css'
-            }
-        }
-
-        let tabels = {
-            /**
-            * @param {Array Objects}
-            * {Number} prise - prise tabel
-            * {String} name - name client
-            * {Number} hours - how many hours the table was ordered
-            * {String} order - table order time. format : hh:mm:ss
-            */
-            items: [
-                {
-                    prise: 400, 
-                    name: ''
-                }, 
-                {
-                    name: '',
-                    prise: 400,
-                }, 
-                {
-                    prise: 400
-                },
-                {
-                    prise: 450
-                }
-            ],
-            style: {
-                type: 'link',
+        	},
+        	tabels: {
+        		type: 'link',
                 body: 'css/table.css'
-            }
-        }
-
-        let popupAddClient = {
-            style : {
-                type: 'link',
+        	},
+        	addClient : {
+        		type: 'link',
                 body: 'css/popup.css'
-            }
-        }
-
-        let popupPay = {
-            style : {
-                type: 'link',
+        	},
+        	pay : {
+        		type: 'link',
                 body: 'css/popup_prise.css'
-            }
+        	}
         }
 
-        let data = {
-            content: content,
-            tabels: tabels,
-            popupAddClient: popupAddClient,
-            popupPay: popupPay
-        }
+        let tabels = [
+        	{
+                prise: 400, 
+                name: 'Сергей',
+                hours: 2,
+                order: '19:47'
+            }, 
+            {
+                name: '',
+                prise: 400,
+            }, 
+            {
+                prise: 400
+            },
+            {
+                prise: 450
+            }
+        ];
+
+		let data = {
+			content: content,
+			styles: styles,
+			tabels: tabels
+		}
 
         let controller = new Controller(data);
-
-        console.log(controller);
     </script>
 </body>
 </html>
