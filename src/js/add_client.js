@@ -38,8 +38,8 @@ AddClient.prototype = {
 	/**
 	* init this Object
 	* @param
-	* {Object} controller - controller element
-	* id - id element
+	* {Object} controller - the controlling element
+	* id - element's id
 	* @return this Object
 	*/
 
@@ -193,9 +193,9 @@ AddClient.prototype = {
 	},
 
 	/**
-	* processing of the entered username
+	* the process of entering username
 	* @param
-	* {Object} e - the received data
+	* {Object} e - received data
 	* {Object} than - this Object
 	*/
 
@@ -205,9 +205,9 @@ AddClient.prototype = {
 	},
 
 	/**
-	* processing of the entered hours
+	* the process of entering hours
 	* @param
-	* {Object} e - the received data
+	* {Object} e - received data
 	* {Object} than - this Object
 	*/
 
@@ -226,9 +226,9 @@ AddClient.prototype = {
 	},
 
 	/**
-	* check input name
+	* checking the entered name
 	* @param 
-	* name - entered name
+	* name - enter the name
 	* than - this object
 	*/
 
@@ -249,9 +249,9 @@ AddClient.prototype = {
 	},
 
 	/**
-	* check input time
+	* checking the entered time
 	* @param 
-	* time - entered time
+	* time - enter the time
 	* than - this object
 	*/
 
