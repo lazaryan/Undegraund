@@ -278,30 +278,30 @@ AddClient.prototype = {
 
 	/**
 	* @param
-	* {Object} body - in which block to generate the object
-	* {String} type - type element
-	* {String} className - element class list
-	* {String} id - element id
+	* {Object} body - block to which this element is generated
+	* {String} type - element's type
+	* {String} className - list of the element's classes
+	* {String} id - element's id
 	* {String} text - text in element
 	* {String} html_text - html markup inside the element
-	* {Boolean} generate - creation condition
-	* {Object} elements - children
-	* {Object} save - save element
-	* {String} label_for - id input for which the label was created
-	* {String} input_type - type input
-	* {Number} input_min - min count input (type="number")
-	* {Number} input_max - max count input (type="number")
+	* {Boolean} generate - generated under certain condition
+	* {Object} elements - child elements
+	* {Object} save - saving element
+	* {String} label_for - input id for which the label is created
+	* {String} input_type - input type
+	* {Number} input_min - min numeric value input (type="number")
+	* {Number} input_max - max numeric value input (type="number")
 	* {Number} maxlength - max length value input (type="text")
-	* {String} value - value element
+	* {String} value - element's value
 	** @param
-	** {Boolean} active - attendance
+	** {Boolean} active - presence of event listeners
 	** {String} name - name to save
-	* {Object} on - слушатели
+	* {Object} on - event listeners
 	** @param
-	** {Boolean} active - attendance
-	** {String} type - type of listener
+	** {Boolean} active - presence of event listeners
+	** {String} type - type of event listener
 	** {Boolean} param - whether the function takes arguments
-	** {Function} callback - function callback
+	** {Function} callback - callback function
 	*/
 
 	createElement(
