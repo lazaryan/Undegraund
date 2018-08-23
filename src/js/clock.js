@@ -4,9 +4,9 @@
 * Timer for table
 * @constructor
 * @param
-* {Object} controller - controller element
-* id - id element
-* {Number} minutes - how many minutes the table was ordered
+* {Object} controller - controlling element
+* id - element's id
+* {Number} minutes - how many minutes the table will be ordered
 * @return this Object
 */
 
@@ -26,9 +26,9 @@ Clock.prototype = {
 	/**
 	* init this Object
 	* @param
-	* {Object} controller - controller element
-	* id - id element
-	* {Number} minutes - how many minutes the table was ordered
+	* {Object} controller - controlling element
+	* id - element's id
+	* {Number} minutes - how many minutes the table will be ordered
 	* @return this Object
 	*/
 
@@ -42,8 +42,8 @@ Clock.prototype = {
 	},
 
 	/**
-	* get how many minutes the table was ordered
-	* @param {Number} minutes - how many minutes the table was ordered
+	* get how many minutes the table will be ordered
+	* @param {Number} minutes - how many minutes the table will be ordered
 	*/
 
 	addMinutes (minutes = 0) {
@@ -80,7 +80,7 @@ Clock.prototype = {
 	},
 
 	/**
-	* change value object and sends messages to the controller
+	* change object's value and sends messages to the controller
 	*/
 
 	changeTime () {
@@ -105,7 +105,7 @@ Clock.prototype = {
 	},
 
 	/**
-	* check format number
+	* check number's  format
 	* @param {Number} n - number
 	* @return two-digit number
 	*/

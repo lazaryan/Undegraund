@@ -3,8 +3,8 @@
 /**
 * the object to add a new client
 * @param
-* {Object} controller - controller element
-* id - id element
+* {Object} controller - controlling element
+* id - element's id
 * @return this Object
 */
 
@@ -38,7 +38,7 @@ AddClient.prototype = {
 	/**
 	* init this Object
 	* @param
-	* {Object} controller - the controlling element
+	* {Object} controller - controlling element
 	* id - element's id
 	* @return this Object
 	*/
