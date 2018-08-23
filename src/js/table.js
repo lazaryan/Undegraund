@@ -4,9 +4,9 @@
 * Table Object
 * @constructor
 * @param
-* {Object} controller - controller element
-* {Object} obj - setting table
-* id - id element
+* {Object} controller - controlling element
+* {Object} obj - table's setting
+* id - element's id
 * @return this Object
 */
 
@@ -34,9 +34,9 @@ Tabel.prototype = {
 	/**
 	* init this Object
 	* @param
-	* {Object} controller - controller element
-	* {Object} obj - setting table
-	* id - id element
+	* {Object} controller - controlling element
+	* {Object} obj - table's setting
+	* id - element's id
 	* @return this Object
 	*/
 
@@ -192,7 +192,7 @@ Tabel.prototype = {
 	},
 
 	/**
-	* Removes the lid and makes the table active
+	* Removes the table's lid and makes it active
 	*/
 
 	closeCap () {
@@ -223,7 +223,7 @@ Tabel.prototype = {
 	},
 
 	/**
-	* method of creating a window for adding visitor data
+	* method of creating a window for adding visitor's data
 	* @param {Object} than - this object
 	*/
 
@@ -232,7 +232,7 @@ Tabel.prototype = {
 	},
 
 	/**
-	* the method adds a lid and makes the table not active
+	* method that adds the table's lid and makes it inactive
 	*/
 
 	addCap () {
@@ -242,10 +242,10 @@ Tabel.prototype = {
 	},
 
 	/**
-	* method of data modification
+	* method of modifying data
 	* @param
-	* {String} name - name client
-	* {Number} hours - how many hours the table was ordered
+	* {String} name - client's name
+	* {Number} hours - how many hours the table will be ordered
 	*/
 
 	changeData (name, hours) {
@@ -258,7 +258,7 @@ Tabel.prototype = {
 	},
 
 	/**
-	* clear information of client
+	* clear the information about the client
 	*/
 
 	clearData () {
@@ -269,10 +269,10 @@ Tabel.prototype = {
 	},
 
 	/**
-	* method of data modification and active table
+	* mmethod of modifying data and activate the table
 	* @param
-	* {String} name - name client
-	* {Number} hours - how many hours the table was ordered
+	* {String} name - client's name
+	* {Number} hours - how many hours the table will be ordered
 	*/
 
 	activeTable (name, hours) {
@@ -281,7 +281,7 @@ Tabel.prototype = {
 	},
 
 	/**
-	* order price display method
+	* method to display the price on the screen
 	* @param {Object} than - this Object
 	*/
 
@@ -290,8 +290,8 @@ Tabel.prototype = {
 	},
 
 	/**
-	* method of changing the remaining time of ordering a table
-	* @param {String} time - the remaining time line
+	* method to change the remaining time of table reservation
+	* @param {String} time - the remaining time
 	*/
 
 	changeTimer (time) {
@@ -300,24 +300,24 @@ Tabel.prototype = {
 
 	/**
 	* @param
-	* {Object} body - in which block to generate the object
-	* {String} type - type element
-	* {String} className - element class list
-	* {String} id - element id
+	* {Object} body - block to which this element is generated
+	* {String} type - element's type
+	* {String} className - list of the element's classes
+	* {String} id - element's id
 	* {String} text - text in element
 	* {String} html_text - html markup inside the element
-	* {Boolean} generate - creation condition
-	* {Object} elements - children
-	* {Object} save - save element
+	* {Boolean} generate - generated under certain condition
+	* {Object} elements - child elements
+	* {Object} save - saving element
 	** @param
-	** {Boolean} active - attendance
+	** {Boolean} active - presence of event listeners
 	** {String} name - name to save
-	* {Object} on - слушатели
+	* {Object} on - event listeners
 	** @param
-	** {Boolean} active - attendance
-	** {String} type - type of listener
+	** {Boolean} active - presence of event listeners
+	** {String} type - type of event listener
 	** {Boolean} param - whether the function takes arguments
-	** {Function} callback - function callback
+	** {Function} callback - callback function
 	*/
 
 	createElement(

@@ -4,8 +4,8 @@
 * Amount display object
 * @constructor
 * @param
-* {Object} controller - controller element
-* id - id element
+* {Object} controller - controlling element
+* id - element's id
 * @return this Object
 */
 
@@ -28,8 +28,8 @@ Pay.prototype = {
 	/**
 	* init this Object
 	* @param
-	* {Object} controller - controller element
-	* id - id element
+	* {Object} controller - controlling element
+	* id - element's id
 	* @return this Object
 	*/
 
@@ -131,10 +131,10 @@ Pay.prototype = {
 	},
 
 	/**
-	* show prise
+	* show price
 	* @param
-	* {Number} prise - prise table
-	* {Number} hours - how many hours the table was ordered
+	* {Number} price - tabel's price
+	* {Number} hours - how many hours the table will be ordered
 	*/
 
 	addPrise (prise, hours) {
@@ -145,24 +145,24 @@ Pay.prototype = {
 
 	/**
 	* @param
-	* {Object} body - in which block to generate the object
-	* {String} type - type element
-	* {String} className - element class list
-	* id - element id
+	* {Object} body - block to which this element is generated
+	* {String} type - element's type
+	* {String} className - list of the element's classes
+	* id - element's id
 	* {String} text - text in element
 	* {String} html_text - html markup inside the element
-	* {Boolean} generate - creation condition
-	* {Object} elements - children
-	* {Object} save - save element
+	* {Boolean} generate - generated under certain condition
+	* {Object} elements - child elements
+	* {Object} save - saving element
 	** @param
-	** {Boolean} active - attendance
+	** {Boolean} active - presence of event listeners
 	** {String} name - name to save
-	* {Object} on - слушатели
+	* {Object} on - event listeners
 	** @param
-	** {Boolean} active - attendance
-	** {String} type - type of listener
+	** {Boolean} active - presence of event listeners
+	** {String} type - type of event listener
 	** {Boolean} param - whether the function takes arguments
-	** {Function} callback - function callback
+	** {Function} callback - callback function
 	*/
 
 	createElement(
