@@ -120,7 +120,6 @@ Controller.prototype = {
 	},
 
 	startTimer(number, minutes) {
-		console.log(number, this.clock[number]);
 		this.clock[number].addMinutes(minutes);
 		this.clock[number].start();
 	},
@@ -138,7 +137,6 @@ Controller.prototype = {
 	},
 
 	changeTime(number, time) {
-		console.log(this.tabels);
 		this.tabels[number].changeTimer(time);
 	},
 
@@ -147,5 +145,10 @@ Controller.prototype = {
 		let hours = this.tabels[number].Hours;
 
 		this.showPay(number, hours, prise);
+	},
+
+	addHours(number, hours) {
+		this.clock[number].getHours(hours);
+		this.tabels[number].changeTimer(this.clock[number].getTime());
 	}
 }

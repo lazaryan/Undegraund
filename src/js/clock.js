@@ -51,6 +51,10 @@ Clock.prototype = {
 		this.minutes = minutes % 60;
 	},
 
+	getHours (hours) {
+		this.hours += hours;
+	},
+
 	/**
 	* start this timer
 	*/
@@ -102,6 +106,13 @@ Clock.prototype = {
 		} else {
 			this.controller.finishTimer(this.id);
 		}
+	},
+
+	getTime () {
+		this.hours = this.formatTime(+this.hours);
+		this.minutes = this.formatTime(+this.minutes);
+
+		return `${this.hours}:${this.minutes}`;
 	},
 
 	/**

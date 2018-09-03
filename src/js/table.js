@@ -21,6 +21,7 @@ function Tabel (id, obj, controller) {
 	this.controller = undefined;
 
 	this._active = false;
+	this._active_add_hours = false;
 	this._body = undefined;
 	this._elements = {};
 	this._create = undefined;
@@ -128,13 +129,86 @@ Tabel.prototype = {
 					className : 'table__change',
 					elements: [
 						{
-							type: 'button',
-							className: 'information__button',
-							text: 'Добавить',
-							save: {
-								active: true,
-								name: '_add_hours'
-							}
+							type: 'div',
+							className: 'information__checked',
+							elements: [
+								{
+									type: 'button',
+									className: 'information__button',
+									text: 'Добавить',
+									save: {
+										active: true,
+										name: '_add_hours'
+									},
+									on: {
+										active: true,
+										type: 'click',
+										callback: this.showAddHours
+									}
+								},
+								{
+									type: 'div',
+									className: 'information__add-hours',
+									style: 'transform: scaleY(0)',
+									save: {
+										active: true,
+										name: '_add_hours_checked'
+									},
+									elements: [
+										{
+											type: 'button',
+											className: 'information__button',
+											text: '1 час',
+											data: [
+												{
+													name: 'value',
+													value: 1
+												}
+											],
+											on: {
+												active: true,
+												type: 'click',
+												param: true,
+												callback: this.addHours
+											}
+										},
+										{
+											type: 'button',
+											className: 'information__button',
+											text: '2 часа',
+											data: [
+												{
+													name: 'value',
+													value: 2
+												}
+											],
+											on: {
+												active: true,
+												type: 'click',
+												param: true,
+												callback: this.addHours
+											}
+										},
+										{
+											type: 'button',
+											className: 'information__button',
+											text: '3 часа',
+											data: [
+												{
+													name: 'value',
+													value: 3
+												}
+											],
+											on: {
+												active: true,
+												type: 'click',
+												param: true,
+												callback: this.addHours
+											}
+										}
+									]
+								}
+							]
 						},
 						{
 							type: 'button',
@@ -298,6 +372,22 @@ Tabel.prototype = {
 		this._elements._timer.innerText = time;
 	},
 
+	showAddHours (than) {
+		than._active_add_hours = !than._active_add_hours;
+		if (than._active_add_hours) {
+			than._elements._add_hours_checked.setAttribute('style', 'transform: scaleY(1)');
+		} else {
+			than._elements._add_hours_checked.setAttribute('style', 'transform: scaleY(0)');
+		}
+	},
+
+	addHours (e, than) {
+		let value = e.target.dataset.value;
+		than.showAddHours(than);
+		than.Hours += +value;
+		than.controller.addHours(than.number, +value);
+	},
+
 	/**
 	* @param
 	* {Object} body - block to which this element is generated
@@ -328,6 +418,8 @@ Tabel.prototype = {
 			id,
 			text,
 			html_text,
+			style,
+			data,
 			generate =  true,
 			save =  {
 				active: false,
@@ -347,8 +439,14 @@ Tabel.prototype = {
 
 			if (className) elem.className = className;
 			if (id) elem.id = id;
-			if(text) elem.innerText = text;
-			if(html_text) elem.innerHTML = html_text;
+			if (text) elem.innerText = text;
+			if (html_text) elem.innerHTML = html_text;
+			if (style) elem.setAttribute('style', style);
+			if (data) {
+				data.forEach((el) => {
+					elem.dataset[el.name] = el.value
+				});
+			}
 
 			if (save.active) {
 				if(!this._elements) this._elements = {};
