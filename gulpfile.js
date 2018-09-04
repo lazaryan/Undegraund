@@ -78,7 +78,7 @@ gulp.task('js', () => {
 });
 
 gulp.task('html', () => {
-    gulp.src('src/[^_]*.+(html|php)')
+    gulp.src('src/**/[^_]*.+(html|php)')
         .pipe(fileinclude())
         .pipe(gulpif(!IsDevelopment, htmlmin({
             collapseWhitespace: true

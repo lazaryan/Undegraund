@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "set NODE_ENV=development&&gulp",
     "dev": "set NODE_ENV=development&&gulp",
-    "prod": "set NODE_ENV=production&&gulp prod"
+    "prod": "gulp prod"
   },
   "author": "Lazaryan S.K.",
   "license": "ISC",
