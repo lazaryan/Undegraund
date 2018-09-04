@@ -1,12 +1,12 @@
 'use strict';
 
-function Controller ({content = 'body', styles, tabels}) {
+function Controller ({content = 'body', tabels}) {
 	this.content = undefined;
 	this.tabels = [];
 	this.clock = [];
 	this.pay = [];
 
-	this.init(content, styles, tabels);
+	this.init(content, tabels);
 
 	return this;
 }
@@ -16,17 +16,11 @@ Controller.prototype = {
 	_count_tabels: 0,
 	_popupAddClient: undefined,
 
-	init (content, styles, tabels) {
+	init (content, tabels) {
 		if (content) {
 			this._init_content(content);
 		} else {
 			throw new Error('Not app body!');
-		}
-
-		if (styles) {
-			for(let key in styles) {
-				this.createStyle(styles[key]);
-			}
 		}
 
 		if (tabels) {
@@ -53,25 +47,6 @@ Controller.prototype = {
 		
 		this.createBlock(this.tabels[id_tabel].Body, this.content);
 		this.tabels[id_tabel].checkClient();
-	},
-
-	createStyle (style) {
-		let elem;
-
-		if (style.type === 'link') {
-			elem = document.createElement('link');
-			elem.type = 'text/css';
-                	elem.rel = 'stylesheet';
-                	elem.href = style.body;
-
-		} else if (style.type === 'style') {
-			elem = document.createElement('style');
-			elem.innerText = style.body;
-		}
-
-		if (elem) {
-			this._head.appendChild(elem);
-		}
 	},
 
 	createBlock (body, content) {

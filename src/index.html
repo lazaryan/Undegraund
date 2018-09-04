@@ -9,11 +9,19 @@
             content="ie=edge">
 
     <title>Underground</title>
+    
+    <noscript id="deferred-styles">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link rel="stylesheet" type="text/css" href="css/table.css">
+        <link rel="stylesheet" type="text/css" href="css/popup.css">
+        <link rel="stylesheet" type="text/css" href="css/popup_prise.css">
+    </noscript>
 </head>
 <body class="body">
     <!--Основа сайта-->
     <div class="content" id="content"></div>	
     <!--Скрипты-->
+    <script src="js/apend_styles.js"></script>
     <script src="js/add_client.js"></script>
     <script src="js/clock.js"></script>
     <script src="js/pay.js"></script>
@@ -21,25 +29,6 @@
     <script src="js/controller.js"></script>
     <script>
         let content = document.querySelector('#content');
-
-        let styles = {
-        	content: {
-        		type: 'link',
-                body: 'css/main.css'
-        	},
-        	tabels: {
-        		type: 'link',
-                body: 'css/table.css'
-        	},
-        	addClient : {
-        		type: 'link',
-                body: 'css/popup.css'
-        	},
-        	pay : {
-        		type: 'link',
-                body: 'css/popup_prise.css'
-        	}
-        }
 
         let tabels = [
         	{
@@ -62,7 +51,6 @@
 
 		let data = {
 			content: content,
-			styles: styles,
 			tabels: tabels
 		}
 
