@@ -302,6 +302,7 @@ Tabel.prototype = {
 	*/
 
 	showPopup (than) {
+
 		than.controller.showAddClient(than.Number);
 	},
 
@@ -360,7 +361,22 @@ Tabel.prototype = {
 	*/
 
 	showPay (than) {
-		than.controller.showPay(than.Number, than.Hours, than.prise);
+		let obj = `number=${than.Number}`;
+
+		let xhr = new XMLHttpRequest();
+		xhr.open('POST', '../php/remove_client.php', true);
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhr.send(obj);
+
+		xhr.onreadystatechange = function() {
+  			if (xhr.readyState != 4) return;
+
+  			if (xhr.status != 200) {
+    				throw new Error(xhr.statusText);
+  			} else {
+    				than.controller.showPay(than.Number, than.Hours, than.prise);
+  			}
+		}
 	},
 
 	/**
@@ -385,7 +401,23 @@ Tabel.prototype = {
 		let value = e.target.dataset.value;
 		than.showAddHours(than);
 		than.Hours += +value;
-		than.controller.addHours(than.number, +value);
+
+		let obj = `number=${than.Number}&value=${than.Hours}`;
+
+		let xhr = new XMLHttpRequest();
+		xhr.open('POST', '../php/add_hour.php', true);
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhr.send(obj);
+
+		xhr.onreadystatechange = function() {
+  			if (xhr.readyState != 4) return;
+
+  			if (xhr.status != 200) {
+    				throw new Error(xhr.statusText);
+  			} else {
+    				than.controller.addHours(than.number, +value);
+  			}
+		}
 	},
 
 	/**
