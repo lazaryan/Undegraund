@@ -222,7 +222,9 @@ AddClient.prototype = {
 	*/
 
 	enterData (than) {
-		let obj = `number=${than.Number}&name=${than.Name}&hours=${than.Hours}`;
+		let now = new Date();
+		let date = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`; 
+		let obj = `number=${than.Number}&name=${than.Name}&hours=${than.Hours}&date=${date}`;
 
 		let xhr = new XMLHttpRequest();
 		xhr.open('POST', '../php/add_client.php', true);
