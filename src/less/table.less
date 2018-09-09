@@ -5,32 +5,57 @@
 @color_fill: #f1f0ea;
 
 .table {
-    width: 530px;
-    height: 230px;
+    width: 90%;
+    max-width: 400px;
+    height: 380px;
     background-color: @color_fill;
-    border-radius: 100px;
+    border-radius: 20px;
     border: 1px solid @color_bth;
     box-shadow: 0 0 25px @color_bth;
     filter: blur(0.5px);
+    margin: auto;
     margin-bottom: 120px;
     position: relative;
 
+    @media @tablet {
+        width: 45%;
+        max-width: 530px;
+        max-width: none;
+        border-radius: 40px;
+        height: 250px;
+    }
+
+    @media @desktop {
+        border-radius: 100px;
+        height: 250px;
+    }
+
     &__content {
         width: 100%;
-        height: 100%;
-        border-radius: 100px;
-        border: 1px solid @color_bth;
-        border-radius: 100px;
+        border-radius: 20px;
         position: absolute;
         z-index: 1;
+
+        @media @tablet {
+            border-radius: 40px;
+        }
+
+        @media @desktop {
+            border-radius: 100px;
+        }
     }
 
     &__title {
         text-align: center;
         color: @color_text;
-        line-height: 45px;
-        font-size: 30px;
         font-weight: 700;
+        line-height: 35px;
+        font-size: 25px;
+
+        @media @tablet {
+            line-height: 45px;
+            font-size: 30px;
+        }
     }
 
     &__cap {
@@ -40,52 +65,98 @@
         position: absolute;
         top: 0;
         cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        border: none;
         color: @color_text;
         background-color: @color_fill;
         font-size: 50px;
         font-weight: 900;
-        border-radius: 100px;
+        border-radius: 20px;
+
+        @media @tablet {
+            border-radius: 40px;
+        }
+
+        @media @desktop {
+            border-radius: 100px;
+        }
     }
 
     &__information,
     &__change {
         width: 100%;
-        display: flex;
-        justify-content: space-around;
+
+        @media @tablet {
+            display: flex;
+            justify-content: space-around;
+        }
     }
 
     &__information {
-        height: 120px;
     }
 
     &__change {
-        height: 50px;
+        margin-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        > .information__button {
+            margin-top: 20px;
+            width: 50%;
+
+            @media @tablet {
+                order: 2;
+                width: 130px;
+            }
+
+            @media @desktop {
+                width: 160px;
+            }
+        }
     }
 }
 
+
 .information {
     &__field {
-        width: 200px;
+        width: 80%;
+        margin: auto;
+
+        @media @tablet {
+            width: 45%;
+        }
+
+        @media @desktop {
+            width: 200px;
+        }
     }
 
     &__title {
         color: @color_text;
         text-align: center;
-        line-height: 40px;
-        font-size: 30px;
         font-weight: 500;
         margin-bottom: 10px;
+        font-size: 20px;
+        line-height: 40px;
+
+        @media @tablet-strict {
+            font-size: 25px;
+        }
+
+        @media @desktop {
+            font-size: 30px;
+        }
     }
+
     &__value,
     &__button {
         display: block;
         height: 40px;
-        width: 160px;
+        width: 70%;
         margin: auto;
         background-color: @color_bth;
+        border: none;
+        outline: none;
         border-radius: 20px;
         color: @color_text;
         line-height: 40px;
@@ -93,13 +164,32 @@
         font-size: 20px;
         overflow: hidden;
         text-overflow: ellipsis;
+
+        @media @tablet {
+            width: 130px;
+        }
+
+        @media @desktop {
+            width: 160px;
+        }
     }
 
     &__checked {
         display: block;
-        width: 160px;
+        width: 70%;
         margin: auto;
         border-radius: 20px;
+        order: 2;
+        margin-top: 20px;
+
+        @media @tablet {
+            order: 1;
+            width: 130px;
+        }
+
+        @media @desktop {
+            width: 160px;
+        }
     }
 
     &__add-hours {

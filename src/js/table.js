@@ -59,6 +59,7 @@ Tabel.prototype = {
 		this._create = {
 			cap: {
 				setting: {
+					type: 'button',
 					className: 'table__cap',
 					text: `Стол № ${this.Number}`,
 					generate: !this._active,
@@ -363,6 +364,11 @@ Tabel.prototype = {
 
 	showPay (than) {
 		than.controller.showPay(than.Number, than.Hours, than.prise);
+
+		if (than._active_add_hours) {
+			than._elements._add_hours_checked.setAttribute('style', 'transform: scaleY(0)');
+			than._active_add_hours = false;
+		}
 	},
 
 	/**
