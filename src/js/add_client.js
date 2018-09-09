@@ -236,7 +236,7 @@ AddClient.prototype = {
 		let text = name;
 
 		if (text.match(/[^A-Za-zА-Яа-яЁё,. 0-9]/g )){
-        	text = text.replace(/[^A-Za-zА-Яа-яЁё,. 0-9]/g, '');
+        		text = text.replace(/[^A-Za-zА-Яа-яЁё,. 0-9]/g, '');
 		}
 
     		if(text.length > than._elements._name.maxlength){

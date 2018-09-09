@@ -284,13 +284,15 @@ Tabel.prototype = {
 
 	startTable () {
 		let time = new Date();
-		let minutes_order = time.getHours() * 60 + time.getMinutes();
-		let order = this.order.split(':').reduce((s, c) => s * 60 + +c );
+		let seconds_order = time.getHours() * 3600 + time.getMinutes() * 60 + time.getSeconds();
+		let order = this.order.split(':').reduce((s, c) => s * 60 + +c, 0 );
 		
-		let minutes = (this.Hours * 60 + order) - minutes_order;
+		let seconds = (this.Hours * 3600 + order) - seconds_order;
 
-		if (minutes > 0) {
-			this.controller.startTimer(this.Number,	minutes);
+		console.log(order, seconds_order, seconds);
+
+		if (seconds > 0) {
+			this.controller.startTimer(this.Number,	seconds);
 		} else {
 			this.showPay(this);
 		}
