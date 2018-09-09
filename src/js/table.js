@@ -363,12 +363,26 @@ Tabel.prototype = {
 	*/
 
 	showPay (than) {
-		than.controller.showPay(than.Number, than.Hours, than.prise);
+		let obj = `number=${than.Number}`;
 
-		if (than._active_add_hours) {
-			than._elements._add_hours_checked.setAttribute('style', 'transform: scaleY(0)');
-			than._active_add_hours = false;
-		}
+		let xhr = new XMLHttpRequest();
+		xhr.open('POST', '../php/remove_client.php', true);
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhr.send(obj);
+
+		xhr.onreadystatechange = function() {
+  			if (xhr.readyState != 4) return;
+
+  			if (xhr.status != 200) {
+    				throw new Error(xhr.statusText);
+  			} else {
+    				than.controller.showPay(than.Number, than.Hours, than.prise);
+
+    				if (than._active_add_hours) {
+					than._elements._add_hours_checked.setAttribute('style', 'transform: scaleY(0)');
+					than._active_add_hours = false;
+				}
+  			}
 	},
 
 	/**
