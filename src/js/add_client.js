@@ -222,7 +222,22 @@ AddClient.prototype = {
 	*/
 
 	enterData (than) {
-		than.controller.enterData(than.Number, than.Name, than.Hours);
+		let obj = `number=${than.Number}&name=${than.Name}&hours=${than.Hours}`;
+
+		let xhr = new XMLHttpRequest();
+		xhr.open('POST', '../php/add_client.php', true);
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhr.send(obj);
+
+		xhr.onreadystatechange = function() {
+  			if (xhr.readyState != 4) return;
+
+  			if (xhr.status != 200) {
+    				throw new Error(xhr.statusText);
+  			} else {
+    				than.controller.enterData(than.Number, than.Name, than.Hours);
+  			}
+		}
 	},
 
 	/**
