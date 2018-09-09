@@ -383,6 +383,7 @@ Tabel.prototype = {
 					than._active_add_hours = false;
 				}
   			}
+  		}
 	},
 
 	/**
