@@ -406,7 +406,7 @@ Tabel.prototype = {
 	addHours (e, than) {
 		let value = e.target.dataset.value;
 		than.showAddHours(than);
-		than.Hours += +value;
+		than.Hours = +than.Hours + +value;
 
 		than.controller.addHours(than.number, +value);
 
