@@ -1,3 +1,5 @@
+@import (less) './_media';
+
 @color_bth: #9496d1;
 @color_text: #2a0063;
 @fill: #f1f0ea;
@@ -6,8 +8,6 @@
 .to-pay {
     position: fixed;
     z-index: 50;
-    width: 600px;
-    height: 260px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -16,6 +16,12 @@
     box-shadow: 0 0 25px @color_bth;
     filter: blur(0.5px);
     background-color: @fill;
+    width: 90%;
+    padding: 20px 0;
+
+    @media @tablet {
+        width: 600px;
+    }
 
     &__header {
         height: 65px;
@@ -24,9 +30,19 @@
 
     &__title-header {
         text-align: center;
-        line-height: 65px;
-        font-size: 35px;
+        font-size: 25px;
+        line-height: 50px;
         color: @color_text;
+
+        @media @tablet-strict {
+            font-size: 30px;
+            line-height: 55px;
+        }
+
+        @media @desktop {
+            line-height: 65px;
+            font-size: 35px;
+        }
     }
 
     &__close {

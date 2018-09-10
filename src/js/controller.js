@@ -25,10 +25,10 @@ Controller.prototype = {
 
 		if (tabels) {
 			if (tabels instanceof Array) {
-				for (let i = 0; i < tabels.length; i++) {
+				tabels.forEach((tabel) => {
 					this._count_tabels++;
-					this._init_tabels(this._count_tabels, tabels[i], this);
-				}
+					this._init_tabels(this._count_tabels, tabel, this);
+				});
 			} else {
 				this._init_tabels(this._count_tabels, tabels, this);
 			}
@@ -86,7 +86,7 @@ Controller.prototype = {
 		if (name) {
 			this.tabels[number].activeTable(name, hours);
 
-			this.startTimer(number, hours * 60);
+			this.startTimer(number, hours * 3600);
 
 			this._popupAddClient.removePopup(this._popupAddClient);
 			this._popupAddClient = undefined;
@@ -94,8 +94,8 @@ Controller.prototype = {
 		}
 	},
 
-	startTimer(number, minutes) {
-		this.clock[number].addMinutes(minutes);
+	startTimer(number, seconds) {
+		this.clock[number].addSeconds(seconds);
 		this.clock[number].start();
 	},
 

@@ -1,3 +1,5 @@
+@import (less) './_media';
+
 @color_bth: #9496d1;
 @color_text: #2a0063;
 @fill: #f1f0ea;
@@ -5,8 +7,6 @@
 .add-client {
     position: fixed;
     z-index: 10;
-    width: 964px;
-    height: 400px;
     background-color: @fill;
     top: 50%;
     left: 50%;
@@ -15,22 +15,22 @@
     border-radius: 10px;
     box-shadow: 0 0 25px @color_bth;
     filter: blur(0.5px);
+    width: 90%;
+    max-width: 964px;
+    padding-bottom: 30px;
 
     &__header {
-        height: 70px;
-
-        &::after {
-            content: '';
-            display: block;
-            clear: both;
-        }
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 10px;
     }
 
     &__close {
         width: 65px;
         height: 65px;
-        float: right;
         background-color: @fill;
+        border: none;
+        outline: none;
         border-left: 4px solid @color_bth;
         border-bottom: 4px solid @color_bth;
         border-radius: 0 5px 0 10px;
@@ -61,12 +61,15 @@
     }
 
     &__body {
-        width: 830px;
-        height: 300px;
+        width: 80%;
+        max-width: 830px;
         margin: auto;
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
+
+        @media @tablet {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
     }
 
     &__enter-name {
@@ -74,47 +77,83 @@
     }
 
     &__enter-hours {
-        width: 350px;
-        height: 65px;
-        margin-top: 55px;
         border: 4px solid @color_bth;
         border-radius: 20px;
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        width: 80%;
+        margin: 35px auto 0;
+
+        @media @tablet {
+            margin: 55px 0 0 0;
+            width: 250px;
+        }
+
+        @media @desktop {
+            width: 350px;
+        }
     }
 
     &__enter {
-        width: 260px;
+        width: 80%;
+        max-width: 260px;
         height: 65px;
-        margin-top: 55px;
+        display: block;
+        margin: 35px auto 0;
         background-color: @color_bth;
         border-radius: 15px;
         border: none;
         cursor: pointer;
         color: @color_text;
-        font-size: 20px;
+        font-size: 15px;
         line-height: 65px;
         font-weight: bold;
         text-align: center;
+
+        @media @tablet{
+            margin: 55px 0 0 0;
+            font-size: 20px;
+        }
     }
 }
 
 .enter-name {
     &__title {
-        font-size: 45px;
-        line-height: 70px;
+        font-size: 27px;
+        line-height: 45px;
         font-family: "Sitka";
         color: @color_text;
+        text-align: center;
+        display: block;
+
+        @media @tablet {
+            font-size: 30px;
+            line-height: 60px;
+        }
+
+        @media @desktop {
+            font-size: 45px;
+            line-height: 70px;
+            text-align: left;
+        }
     }
 
     &__block {
-        height: 100px;
-        width: 100%;
+        height: 70px;
+        width: 80%;
+        margin: 20px auto 0;
         background-color: @color_bth;
         border-radius: 10px;
         display: flex;
         justify-content: center;
         align-items: center;
+
+        @media @tablet {
+            width: 100%;
+            margin: 0;
+            height: 100px;
+        }
     }
 
     &__input {
@@ -122,36 +161,61 @@
         border-bottom: 3px solid @fill;
         background-color: @color_bth;
         width: 80%;
-        height: 60px;
-        font-size: 40px;
+        height: 45px;
+        font-size: 30px;
         color: #fff;
+
+        @media @tablet {
+            height: 60px;
+            font-size: 35px;
+        }
+
+        @media @desktop {
+            font-size: 40px;
+        }
     }
 }
 
 .enter-time {
     &__title {
-        width: 185px;
-        height: 65px;
+        width: 50%;
         background-color: @color_bth;
         border-radius: 10px 0 0 10px;
         color: @color_text;
-        font-size: 20px;
-        line-height: 65px;
+        font-size: 18px;
+        line-height: 40px;
         font-weight: bold;
         text-align: center;
+        min-height: 50px;
+
+        @media @tablet {
+            font-size: 20px;
+            width: 185px;
+            line-height: 65px;
+        }
     }
 
     &__input {
         border: none;
         border-bottom: 2px solid @color_bth;
-        width: 130px;
-        height: 40px;
-        margin-top: 10px;
-        margin-right: 10px;
-        font-size: 20px;
-        line-height: 40px;
+        line-height: 30px;
         color: @color_text;
-        background-color: @fill;
+        background-color: transparent;
         text-align: center;
+        width: 44%;
+        display: block;
+        height: 40px;
+        margin-right: 3%;
+        font-size: 15px;
+
+        @media @tablet {
+            height: 40px;
+            font-size: 17px;
+        }
+
+        @media @desktop {
+            width: 130px;
+            font-size: 20px;
+        }
     }
 }
