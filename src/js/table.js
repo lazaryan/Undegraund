@@ -364,6 +364,13 @@ Tabel.prototype = {
 	showPay (than) {
 		let obj = `number=${than.Number}`;
 
+		than.controller.showPay(than.Number, than.Hours, than.prise);
+
+    		if (than._active_add_hours) {
+			than._elements._add_hours_checked.setAttribute('style', 'transform: scaleY(0)');
+			than._active_add_hours = false;
+		}
+
 		let xhr = new XMLHttpRequest();
 		xhr.open('POST', '../php/remove_client.php', true);
 		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -374,13 +381,6 @@ Tabel.prototype = {
 
   			if (xhr.status != 200) {
     				throw new Error(xhr.statusText);
-  			} else {
-    				than.controller.showPay(than.Number, than.Hours, than.prise);
-
-    				if (than._active_add_hours) {
-					than._elements._add_hours_checked.setAttribute('style', 'transform: scaleY(0)');
-					than._active_add_hours = false;
-				}
   			}
   		}
 	},
@@ -408,6 +408,8 @@ Tabel.prototype = {
 		than.showAddHours(than);
 		than.Hours += +value;
 
+		than.controller.addHours(than.number, +value);
+
 		let obj = `number=${than.Number}&value=${than.Hours}`;
 
 		let xhr = new XMLHttpRequest();
@@ -420,8 +422,6 @@ Tabel.prototype = {
 
   			if (xhr.status != 200) {
     				throw new Error(xhr.statusText);
-  			} else {
-    				than.controller.addHours(than.number, +value);
   			}
 		}
 	},

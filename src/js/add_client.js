@@ -223,8 +223,10 @@ AddClient.prototype = {
 
 	enterData (than) {
 		let now = new Date();
-		let date = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`; 
+		let date = `${than.formatTime(now.getHours())}:${than.formatTime(now.getMinutes())}:${than.formatTime(now.getSeconds())}`; 
 		let obj = `number=${than.Number}&name=${than.Name}&hours=${than.Hours}&date=${date}`;
+
+		than.controller.enterData(than.Number, than.Name, than.Hours);
 
 		let xhr = new XMLHttpRequest();
 		xhr.open('POST', '../php/add_client.php', true);
@@ -236,8 +238,6 @@ AddClient.prototype = {
 
   			if (xhr.status != 200) {
     				throw new Error(xhr.statusText);
-  			} else {
-    				than.controller.enterData(than.Number, than.Name, than.Hours);
   			}
 		}
 	},
@@ -291,6 +291,16 @@ AddClient.prototype = {
     		than.Hours = text;
 
     		than._elements._hours.value = than.Hours;
+	},
+
+	/**
+	* check number's  format
+	* @param {Number} n - number
+	* @return two-digit number
+	*/
+
+	formatTime (n) {
+		return n > 9 ? n : `0${n}`;
 	},
 
 	/**
