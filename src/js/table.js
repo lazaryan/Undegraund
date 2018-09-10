@@ -290,9 +290,7 @@ Tabel.prototype = {
 		
 		let seconds = (this.Hours * 3600 + order) - seconds_order;
 
-		console.log(order, seconds_order, seconds);
-
-		if (seconds > 0) {
+		if (seconds > 0 && order < seconds_order) {
 			this.controller.startTimer(this.Number,	seconds);
 		} else {
 			this.showPay(this);
