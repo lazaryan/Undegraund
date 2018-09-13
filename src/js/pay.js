@@ -15,6 +15,7 @@ function Pay (controller, id) {
 	this.prise = 0;
 
 	this._body = undefined;
+	this.currency = '₽';
 
 	this.init(controller, id);
 
@@ -140,7 +141,7 @@ Pay.prototype = {
 	addPrise (prise, hours) {
 		this.prise = (prise * hours) || this.prise;
 
-		this._elements._value.innerText = this.prise;
+		this._elements._value.innerText = `${this.prise} ${this.currency}`;
 	},
 
 	/**

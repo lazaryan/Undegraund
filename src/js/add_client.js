@@ -17,6 +17,9 @@ function AddClient (controller, id) {
 	this._create = {};
 	this._body = undefined;
 
+	this._hour_id = ['Час', 'Часа', 'Часов'];
+	this._style_button_disabled = 'background-color: #DFDFDF; color: #C0BEBE';
+
 	this.init(controller, id);
 
 	return this;
@@ -61,8 +64,10 @@ AddClient.prototype = {
 						},
 						on: {
 							active: true,
-							type: 'click',
-							callback: this.closePopup
+							events: {
+								type: 'click',
+								callback: this.closePopup.bind(this)
+							}
 						}
 					}
 				}
@@ -87,16 +92,25 @@ AddClient.prototype = {
 										input_type: 'text',
 										className: 'enter-name__input',
 										id_element: 'inputName',
-										maxlength: 30,
+										attr: [{name: 'placeholder', value: 'Введите имя'}],
+										maxlength: 63,
 										save: {
 											active: true,
 											name: '_name'
 										},
 										on: {
 											active: true,
-											type: 'input',
-											param: true,
-											callback: this.inputName
+											events: [
+												{
+													type: 'input',
+													param: true,
+													callback: this.inputName.bind(this)
+												},
+												{
+													type: 'keyup',
+													param: true,
+													callback: this.checkEnter.bind(this)
+												}]
 										}
 									}
 								}
@@ -124,9 +138,26 @@ AddClient.prototype = {
 									},
 									on: {
 										active: true,
-										type: 'input',
-										param: true,
-										callback: this.inputHours
+										events : [
+											{
+												type: 'input',
+												param: true,
+												callback: this.inputHours.bind(this)
+											},
+											{
+												type: 'keyup',
+												param: true,
+												callback: this.checkEnter.bind(this)
+											}]
+									}
+								},
+								{
+									type: 'span',
+									text: 'Час',
+									className: 'enter-time__hours',
+									save: {
+										active: true,
+										name: '_hours_text'
 									}
 								}
 							]
@@ -135,14 +166,18 @@ AddClient.prototype = {
 							type: 'button',
 							className: 'add-client__enter',
 							text: 'Подтвердить',
+							attr : [{name: 'disabled', value: 'disabled'}],
+							style: this._style_button_disabled,
 							save: {
 								active: true,
 								name: '_enter'
 							},
 							on: {
 								active: true,
-								type: 'click',
-								callback: this.enterData
+								events: {
+									type: 'click',
+									callback: this.enterData.bind(this)
+								}
 							}
 						}
 					]
@@ -171,62 +206,89 @@ AddClient.prototype = {
 
 		document.querySelector('body')
 			.appendChild(this.Body);
+
+		this._elements._name.focus();	
 	},
 
 	/**
 	* remove this popup
-	* @param {Object} than - this Object
 	*/
 
-	removePopup (than) {
-		document.querySelector('body').removeChild(than.Body);
+	removePopup () {
+		document.querySelector('body').removeChild(this.Body);
 	},
 
 	/**
 	* close this popup
-	* @param {Object} than - this Object
 	*/
 
-	closePopup (than) {
-		than.controller.closeAddClient(than.number);
-		than.removePopup(than);
+	closePopup () {
+		this.controller.closeAddClient(this.number);
+		this.removePopup();
 	},
 
 	/**
 	* the process of entering username
 	* @param
 	* {Object} e - received data
-	* {Object} than - this Object
 	*/
 
-	inputName (e, than) {
-		than.format_name(e.target.value, than);
-		than.controller.changeDataTable(than.Number, than.Name, than.Hours);
+	inputName (e) {
+		this.format_name(e.target.value);
+
+		if (this.Name && this._elements._enter.disabled) {
+			this._elements._enter.disabled = '';
+			this._elements._enter.style = '';
+		}
+
+		if (!this.Name) {
+			this._elements._enter.disabled = 'disabled';
+			this._elements._enter.style = this._style_button_disabled;
+		}
+
+		this.controller.changeDataTable(this.Number, this.Name, this.Hours);
+	},
+
+	checkEnter (e) {
+		if (e.code == 'Enter' && this.Name) {
+			this.enterData();
+		}
 	},
 
 	/**
 	* the process of entering hours
 	* @param
 	* {Object} e - received data
-	* {Object} than - this Object
 	*/
 
-	inputHours (e, than) {
-		than.format_time(e.target.value, than);
-		than.controller.changeDataTable(than.Number, than.Name, than.Hours);
+	inputHours (e) {
+		this.format_time(e.target.value);
+
+		this.showHoursText();
+
+		this.controller.changeDataTable(this.Number, this.Name, this.Hours);
+	},
+
+	showHoursText () {
+		if (this.Hours == 0 || this.Hours > 5) {
+			this._elements._hours_text.innerText = this._hour_id[2];
+		} else if (this.Hours == 1) {
+			this._elements._hours_text.innerText = this._hour_id[0];
+		} else {
+			this._elements._hours_text.innerText = this._hour_id[1];
+		}
 	},
 
 	/**
 	* input of received data
-	* @param {Object} than - this Object
 	*/
 
-	enterData (than) {
+	enterData () {
 		let now = new Date();
-		let date = `${than.formatTime(now.getHours())}:${than.formatTime(now.getMinutes())}:${than.formatTime(now.getSeconds())}`; 
-		let obj = `number=${than.Number}&name=${than.Name}&hours=${than.Hours}&date=${date}`;
+		let date = `${this.formatTime(now.getHours())}:${this.formatTime(now.getMinutes())}:${this.formatTime(now.getSeconds())}`; 
+		let obj = `number=${this.Number}&name=${this.Name}&hours=${this.Hours}&date=${date}`;
 
-		than.controller.enterData(than.Number, than.Name, than.Hours);
+		this.controller.enterData(this.Number, this.Name, this.Hours);
 
 		let xhr = new XMLHttpRequest();
 		xhr.open('POST', '../php/add_client.php', true);
@@ -246,33 +308,31 @@ AddClient.prototype = {
 	* checking the entered name
 	* @param 
 	* name - enter the name
-	* than - this object
 	*/
 
-	format_name (name, than) {
+	format_name (name) {
 		let text = name;
 
 		if (text.match(/[^A-Za-zА-Яа-яЁё,. 0-9]/g )){
         		text = text.replace(/[^A-Za-zА-Яа-яЁё,. 0-9]/g, '');
 		}
 
-    		if(text.length > than._elements._name.maxlength){
-    			text = text.slice(0, than._elements._name.maxlength); 
+    		if(text.length > this._elements._name.maxlength){
+    			text = text.slice(0, this._elements._name.maxlength); 
     		}
 
-    		than.Name = text;
+    		this.Name = text;
 
-    		than._elements._name.value = than.Name;
+    		this._elements._name.value = this.Name;
 	},
 
 	/**
 	* checking the entered time
 	* @param 
 	* time - enter the time
-	* than - this object
 	*/
 
-	format_time (time, than) {
+	format_time (time) {
 		let text = time;
 
 		if (!Number(text)){
@@ -281,16 +341,16 @@ AddClient.prototype = {
 
         	text = +text;
 
-    		if(text && text > than._elements._hours.max){
-    			text = than._elements._hours.max; 
+    		if(text && text > this._elements._hours.max){
+    			text = this._elements._hours.max; 
     		}
-    		if(text && text < than._elements._hours.min){
-    			text = than._elements._hours.min; 
+    		if(text && text < this._elements._hours.min){
+    			text = this._elements._hours.min; 
     		}
 
-    		than.Hours = text;
+    		this.Hours = text;
 
-    		than._elements._hours.value = than.Hours;
+    		this._elements._hours.value = this.Hours;
 	},
 
 	/**
@@ -345,6 +405,7 @@ AddClient.prototype = {
 			input_max = 999,
 			maxlength,
 			value,
+			style,
 			generate =  true,
 			save =  {
 				active: false,
@@ -352,11 +413,13 @@ AddClient.prototype = {
 			},
 			on = {
 				active: false,
-				param: false,
+				/*param: false,
 				type: undefined,
-				callback: undefined
+				callback: undefined*/
+				events: undefined
 			},
 			elements,
+			attr
 		}
 	) {
 		if (generate) {
@@ -372,6 +435,12 @@ AddClient.prototype = {
 			if (value) elem.value = value;
 			if (maxlength) elem.setAttribute('maxlength', maxlength);
 			if (label_for) elem.setAttribute('for', label_for);
+			if (style) elem.setAttribute('style', style);
+			if (attr) {
+				attr.forEach((el) => {
+					elem.setAttribute(el.name, el.value);
+				})
+			}
 
 			if (save.active) {
 				if(!this._elements) this._elements = {};
@@ -379,10 +448,20 @@ AddClient.prototype = {
 			}
 
 			if (on.active) {
-				if (on.param) {
-					elem.addEventListener(on.type, (e) => on.callback(e, this));
+				if (on.events instanceof Array) {
+					on.events.forEach((event) => {
+						if (event.param) {
+							elem.addEventListener(event.type, (e) => event.callback(e));
+						} else {
+							elem.addEventListener(event.type, () => event.callback());
+						}
+					})
 				} else {
-					elem.addEventListener(on.type, () => on.callback(this));
+					if (on.events.param) {
+						elem.addEventListener(on.events.type, (e) => on.events.callback(e));
+					} else {
+						elem.addEventListener(on.events.type, () => on.events.callback());
+					}
 				}
 			}
 
