@@ -413,9 +413,6 @@ AddClient.prototype = {
 			},
 			on = {
 				active: false,
-				/*param: false,
-				type: undefined,
-				callback: undefined*/
 				events: undefined
 			},
 			elements,
