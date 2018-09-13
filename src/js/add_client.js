@@ -253,6 +253,36 @@ AddClient.prototype = {
 		if (e.code == 'Enter' && this.Name) {
 			this.enterData();
 		}
+
+		if (e.code == 'ArrowUp') {
+			this.upHours();
+		}
+
+		if (e.code == 'ArrowDown') {
+			this.downHours();
+		}
+	},
+
+	upHours () {
+		if (this.Hours < this._elements._hours.max) {
+			this.Hours++;
+			this._elements._hours.value = this.Hours;
+
+			this.showHoursText();
+
+			this.controller.changeDataTable(this.Number, this.Name, this.Hours);
+		}
+	},
+
+	downHours () {
+		if (this.Hours > this._elements._hours.min) {
+			this.Hours--;
+			this._elements._hours.value = this.Hours;
+
+			this.showHoursText();
+
+			this.controller.changeDataTable(this.Number, this.Name, this.Hours);
+		}
 	},
 
 	/**
