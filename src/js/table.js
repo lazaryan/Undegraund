@@ -70,7 +70,7 @@ Tabel.prototype = {
 					on: {
 						active: true,
 						type: 'click',
-						callback: this.showPopup
+						callback: this.showPopup.bind(this)
 					}
 				}
 			},
@@ -144,7 +144,7 @@ Tabel.prototype = {
 									on: {
 										active: true,
 										type: 'click',
-										callback: this.showAddHours
+										callback: this.showAddHours.bind(this)
 									}
 								},
 								{
@@ -170,7 +170,7 @@ Tabel.prototype = {
 												active: true,
 												type: 'click',
 												param: true,
-												callback: this.addHours
+												callback: this.addHours.bind(this)
 											}
 										},
 										{
@@ -187,7 +187,7 @@ Tabel.prototype = {
 												active: true,
 												type: 'click',
 												param: true,
-												callback: this.addHours
+												callback: this.addHours.bind(this)
 											}
 										},
 										{
@@ -204,7 +204,7 @@ Tabel.prototype = {
 												active: true,
 												type: 'click',
 												param: true,
-												callback: this.addHours
+												callback: this.addHours.bind(this)
 											}
 										}
 									]
@@ -222,7 +222,7 @@ Tabel.prototype = {
 							on: {
 								active: true,
 								type: 'click',
-								callback: this.showPay
+								callback: this.showPay.bind(this)
 							}
 						}
 					]
@@ -299,12 +299,11 @@ Tabel.prototype = {
 
 	/**
 	* method of creating a window for adding visitor's data
-	* @param {Object} than - this object
 	*/
 
-	showPopup (than) {
+	showPopup () {
 
-		than.controller.showAddClient(than.Number);
+		this.controller.showAddClient(this.Number);
 	},
 
 	/**
@@ -358,17 +357,16 @@ Tabel.prototype = {
 
 	/**
 	* method to display the price on the screen
-	* @param {Object} than - this Object
 	*/
 
-	showPay (than) {
-		let obj = `number=${than.Number}`;
+	showPay () {
+		let obj = `number=${this.Number}`;
 
-		than.controller.showPay(than.Number, than.Hours, than.prise);
+		this.controller.showPay(this.Number, this.Hours, this.prise);
 
-    		if (than._active_add_hours) {
-			than._elements._add_hours_checked.setAttribute('style', 'transform: scaleY(0)');
-			than._active_add_hours = false;
+    		if (this._active_add_hours) {
+			this._elements._add_hours_checked.setAttribute('style', 'transform: scaleY(0)');
+			this._active_add_hours = false;
 		}
 
 		let xhr = new XMLHttpRequest();
@@ -394,23 +392,23 @@ Tabel.prototype = {
 		this._elements._timer.innerText = time;
 	},
 
-	showAddHours (than) {
-		than._active_add_hours = !than._active_add_hours;
-		if (than._active_add_hours) {
-			than._elements._add_hours_checked.setAttribute('style', 'transform: scaleY(1)');
+	showAddHours () {
+		this._active_add_hours = !this._active_add_hours;
+		if (this._active_add_hours) {
+			this._elements._add_hours_checked.setAttribute('style', 'transform: scaleY(1)');
 		} else {
-			than._elements._add_hours_checked.setAttribute('style', 'transform: scaleY(0)');
+			this._elements._add_hours_checked.setAttribute('style', 'transform: scaleY(0)');
 		}
 	},
 
-	addHours (e, than) {
+	addHours (e) {
 		let value = e.target.dataset.value;
-		than.showAddHours(than);
-		than.Hours = +than.Hours + +value;
+		this.showAddHours();
+		this.Hours = +this.Hours + +value;
 
-		than.controller.addHours(than.number, +value);
+		this.controller.addHours(this.number, +value);
 
-		let obj = `number=${than.Number}&value=${than.Hours}`;
+		let obj = `number=${this.Number}&value=${this.Hours}`;
 
 		let xhr = new XMLHttpRequest();
 		xhr.open('POST', '../php/add_hour.php', true);
@@ -493,9 +491,9 @@ Tabel.prototype = {
 
 			if (on.active) {
 				if (on.param) {
-					elem.addEventListener(on.type, (e) => on.callback(e, this));
+					elem.addEventListener(on.type, (e) => on.callback(e));
 				} else {
-					elem.addEventListener(on.type, () => on.callback(this));
+					elem.addEventListener(on.type, () => on.callback());
 				}
 			}
 

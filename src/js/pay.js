@@ -15,6 +15,7 @@ function Pay (controller, id) {
 	this.prise = 0;
 
 	this._body = undefined;
+	this.currency = '₽';
 
 	this.init(controller, id);
 
@@ -62,7 +63,7 @@ Pay.prototype = {
 							on: {
 								active: true,
 								type: 'click',
-								callback: this.closePopup
+								callback: this.closePopup.bind(this)
 							}
 						}
 					]
@@ -113,21 +114,19 @@ Pay.prototype = {
 
 	/**
 	* close this Object
-	* @param this Object
 	*/
 
-	closePopup (than) {
-		than.controller.closePay(than.id);
-		than.removePopup(than);
+	closePopup () {
+		this.controller.closePay(this.id);
+		this.removePopup();
 	},
 
 	/**
 	* remove this popup
-	* @param {Object} than - this Object
 	*/
 
-	removePopup (than) {
-		document.querySelector('body').removeChild(than.Body);
+	removePopup () {
+		document.querySelector('body').removeChild(this.Body);
 	},
 
 	/**
@@ -140,7 +139,7 @@ Pay.prototype = {
 	addPrise (prise, hours) {
 		this.prise = (prise * hours) || this.prise;
 
-		this._elements._value.innerText = this.prise;
+		this._elements._value.innerText = `${this.prise} ${this.currency}`;
 	},
 
 	/**
@@ -202,9 +201,9 @@ Pay.prototype = {
 
 			if (on.active) {
 				if (on.param) {
-					elem.addEventListener(on.type, (e) => on.callback(e, this));
+					elem.addEventListener(on.type, (e) => on.callback(e));
 				} else {
-					elem.addEventListener(on.type, () => on.callback(this));
+					elem.addEventListener(on.type, () => on.callback());
 				}
 			}
 
