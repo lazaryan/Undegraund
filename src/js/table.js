@@ -60,13 +60,10 @@ Tabel.prototype = {
 			cap: {
 				setting: {
 					type: 'button',
-					className: 'table__cap',
+					save_name: '_cap',
 					text: `Стол № ${this.Number}`,
 					generate: !this._active,
-					save: {
-						active: true,
-						name: '_cap'
-					},
+					attr: {name: 'class', value: 'table__cap'},
 					on: {
 						active: true,
 						type: 'click',
@@ -76,49 +73,47 @@ Tabel.prototype = {
 			},
 			title: {
 				setting: {
-					className: 'table__title',
-					text: `Стол № ${this.number}`
+					text: `Стол № ${this.number}`,
+					attr: {name: 'class', value: 'table__title'},
 				}
 			},
 			information: {
 				setting: {
-					className: 'table__information',
+					attr: {name: 'class', value: 'table__information'},
 					elements : [
 						{
-							className : 'information__field',
+							attr: {name: 'class', value: 'information__field'},
 							elements : [
 								{
-									className: 'information__title',
-									text: 'Клиент'
+									text: 'Клиент',
+									attr: {name: 'class', value: 'information__title'},
 								},
 								{
 									type: 'span',
-									className: 'information__value',
-									id: `${this.Number}_name`,
+									save_name: '_name',
 									text: this.Name,
-									save: {
-										active: true,
-										name: '_name'
-									}
+									attr: [
+										{name: 'class', value: 'information__value'},
+										{name: 'id', value: `${this.Number}_name`}
+									]
 								}
 							]
 						},
 						{
-							className : 'information__field',
+							attr: {name: 'class', value: 'information__field'},
 							elements : [
 								{
-									className: 'information__title',
-									text: 'Таймер'
+									text: 'Таймер',
+									attr: {name: 'class', value: 'information__title'},
 								},
 								{
 									type: 'span',
-									className: 'information__value',
-									id: `${this.Number}_timer`,
 									text: '00:00',
-									save: {
-										active: true,
-										name: '_timer'
-									}
+									save_name: '_timer',
+									attr: [
+										{name: 'class', value: 'information__value'},
+										{name: 'id', value: `${this.Number}_timer`}
+									]
 								}
 							]
 						}
@@ -127,20 +122,17 @@ Tabel.prototype = {
 			},
 			change: {
 				setting: {
-					className : 'table__change',
+					attr: {name: 'class', value: 'table__change'},
 					elements: [
 						{
 							type: 'div',
-							className: 'information__checked',
+							attr: {name: 'class', value: 'information__checked'},
 							elements: [
 								{
 									type: 'button',
-									className: 'information__button',
 									text: 'Добавить',
-									save: {
-										active: true,
-										name: '_add_hours'
-									},
+									save_name: '_add_hours',
+									attr: {name: 'class', value: 'information__button'},
 									on: {
 										active: true,
 										type: 'click',
@@ -149,22 +141,18 @@ Tabel.prototype = {
 								},
 								{
 									type: 'div',
-									className: 'information__add-hours',
-									style: 'transform: scaleY(0)',
-									save: {
-										active: true,
-										name: '_add_hours_checked'
-									},
+									save_name: '_add_hours_checked',
+									attr: [
+										{name: 'class', value: 'information__add-hours'},
+										{name: 'style', value: 'transform: scaleY(0)'}
+									],
 									elements: [
 										{
 											type: 'button',
-											className: 'information__button',
 											text: '1 час',
-											data: [
-												{
-													name: 'value',
-													value: 1
-												}
+											attr: [
+												{name: 'class', value: 'information__button'},
+												{name: 'data-value', value: 1}
 											],
 											on: {
 												active: true,
@@ -175,13 +163,10 @@ Tabel.prototype = {
 										},
 										{
 											type: 'button',
-											className: 'information__button',
 											text: '2 часа',
-											data: [
-												{
-													name: 'value',
-													value: 2
-												}
+											attr: [
+												{name: 'class', value: 'information__button'},
+												{name: 'data-value', value: 2}
 											],
 											on: {
 												active: true,
@@ -192,13 +177,10 @@ Tabel.prototype = {
 										},
 										{
 											type: 'button',
-											className: 'information__button',
 											text: '3 часа',
-											data: [
-												{
-													name: 'value',
-													value: 3
-												}
+											attr: [
+												{name: 'class', value: 'information__button'},
+												{name: 'data-value', value: 3}
 											],
 											on: {
 												active: true,
@@ -213,12 +195,9 @@ Tabel.prototype = {
 						},
 						{
 							type: 'button',
-							className: 'information__button',
 							text: 'Убрать',
-							save: {
-								active: true,
-								name: '_add_remove'
-							},
+							save_name: '_add_remove',
+							attr: {name: 'class', value: 'information__button'},
 							on: {
 								active: true,
 								type: 'click',
@@ -450,17 +429,11 @@ Tabel.prototype = {
 		body = document.querySelector('body'),
 		{
 			type = 'div',
-			className,
-			id,
 			text,
 			html_text,
-			style,
-			data,
+			attr,
 			generate =  true,
-			save =  {
-				active: false,
-				name: undefined
-			},
+			save_name,
 			on = {
 				active: false,
 				param: false,
@@ -473,20 +446,17 @@ Tabel.prototype = {
 		if (generate) {
 			let elem = document.createElement(type);
 
-			if (className) elem.className = className;
-			if (id) elem.id = id;
 			if (text) elem.innerText = text;
 			if (html_text) elem.innerHTML = html_text;
-			if (style) elem.setAttribute('style', style);
-			if (data) {
-				data.forEach((el) => {
-					elem.dataset[el.name] = el.value
-				});
+
+			if (attr) {
+				if (!(attr instanceof Array)) attr = [attr];
+				attr.forEach((el) => elem.setAttribute(el.name, el.value));
 			}
 
-			if (save.active) {
+			if (save_name) {
 				if(!this._elements) this._elements = {};
-				this._elements[save.name] = elem;
+				this._elements[save_name] = elem;
 			}
 
 			if (on.active) {
@@ -498,13 +468,8 @@ Tabel.prototype = {
 			}
 
 			if (elements) {
-				if (elements instanceof Array) {
-					for (let elems of elements) {
-						this.createElement(elem, elems);
-					}
-				} else {
-					this.createElement(elem, elements);
-				}
+				if (!(elements instanceof Array)) elements = [elements];
+				elements.forEach((el) => this.createElement(elem, el));
 			}
 
 			body.appendChild(elem);

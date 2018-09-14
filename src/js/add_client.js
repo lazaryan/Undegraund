@@ -54,14 +54,11 @@ AddClient.prototype = {
 			header : {
 				setting: {
 					type: 'header',
-					className: 'add-client__header',
+					attr: {name: 'class', value: 'add-client__header'},
 					elements: {
 						type: 'button',
-						className: 'add-client__close',
-						save: {
-							active: true,
-							name: '_close'
-						},
+						save_name: '_close',
+						attr: {name: 'class', value: 'add-client__close'},
 						on: {
 							active: true,
 							events: {
@@ -74,30 +71,31 @@ AddClient.prototype = {
 			},
 			body: {
 				setting: {
-					className: 'add-client__body',
+					attr: {name: 'class', value: 'add-client__body'},
 					elements: [
 						{
-							className: 'add-client__enter-name',
+							attr: {name: 'class', value: 'add-client__enter-name'},
 							elements: [
 								{
 									type: 'label',
-									label_for: 'inputName',
-									className: 'enter-name__title',
-									text: 'Введите имя посетителя'
+									text: 'Введите имя посетителя',
+									attr: [
+										{name: 'for', value: 'inputName'},
+										{name: 'class', value: 'enter-name__title'}
+									]
 								},
 								{
-									className: 'enter-name__block',
+									attr: {name: 'class', value: 'enter-name__block'},
 									elements: {
 										type: 'input',
-										input_type: 'text',
-										className: 'enter-name__input',
-										id_element: 'inputName',
-										attr: [{name: 'placeholder', value: 'Введите имя'}],
-										maxlength: 63,
-										save: {
-											active: true,
-											name: '_name'
-										},
+										save_name: '_name',
+										attr: [
+											{name: 'placeholder', value: 'Введите имя'},
+											{name: 'class', value: 'enter-name__input'},
+											{name: 'id', value: 'inputName'},
+											{name: 'type', value: 'text'},
+											{name: 'maxlength', value: 2}
+										],
 										on: {
 											active: true,
 											events: [
@@ -117,25 +115,24 @@ AddClient.prototype = {
 							]
 						},
 						{
-							className: 'add-client__enter-hours',
+							attr: {name: 'class', value: 'add-client__enter-hours'},
 							elements: [
 								{
 									type: 'label',
-									className: 'enter-time__title',
-									text: 'Введите время'
+									text: 'Введите время',
+									attr: {name: 'class', value: 'enter-time__title'},
 								},
 								{
 									type: 'input',
-									input_type: 'number',
-									className: 'enter-time__input',
-									id_element: 'inputHours',
-									input_min: 1,
-									input_max: 10,
-									value: 1,
-									save: {
-										active: true,
-										name: '_hours'
-									},
+									save_name: '_hours',
+									attr: [
+										{name: 'class', value: 'enter-time__input'},
+										{name: 'id', value: 'inputHours'},
+										{name: 'type', value: 'number'},
+										{name: 'min', value: 1},
+										{name: 'max', value: 10},
+										{name: 'value', value: 1}
+									],
 									on: {
 										active: true,
 										events : [
@@ -154,24 +151,20 @@ AddClient.prototype = {
 								{
 									type: 'span',
 									text: 'Час',
-									className: 'enter-time__hours',
-									save: {
-										active: true,
-										name: '_hours_text'
-									}
+									save_name: '_hours_text',
+									attr: {name: 'class', value: 'enter-time__hours'}
 								}
 							]
 						},
 						{
 							type: 'button',
-							className: 'add-client__enter',
 							text: 'Подтвердить',
-							attr : [{name: 'disabled', value: 'disabled'}],
-							style: this._style_button_disabled,
-							save: {
-								active: true,
-								name: '_enter'
-							},
+							save_name: '_enter',
+							attr: [
+								{name: 'class', value: 'add-client__enter'},
+								{name; 'style', value: this._style_button_disabled},
+								{name: 'disabled', value: 'disabled'}
+							],
 							on: {
 								active: true,
 								events: {
@@ -425,53 +418,33 @@ AddClient.prototype = {
 		body = document.querySelector('body'),
 		{
 			type = 'div',
-			className,
-			id_element,
 			text,
 			html_text,
-			label_for,
-			input_type = 'text',
-			input_min = 0,
-			input_max = 999,
-			maxlength,
-			value,
-			style,
+			attr,
 			generate =  true,
-			save =  {
-				active: false,
-				name: undefined
-			},
+			save_name,
 			on = {
 				active: false,
 				events: undefined
 			},
 			elements,
-			attr
 		}
 	) {
 		if (generate) {
 			let elem = document.createElement(type);
 
-			if (className) elem.className = className;
-			if (id_element) elem.id = id_element;
 			if (text) elem.innerText = text;
 			if (html_text) elem.innerHTML = html_text;
-			if (input_type) elem.type = input_type;
-			if (input_min) elem.min = input_min;
-			if (input_max) elem.max = input_max;
-			if (value) elem.value = value;
-			if (maxlength) elem.setAttribute('maxlength', maxlength);
-			if (label_for) elem.setAttribute('for', label_for);
-			if (style) elem.setAttribute('style', style);
+
 			if (attr) {
 				attr.forEach((el) => {
 					elem.setAttribute(el.name, el.value);
 				})
 			}
 
-			if (save.active) {
+			if (save_name) {
 				if(!this._elements) this._elements = {};
-				this._elements[save.name] = elem;
+				this._elements[save_name] = elem;
 			}
 
 			if (on.active) {
@@ -493,13 +466,8 @@ AddClient.prototype = {
 			}
 
 			if (elements) {
-				if (elements instanceof Array) {
-					for (let elems of elements) {
-						this.createElement(elem, elems);
-					}
-				} else {
-					this.createElement(elem, elements);
-				}
+				if (!(elements instanceof Array)) elements = [elements];
+				elements.forEach((el) => this.createElement(elem, el));
 			}
 
 			body.appendChild(elem);

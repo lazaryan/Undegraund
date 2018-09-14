@@ -42,24 +42,18 @@ Pay.prototype = {
 			header: {
 				setting: {
 					type: 'header',
-					className: 'to-pay__header',
+					attr: {name: 'class', value: 'to-pay__header'},
 					elements: [
 						{
 							type: 'h2',
-							className: 'to-pay__title-header',
 							text: `Стол № ${this.id}`,
-							save: {
-								active: true,
-								name: '_title'
-							}
+							save_name: '_title',
+							attr: {name: 'class', value: 'to-pay__title-header'}
 						},
 						{
 							type: 'span',
-							className: 'to-pay__close',
-							save: {
-								active: true,
-								name: '_close'
-							},
+							save_name: '_close',
+							attr: {name: 'class', value: 'to-pay__close'},
 							on: {
 								active: true,
 								type: 'click',
@@ -71,19 +65,16 @@ Pay.prototype = {
 			},
 			body: {
 				setting: {
-					className: 'to-pay__body',
+					attr: {name: 'class', value: 'to-pay__body'},
 					elements: [
 						{
 							type: 'p',
-							className: 'to-pay__title',
-							text: 'К оплате:'
+							text: 'К оплате:',
+							attr: {name: 'class', value: 'to-pay__title'},
 						},
 						{
-							className: 'to-pay__value',
-							save: {
-								active: true,
-								name: '_value'
-							}
+							attr: {name: 'class', value: 'to-pay__value'},
+							save_name: '_value'
 						}
 					]
 				}
@@ -168,15 +159,11 @@ Pay.prototype = {
 		body = document.querySelector('body'),
 		{
 			type = 'div',
-			className,
-			id,
 			text,
 			html_text,
+			attr,
 			generate =  true,
-			save =  {
-				active: false,
-				name: undefined
-			},
+			save_name,
 			on = {
 				active: false,
 				param: false,
@@ -189,14 +176,17 @@ Pay.prototype = {
 		if (generate) {
 			let elem = document.createElement(type);
 
-			if (className) elem.className = className;
-			if (id) elem.id = id;
 			if(text) elem.innerText = text;
 			if(html_text) elem.innerHTML = html_text;
 
-			if (save.active) {
+			if (attr) {
+				if (!(attr instanceof Array)) attr = [attr];
+				attr.forEach((el) => elem.setAttribute(el.name, el.value));
+			}
+
+			if (save_name) {
 				if(!this._elements) this._elements = {};
-				this._elements[save.name] = elem;
+				this._elements[save_name] = elem;
 			}
 
 			if (on.active) {
@@ -208,13 +198,8 @@ Pay.prototype = {
 			}
 
 			if (elements) {
-				if (elements instanceof Array) {
-					for (let elems of elements) {
-						this.createElement(elem, elems);
-					}
-				} else {
-					this.createElement(elem, elements);
-				}
+				if (!(elements instanceof Array)) elements = [elements];
+				elements.forEach((el) => this.createElement(elem, el));
 			}
 
 			body.appendChild(elem);
