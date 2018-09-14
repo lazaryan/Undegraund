@@ -18,7 +18,7 @@ function AddClient (controller, id) {
 	this._body = undefined;
 
 	this._hour_id = ['Час', 'Часа', 'Часов'];
-	this._style_button_disabled = 'background-color: #DFDFDF; color: #C0BEBE';
+	this._style_button_disabled = 'background-color: #DFDFDF; color: #C0BEBE; cursor: default';
 
 	this.init(controller, id);
 

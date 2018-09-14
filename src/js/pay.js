@@ -15,7 +15,7 @@ function Pay (controller, id) {
 	this.prise = 0;
 
 	this._body = undefined;
-	this.currency = '₽';
+	this.currency = '\u20BD'; //₽
 
 	this.init(controller, id);
 
