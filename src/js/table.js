@@ -63,7 +63,7 @@ Tabel.prototype = {
 					save_name: '_cap',
 					text: `Стол № ${this.Number}`,
 					generate: !this._active,
-					attr: {name: 'class', value: 'table__cap'},
+					attr: {class: 'table__cap'},
 					on: {
 						active: true,
 						type: 'click',
@@ -74,46 +74,46 @@ Tabel.prototype = {
 			title: {
 				setting: {
 					text: `Стол № ${this.number}`,
-					attr: {name: 'class', value: 'table__title'},
+					attr: {class: 'table__title'},
 				}
 			},
 			information: {
 				setting: {
-					attr: {name: 'class', value: 'table__information'},
+					attr: {class: 'table__information'},
 					elements : [
 						{
-							attr: {name: 'class', value: 'information__field'},
+							attr: {class: 'information__field'},
 							elements : [
 								{
 									text: 'Клиент',
-									attr: {name: 'class', value: 'information__title'},
+									attr: {class: 'information__title'},
 								},
 								{
 									type: 'span',
 									save_name: '_name',
 									text: this.Name,
-									attr: [
-										{name: 'class', value: 'information__value'},
-										{name: 'id', value: `${this.Number}_name`}
-									]
+									attr: {
+										class: 'information__value',
+										id: `${this.Number}_name`
+									}
 								}
 							]
 						},
 						{
-							attr: {name: 'class', value: 'information__field'},
+							attr: {class: 'information__field'},
 							elements : [
 								{
 									text: 'Таймер',
-									attr: {name: 'class', value: 'information__title'},
+									attr: {class: 'information__title'},
 								},
 								{
 									type: 'span',
 									text: '00:00',
 									save_name: '_timer',
-									attr: [
-										{name: 'class', value: 'information__value'},
-										{name: 'id', value: `${this.Number}_timer`}
-									]
+									attr: {
+										class: 'information__value',
+										id: `${this.Number}_timer`
+									}
 								}
 							]
 						}
@@ -122,17 +122,17 @@ Tabel.prototype = {
 			},
 			change: {
 				setting: {
-					attr: {name: 'class', value: 'table__change'},
+					attr: {class: 'table__change'},
 					elements: [
 						{
 							type: 'div',
-							attr: {name: 'class', value: 'information__checked'},
+							attr: {class: 'information__checked'},
 							elements: [
 								{
 									type: 'button',
 									text: 'Добавить',
 									save_name: '_add_hours',
-									attr: {name: 'class', value: 'information__button'},
+									attr: {class: 'information__button'},
 									on: {
 										active: true,
 										type: 'click',
@@ -142,18 +142,18 @@ Tabel.prototype = {
 								{
 									type: 'div',
 									save_name: '_add_hours_checked',
-									attr: [
-										{name: 'class', value: 'information__add-hours'},
-										{name: 'style', value: 'transform: scaleY(0)'}
-									],
+									attr: {
+										class: 'information__add-hours',
+										style: 'transform: scaleY(0)'
+									},
 									elements: [
 										{
 											type: 'button',
 											text: '1 час',
-											attr: [
-												{name: 'class', value: 'information__button'},
-												{name: 'data-value', value: 1}
-											],
+											attr: {
+												class: 'information__button',
+												'data-value': 1
+											},
 											on: {
 												active: true,
 												type: 'click',
@@ -164,10 +164,10 @@ Tabel.prototype = {
 										{
 											type: 'button',
 											text: '2 часа',
-											attr: [
-												{name: 'class', value: 'information__button'},
-												{name: 'data-value', value: 2}
-											],
+											attr: {
+												class: 'information__button',
+												'data-value': 2
+											},
 											on: {
 												active: true,
 												type: 'click',
@@ -178,10 +178,10 @@ Tabel.prototype = {
 										{
 											type: 'button',
 											text: '3 часа',
-											attr: [
-												{name: 'class', value: 'information__button'},
-												{name: 'data-value', value: 3}
-											],
+											attr: {
+												class: 'information__button',
+												'data-value': 3
+											},
 											on: {
 												active: true,
 												type: 'click',
@@ -197,7 +197,7 @@ Tabel.prototype = {
 							type: 'button',
 							text: 'Убрать',
 							save_name: '_add_remove',
-							attr: {name: 'class', value: 'information__button'},
+							attr: {class: 'information__button'},
 							on: {
 								active: true,
 								type: 'click',
@@ -450,8 +450,10 @@ Tabel.prototype = {
 			if (html_text) elem.innerHTML = html_text;
 
 			if (attr) {
-				if (!(attr instanceof Array)) attr = [attr];
-				attr.forEach((el) => elem.setAttribute(el.name, el.value));
+				Object.keys(attr)
+					.forEach((key) => {
+						elem.setAttribute(key, attr[key])
+					})
 			}
 
 			if (save_name) {

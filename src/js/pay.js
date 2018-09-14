@@ -42,18 +42,18 @@ Pay.prototype = {
 			header: {
 				setting: {
 					type: 'header',
-					attr: {name: 'class', value: 'to-pay__header'},
+					attr: {class: 'to-pay__header'},
 					elements: [
 						{
 							type: 'h2',
 							text: `Стол № ${this.id}`,
 							save_name: '_title',
-							attr: {name: 'class', value: 'to-pay__title-header'}
+							attr: {class: 'to-pay__title-header'}
 						},
 						{
 							type: 'span',
 							save_name: '_close',
-							attr: {name: 'class', value: 'to-pay__close'},
+							attr: {class: 'to-pay__close'},
 							on: {
 								active: true,
 								type: 'click',
@@ -65,15 +65,15 @@ Pay.prototype = {
 			},
 			body: {
 				setting: {
-					attr: {name: 'class', value: 'to-pay__body'},
+					attr: {class: 'to-pay__body'},
 					elements: [
 						{
 							type: 'p',
 							text: 'К оплате:',
-							attr: {name: 'class', value: 'to-pay__title'},
+							attr: {class: 'to-pay__title'},
 						},
 						{
-							attr: {name: 'class', value: 'to-pay__value'},
+							attr: {class: 'to-pay__value'},
 							save_name: '_value'
 						}
 					]
@@ -180,8 +180,10 @@ Pay.prototype = {
 			if(html_text) elem.innerHTML = html_text;
 
 			if (attr) {
-				if (!(attr instanceof Array)) attr = [attr];
-				attr.forEach((el) => elem.setAttribute(el.name, el.value));
+				Object.keys(attr)
+					.forEach((key) => {
+						elem.setAttribute(key, attr[key])
+					})
 			}
 
 			if (save_name) {

@@ -54,11 +54,11 @@ AddClient.prototype = {
 			header : {
 				setting: {
 					type: 'header',
-					attr: {name: 'class', value: 'add-client__header'},
+					attr: {class: 'add-client__header'},
 					elements: {
 						type: 'button',
 						save_name: '_close',
-						attr: {name: 'class', value: 'add-client__close'},
+						attr: {class: 'add-client__close'},
 						on: {
 							active: true,
 							events: {
@@ -71,31 +71,31 @@ AddClient.prototype = {
 			},
 			body: {
 				setting: {
-					attr: {name: 'class', value: 'add-client__body'},
+					attr: {class: 'add-client__body'},
 					elements: [
 						{
-							attr: {name: 'class', value: 'add-client__enter-name'},
+							attr: {class: 'add-client__enter-name'},
 							elements: [
 								{
 									type: 'label',
 									text: 'Введите имя посетителя',
-									attr: [
-										{name: 'for', value: 'inputName'},
-										{name: 'class', value: 'enter-name__title'}
-									]
+									attr: {
+										class: 'enter-name__title',
+										for: 'inputName'
+									}
 								},
 								{
-									attr: {name: 'class', value: 'enter-name__block'},
+									attr: {class: 'enter-name__block'},
 									elements: {
 										type: 'input',
 										save_name: '_name',
-										attr: [
-											{name: 'placeholder', value: 'Введите имя'},
-											{name: 'class', value: 'enter-name__input'},
-											{name: 'id', value: 'inputName'},
-											{name: 'type', value: 'text'},
-											{name: 'maxlength', value: 2}
-										],
+										attr: {
+											placeholder: 'Введите имя',
+											class: 'enter-name__input',
+											id: 'inputName',
+											type: 'text',
+											maxlength: 45
+										},
 										on: {
 											active: true,
 											events: [
@@ -107,7 +107,7 @@ AddClient.prototype = {
 												{
 													type: 'keyup',
 													param: true,
-													callback: this.checkEnter.bind(this)
+													callback: this.checkKeyup.bind(this)
 												}]
 										}
 									}
@@ -115,24 +115,24 @@ AddClient.prototype = {
 							]
 						},
 						{
-							attr: {name: 'class', value: 'add-client__enter-hours'},
+							attr: {class: 'add-client__enter-hours'},
 							elements: [
 								{
 									type: 'label',
 									text: 'Введите время',
-									attr: {name: 'class', value: 'enter-time__title'},
+									attr: {class: 'enter-time__title'},
 								},
 								{
 									type: 'input',
 									save_name: '_hours',
-									attr: [
-										{name: 'class', value: 'enter-time__input'},
-										{name: 'id', value: 'inputHours'},
-										{name: 'type', value: 'number'},
-										{name: 'min', value: 1},
-										{name: 'max', value: 10},
-										{name: 'value', value: 1}
-									],
+									attr: {
+										class: 'enter-time__input',
+										id: 'inputHours',
+										type: 'number',
+										min: 1,
+										max: 10,
+										value: 1
+									},
 									on: {
 										active: true,
 										events : [
@@ -152,7 +152,7 @@ AddClient.prototype = {
 									type: 'span',
 									text: 'Час',
 									save_name: '_hours_text',
-									attr: {name: 'class', value: 'enter-time__hours'}
+									attr: {class: 'enter-time__hours'}
 								}
 							]
 						},
@@ -160,11 +160,11 @@ AddClient.prototype = {
 							type: 'button',
 							text: 'Подтвердить',
 							save_name: '_enter',
-							attr: [
-								{name: 'class', value: 'add-client__enter'},
-								{name; 'style', value: this._style_button_disabled},
-								{name: 'disabled', value: 'disabled'}
-							],
+							attr: {
+								class: 'add-client__enter',
+								style: this._style_button_disabled,
+								disabled: 'disabled'
+							},
 							on: {
 								active: true,
 								events: {
@@ -242,11 +242,18 @@ AddClient.prototype = {
 		this.controller.changeDataTable(this.Number, this.Name, this.Hours);
 	},
 
+	checkKeyup (e) {
+		this.checkEnter(e);
+		this.checkArrow(e);
+	},
+
 	checkEnter (e) {
 		if (e.code == 'Enter' && this.Name) {
 			this.enterData();
 		}
+	},
 
+	checkArrow (e) {
 		if (e.code == 'ArrowUp') {
 			this.upHours();
 		}
@@ -307,6 +314,8 @@ AddClient.prototype = {
 	*/
 
 	enterData () {
+		//this.format_time(this.Hours);
+
 		let now = new Date();
 		let date = `${this.formatTime(now.getHours())}:${this.formatTime(now.getMinutes())}:${this.formatTime(now.getSeconds())}`; 
 		let obj = `number=${this.Number}&name=${this.Name}&hours=${this.Hours}&date=${date}`;
@@ -359,15 +368,15 @@ AddClient.prototype = {
 		let text = time;
 
 		if (!Number(text)){
-        		text = text.replace(/[^0-9 ]/g, '');
+        		text = text.toString().replace(/[^0-9 ]/g, '');
         	}
 
         	text = +text;
 
-    		if(text && text > this._elements._hours.max){
+    		if(text > this._elements._hours.max){
     			text = this._elements._hours.max; 
     		}
-    		if(text && text < this._elements._hours.min){
+    		if(text < this._elements._hours.min){
     			text = this._elements._hours.min; 
     		}
 
@@ -437,9 +446,10 @@ AddClient.prototype = {
 			if (html_text) elem.innerHTML = html_text;
 
 			if (attr) {
-				attr.forEach((el) => {
-					elem.setAttribute(el.name, el.value);
-				})
+				Object.keys(attr)
+					.forEach((key) => {
+						elem.setAttribute(key, attr[key])
+					})
 			}
 
 			if (save_name) {
