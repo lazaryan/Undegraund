@@ -60,11 +60,8 @@ AddClient.prototype = {
 						save_name: '_close',
 						attr: {class: 'add-client__close'},
 						on: {
-							active: true,
-							events: {
-								type: 'click',
-								callback: this.closePopup.bind(this)
-							}
+							event: 'click',
+							callback: this.closePopup.bind(this)
 						}
 					}
 				}
@@ -96,20 +93,10 @@ AddClient.prototype = {
 											type: 'text',
 											maxlength: 45
 										},
-										on: {
-											active: true,
-											events: [
-												{
-													type: 'input',
-													param: true,
-													callback: this.inputName.bind(this)
-												},
-												{
-													type: 'keyup',
-													param: true,
-													callback: this.checkKeyup.bind(this)
-												}]
-										}
+										on: [
+											{event: 'input', callback: this.inputName.bind(this)},
+											{event: 'keyup', callback: this.checkKeyup.bind(this)}
+										]
 									}
 								}
 							]
@@ -133,20 +120,10 @@ AddClient.prototype = {
 										max: 10,
 										value: 1
 									},
-									on: {
-										active: true,
-										events : [
-											{
-												type: 'input',
-												param: true,
-												callback: this.inputHours.bind(this)
-											},
-											{
-												type: 'keyup',
-												param: true,
-												callback: this.checkEnter.bind(this)
-											}]
-									}
+									on: [
+										{event: 'input', callback: this.inputHours.bind(this)},
+										{event: 'keyup', callback: this.checkEnter.bind(this)}
+									]
 								},
 								{
 									type: 'span',
@@ -166,11 +143,8 @@ AddClient.prototype = {
 								disabled: 'disabled'
 							},
 							on: {
-								active: true,
-								events: {
-									type: 'click',
-									callback: this.enterData.bind(this)
-								}
+								event: 'click',
+								callback: this.enterData.bind(this)
 							}
 						}
 					]
@@ -432,10 +406,7 @@ AddClient.prototype = {
 			attr,
 			generate =  true,
 			save_name,
-			on = {
-				active: false,
-				events: undefined
-			},
+			on,
 			elements,
 		}
 	) {
@@ -457,22 +428,9 @@ AddClient.prototype = {
 				this._elements[save_name] = elem;
 			}
 
-			if (on.active) {
-				if (on.events instanceof Array) {
-					on.events.forEach((event) => {
-						if (event.param) {
-							elem.addEventListener(event.type, (e) => event.callback(e));
-						} else {
-							elem.addEventListener(event.type, () => event.callback());
-						}
-					})
-				} else {
-					if (on.events.param) {
-						elem.addEventListener(on.events.type, (e) => on.events.callback(e));
-					} else {
-						elem.addEventListener(on.events.type, () => on.events.callback());
-					}
-				}
+			if (on) {
+				if (!(on instanceof Array)) on = [on];
+				on.forEach((el) => elem.addEventListener(el.event, (e) => el.callback(e)))
 			}
 
 			if (elements) {

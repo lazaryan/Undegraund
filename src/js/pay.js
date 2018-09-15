@@ -55,8 +55,7 @@ Pay.prototype = {
 							save_name: '_close',
 							attr: {class: 'to-pay__close'},
 							on: {
-								active: true,
-								type: 'click',
+								event: 'click',
 								callback: this.closePopup.bind(this)
 							}
 						}
@@ -164,12 +163,7 @@ Pay.prototype = {
 			attr,
 			generate =  true,
 			save_name,
-			on = {
-				active: false,
-				param: false,
-				type: undefined,
-				callback: undefined
-			},
+			on,
 			elements,
 		}
 	) {
@@ -191,12 +185,9 @@ Pay.prototype = {
 				this._elements[save_name] = elem;
 			}
 
-			if (on.active) {
-				if (on.param) {
-					elem.addEventListener(on.type, (e) => on.callback(e));
-				} else {
-					elem.addEventListener(on.type, () => on.callback());
-				}
+			if (on) {
+				if (!(on instanceof Array)) on = [on];
+				on.forEach((el) => elem.addEventListener(el.event, (e) => el.callback(e)))
 			}
 
 			if (elements) {

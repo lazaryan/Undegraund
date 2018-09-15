@@ -65,8 +65,7 @@ Tabel.prototype = {
 					generate: !this._active,
 					attr: {class: 'table__cap'},
 					on: {
-						active: true,
-						type: 'click',
+						event: 'click',
 						callback: this.showPopup.bind(this)
 					}
 				}
@@ -134,8 +133,7 @@ Tabel.prototype = {
 									save_name: '_add_hours',
 									attr: {class: 'information__button'},
 									on: {
-										active: true,
-										type: 'click',
+										event: 'click',
 										callback: this.showAddHours.bind(this)
 									}
 								},
@@ -155,9 +153,7 @@ Tabel.prototype = {
 												'data-value': 1
 											},
 											on: {
-												active: true,
-												type: 'click',
-												param: true,
+												event: 'click',
 												callback: this.addHours.bind(this)
 											}
 										},
@@ -169,9 +165,7 @@ Tabel.prototype = {
 												'data-value': 2
 											},
 											on: {
-												active: true,
-												type: 'click',
-												param: true,
+												event: 'click',
 												callback: this.addHours.bind(this)
 											}
 										},
@@ -183,9 +177,7 @@ Tabel.prototype = {
 												'data-value': 3
 											},
 											on: {
-												active: true,
-												type: 'click',
-												param: true,
+												event: 'click',
 												callback: this.addHours.bind(this)
 											}
 										}
@@ -199,8 +191,7 @@ Tabel.prototype = {
 							save_name: '_add_remove',
 							attr: {class: 'information__button'},
 							on: {
-								active: true,
-								type: 'click',
+								event: 'click',
 								callback: this.showPay.bind(this)
 							}
 						}
@@ -434,12 +425,7 @@ Tabel.prototype = {
 			attr,
 			generate =  true,
 			save_name,
-			on = {
-				active: false,
-				param: false,
-				type: undefined,
-				callback: undefined
-			},
+			on,
 			elements,
 		}
 	) {
@@ -461,12 +447,9 @@ Tabel.prototype = {
 				this._elements[save_name] = elem;
 			}
 
-			if (on.active) {
-				if (on.param) {
-					elem.addEventListener(on.type, (e) => on.callback(e));
-				} else {
-					elem.addEventListener(on.type, () => on.callback());
-				}
+			if (on) {
+				if (!(on instanceof Array)) on = [on];
+				on.forEach((el) => elem.addEventListener(el.event, (e) => el.callback(e)))
 			}
 
 			if (elements) {
