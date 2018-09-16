@@ -15,6 +15,8 @@ function Pay (controller, id) {
 	this.prise = 0;
 
 	this._body = undefined;
+	this._elements = {};
+	
 	this.currency = '\u20BD'; //₽
 
 	this.init(controller, id);
@@ -93,9 +95,11 @@ Pay.prototype = {
 		this.Body.id = this.id;
 
 		if (this._create) {
-			for (let elem in this._create) {
-				this.createElement(this.Body, this._create[elem].setting);
-			}
+			Object.keys(this._create)
+				.map((el) => this._create[el])
+				.forEach((el) => {
+					this._elements = Object.assign(this._elements, createElement(this.Body, el.setting));
+				})
 		}
 
 		document.querySelector('body')
@@ -130,72 +134,5 @@ Pay.prototype = {
 		this.prise = (prise * hours) || this.prise;
 
 		this._elements._value.innerText = `${this.prise} ${this.currency}`;
-	},
-
-	/**
-	* @param
-	* {Object} body - block to which this element is generated
-	* {String} type - element's type
-	* {String} className - list of the element's classes
-	* id - element's id
-	* {String} text - text in element
-	* {String} html_text - html markup inside the element
-	* {Boolean} generate - generated under certain condition
-	* {Object} elements - child elements
-	* {Object} save - saving element
-	** @param
-	** {Boolean} active - presence of event listeners
-	** {String} name - name to save
-	* {Object} on - event listeners
-	** @param
-	** {Boolean} active - presence of event listeners
-	** {String} type - type of event listener
-	** {Boolean} param - whether the function takes arguments
-	** {Function} callback - callback function
-	*/
-
-	createElement(
-		body = document.querySelector('body'),
-		{
-			type = 'div',
-			text,
-			html_text,
-			attr,
-			generate =  true,
-			save_name,
-			on,
-			elements,
-		}
-	) {
-		if (generate) {
-			let elem = document.createElement(type);
-
-			if(text) elem.innerText = text;
-			if(html_text) elem.innerHTML = html_text;
-
-			if (attr) {
-				Object.keys(attr)
-					.forEach((key) => {
-						elem.setAttribute(key, attr[key])
-					})
-			}
-
-			if (save_name) {
-				if(!this._elements) this._elements = {};
-				this._elements[save_name] = elem;
-			}
-
-			if (on) {
-				if (!(on instanceof Array)) on = [on];
-				on.forEach((el) => elem.addEventListener(el.event, (e) => el.callback(e)))
-			}
-
-			if (elements) {
-				if (!(elements instanceof Array)) elements = [elements];
-				elements.forEach((el) => this.createElement(elem, el));
-			}
-
-			body.appendChild(elem);
-		}
 	}
 }
