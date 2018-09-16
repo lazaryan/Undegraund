@@ -107,7 +107,7 @@ Tabel.prototype = {
 								},
 								{
 									type: 'span',
-									text: '00:00',
+									text: '00:00:00',
 									save_name: '_timer',
 									attr: {
 										class: 'information__value',

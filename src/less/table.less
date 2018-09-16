@@ -9,7 +9,7 @@
     max-width: 400px;
     height: 380px;
     background-color: @color_fill;
-    border-radius: 20px;
+    border-radius: 100px;
     border: 1px solid @color_bth;
     box-shadow: 0 0 25px @color_bth;
     margin: auto;
@@ -20,29 +20,19 @@
         width: 45%;
         max-width: 530px;
         max-width: none;
-        border-radius: 40px;
         height: 250px;
     }
 
     @media @desktop {
-        border-radius: 100px;
         height: 250px;
         filter: blur(0.5px);
     }
 
     &__content {
         width: 100%;
-        border-radius: 20px;
+        border-radius: 100px;
         position: absolute;
         z-index: 1;
-
-        @media @tablet {
-            border-radius: 40px;
-        }
-
-        @media @desktop {
-            border-radius: 100px;
-        }
     }
 
     &__title {
@@ -70,15 +60,7 @@
         background-color: @color_fill;
         font-size: 50px;
         font-weight: 900;
-        border-radius: 20px;
-
-        @media @tablet {
-            border-radius: 40px;
-        }
-
-        @media @desktop {
-            border-radius: 100px;
-        }
+        border-radius: 100px;
     }
 
     &__information,
@@ -106,7 +88,7 @@
 
             @media @tablet {
                 order: 2;
-                width: 130px;
+                width: 120px;
             }
 
             @media @desktop {
@@ -164,9 +146,11 @@
         font-size: 20px;
         overflow: hidden;
         text-overflow: ellipsis;
+        padding: 0 15px;
+        box-sizing: border-box;
 
         @media @tablet {
-            width: 130px;
+            width: 120px;
         }
 
         @media @desktop {
@@ -184,7 +168,7 @@
 
         @media @tablet {
             order: 1;
-            width: 130px;
+            width: 120px;
         }
 
         @media @desktop {
