@@ -53,7 +53,6 @@ Tabel.prototype = {
 
 		if(this.name) {
 			this._active = true;
-
 		}
 
 		this._create = {
@@ -125,6 +124,7 @@ Tabel.prototype = {
 					elements: [
 						{
 							type: 'div',
+							save_name: '_add_hours_block',
 							attr: {class: 'information__checked'},
 							elements: [
 								{
@@ -138,48 +138,23 @@ Tabel.prototype = {
 									}
 								},
 								{
-									type: 'div',
-									save_name: '_add_hours_checked',
-									attr: {
-										class: 'information__add-hours',
-										style: 'transform: scaleY(0)'
-									},
+									generate: false,
+									save_name: '_add_hours_input',
+									attr: {class: 'information__button information__button_col_transp information__button_flex'},
 									elements: [
 										{
-											type: 'button',
-											text: '1 час',
+											type: 'input',
 											attr: {
-												class: 'information__button',
-												'data-value': 1
-											},
-											on: {
-												event: 'click',
-												callback: this.addHours.bind(this)
+												class: 'information__input-hours',
+												type: 'number',
+												min: this.controller.setting.hours.min,
+												max: this.controller.setting.hours.max,
+												value: this.Hours
 											}
 										},
 										{
 											type: 'button',
-											text: '2 часа',
-											attr: {
-												class: 'information__button',
-												'data-value': 2
-											},
-											on: {
-												event: 'click',
-												callback: this.addHours.bind(this)
-											}
-										},
-										{
-											type: 'button',
-											text: '3 часа',
-											attr: {
-												class: 'information__button',
-												'data-value': 3
-											},
-											on: {
-												event: 'click',
-												callback: this.addHours.bind(this)
-											}
+											attr: {class: 'information__button-hours'}
 										}
 									]
 								}
@@ -366,10 +341,14 @@ Tabel.prototype = {
 
 	showAddHours () {
 		this._active_add_hours = !this._active_add_hours;
-		if (this._active_add_hours) {
-			this._elements._add_hours_checked.setAttribute('style', 'transform: scaleY(1)');
-		} else {
-			this._elements._add_hours_checked.setAttribute('style', 'transform: scaleY(0)');
+
+		if (this._active_add_hours && !this._create.change.setting.elements[0].elements[1].generate) {
+			this._create.change.setting.elements[0].elements[1].generate = true;
+			this._active = false;
+		
+			createElement(this._elements._add_hours_block, 
+				this._create.change.setting.elements[0].elements[1], 
+				this._elements);
 		}
 	},
 

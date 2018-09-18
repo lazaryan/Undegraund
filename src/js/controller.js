@@ -6,6 +6,16 @@ function Controller ({content = 'body', tabels}) {
 	this.clock = [];
 	this.pay = [];
 
+	this.setting = {
+		hours: {
+			min: 1,
+			max: 8
+		},
+		name: {
+			maxlength: 35
+		}
+	}
+
 	this.init(content, tabels);
 
 	return this;

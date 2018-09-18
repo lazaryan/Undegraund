@@ -92,7 +92,7 @@ AddClient.prototype = {
 											class: 'enter-name__input',
 											id: 'inputName',
 											type: 'text',
-											maxlength: 45
+											maxlength: this.controller.setting.name.maxlength
 										},
 										on: [
 											{event: 'input', callback: this.inputName.bind(this)},
@@ -117,9 +117,9 @@ AddClient.prototype = {
 										class: 'enter-time__input',
 										id: 'inputHours',
 										type: 'number',
-										min: 1,
-										max: 10,
-										value: 1
+										min: this.controller.setting.hours.min,
+										max: this.controller.setting.hours.max,
+										value: this.controller.setting.hours.min
 									},
 									on: [
 										{event: 'input', callback: this.inputHours.bind(this)},
