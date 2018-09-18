@@ -170,7 +170,7 @@ AddClient.prototype = {
 			Object.keys(this._create)
 				.map((el) => this._create[el])
 				.forEach((el) => {
-					this._elements = Object.assign(this._elements, createElement(this.Body, el.setting));
+					createElement(this.Body, el.setting, this._elements);
 				})
 		}
 

@@ -233,7 +233,7 @@ Tabel.prototype = {
 			Object.keys(this._create)
 				.map((el) => this._create[el])
 				.forEach((el) => {
-					this._elements = Object.assign(this._elements, createElement(this.Body, el.setting));
+					createElement(this.Body, el.setting, this._elements);
 				})
 		}
 	},
@@ -274,7 +274,6 @@ Tabel.prototype = {
 	*/
 
 	showPopup () {
-
 		this.controller.showAddClient(this.Number);
 	},
 
@@ -286,7 +285,7 @@ Tabel.prototype = {
 		this._create.cap.setting.generate = true;
 		this._active = false;
 		
-		this._elements = Object.assign(this._elements, createElement(this.Body, this._create.cap.setting));
+		createElement(this.Body, this._create.cap.setting, this._elements);
 	},
 
 	/**

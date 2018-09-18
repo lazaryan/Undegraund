@@ -9,9 +9,9 @@ function createElement (
 		save_name,
 		on,
 		elements,
-	}
+	},
+	_elements = {}
 	) {
-	let _elements = {};
 
 	create(body, {
 		type,
