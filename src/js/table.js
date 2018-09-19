@@ -131,19 +131,19 @@ Tabel.prototype = {
 									type: 'button',
 									text: 'Добавить',
 									save_name: '_add_hours',
-									attr: {class: 'information__button'},
+									attr: {class: 'information__button information__button_absolute'},
 									on: {
 										event: 'click',
 										callback: this.showAddHours.bind(this)
 									}
 								},
 								{
-									generate: false,
 									save_name: '_add_hours_input',
 									attr: {class: 'information__button information__button_col_transp information__button_flex'},
 									elements: [
 										{
 											type: 'input',
+											save_name: '_add_hours_value',
 											attr: {
 												class: 'information__input-hours',
 												type: 'number',
@@ -154,7 +154,9 @@ Tabel.prototype = {
 										},
 										{
 											type: 'button',
-											attr: {class: 'information__button-hours'}
+											attr: {class: 'information__button-hours'},
+											text: 'Изменить',
+											on: {event: 'click', callback: this.changeHours.bind(this)}
 										}
 									]
 								}
@@ -340,16 +342,14 @@ Tabel.prototype = {
 	},
 
 	showAddHours () {
-		this._active_add_hours = !this._active_add_hours;
+		this._elements._add_hours_block
+			.removeChild(this._elements._add_hours);
 
-		if (this._active_add_hours && !this._create.change.setting.elements[0].elements[1].generate) {
-			this._create.change.setting.elements[0].elements[1].generate = true;
-			this._active = false;
-		
-			createElement(this._elements._add_hours_block, 
-				this._create.change.setting.elements[0].elements[1], 
-				this._elements);
-		}
+		this._elements._add_hours_value.value = this.Hours;
+	},
+
+	changeHours () {
+		createElement(this._elements._add_hours_block, this._create.change.setting.elements[0].elements[0], this._elements);
 	},
 
 	addHours (e) {
