@@ -56,10 +56,7 @@ Pay.prototype = {
 							type: 'span',
 							save_name: '_close',
 							attr: {class: 'to-pay__close'},
-							on: {
-								event: 'click',
-								callback: this.closePopup.bind(this)
-							}
+							on: {'click': this.closePopup.bind(this)}
 						}
 					]
 				}

@@ -63,10 +63,7 @@ Tabel.prototype = {
 					text: `Стол № ${this.Number}`,
 					generate: !this._active,
 					attr: {class: 'table__cap'},
-					on: {
-						event: 'click',
-						callback: this.showPopup.bind(this)
-					}
+					on: {'click': this.showPopup.bind(this)}
 				}
 			},
 			title: {
@@ -132,10 +129,7 @@ Tabel.prototype = {
 									text: 'Добавить',
 									save_name: '_add_hours',
 									attr: {class: 'information__button information__button_absolute'},
-									on: {
-										event: 'click',
-										callback: this.showAddHours.bind(this)
-									}
+									on: {'click': this.showAddHours.bind(this)}
 								},
 								{
 									save_name: '_add_hours_input',
@@ -154,9 +148,9 @@ Tabel.prototype = {
 										},
 										{
 											type: 'button',
-											attr: {class: 'information__button-hours'},
 											text: 'Изменить',
-											on: {event: 'click', callback: this.changeHours.bind(this)}
+											attr: {class: 'information__button-hours'},
+											on: {'click': this.changeHours.bind(this)}
 										}
 									]
 								}
@@ -167,10 +161,7 @@ Tabel.prototype = {
 							text: 'Убрать',
 							save_name: '_add_remove',
 							attr: {class: 'information__button'},
-							on: {
-								event: 'click',
-								callback: this.showPay.bind(this)
-							}
+							on: {'click': this.showPay.bind(this)}
 						}
 					]
 				}

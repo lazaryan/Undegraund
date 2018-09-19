@@ -60,10 +60,7 @@ AddClient.prototype = {
 						type: 'button',
 						save_name: '_close',
 						attr: {class: 'add-client__close'},
-						on: {
-							event: 'click',
-							callback: this.closePopup.bind(this)
-						}
+						on: {'click': this.closePopup.bind(this)}
 					}
 				}
 			},
@@ -94,10 +91,10 @@ AddClient.prototype = {
 											type: 'text',
 											maxlength: this.controller.setting.name.maxlength
 										},
-										on: [
-											{event: 'input', callback: this.inputName.bind(this)},
-											{event: 'keyup', callback: this.checkKeyup.bind(this)}
-										]
+										on: {
+											'input': this.inputName.bind(this),
+											'keyup': this.checkKeyup.bind(this)
+										}
 									}
 								}
 							]
@@ -121,10 +118,10 @@ AddClient.prototype = {
 										max: this.controller.setting.hours.max,
 										value: this.controller.setting.hours.min
 									},
-									on: [
-										{event: 'input', callback: this.inputHours.bind(this)},
-										{event: 'keyup', callback: this.checkEnter.bind(this)}
-									]
+									on: {
+										'input': this.inputHours.bind(this),
+										'keyup': this.checkEnter.bind(this)
+									}
 								},
 								{
 									type: 'span',
@@ -143,10 +140,7 @@ AddClient.prototype = {
 								style: this._style_button_disabled,
 								disabled: 'disabled'
 							},
-							on: {
-								event: 'click',
-								callback: this.enterData.bind(this)
-							}
+							on: {'click': this.enterData.bind(this)}
 						}
 					]
 				}
