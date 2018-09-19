@@ -58,15 +58,11 @@ function create (
 			_el[save_name] = elem;
 		}
 
-		/*if (on) {
-			if (!(on instanceof Array)) on = [on];
-			on.forEach((el) => elem.addEventListener(el.event, (e) => el.callback(e)))
-		}*/
-
 		if (on) {
 			Object.keys(on)
 				.forEach((event) =>
-					elem.addEventListener(event, (e) => on[event](e)))
+					elem.addEventListener(event, (e) => 
+						on[event](e)))
 		}
 
 		if (elements) {

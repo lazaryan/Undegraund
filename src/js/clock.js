@@ -57,6 +57,10 @@ Clock.prototype = {
 		this.hours = +this.hours + hours;
 	},
 
+	changeHours (hours) {
+		this.hours = +hours;
+	},
+
 	/**
 	* start this timer
 	*/

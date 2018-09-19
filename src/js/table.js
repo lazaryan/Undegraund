@@ -144,6 +144,10 @@ Tabel.prototype = {
 												min: this.controller.setting.hours.min,
 												max: this.controller.setting.hours.max,
 												value: this.Hours
+											},
+											on: {
+												'input': this.inputHours.bind(this),
+												'keyup': this.checkEnter.bind(this)
 											}
 										},
 										{
@@ -340,7 +344,62 @@ Tabel.prototype = {
 	},
 
 	changeHours () {
+		this.format_time(this._elements._add_hours_value.value);
+
+		this.controller.changeHours(this.number, this.Hours);
+
 		createElement(this._elements._add_hours_block, this._create.change.setting.elements[0].elements[0], this._elements);
+
+		let obj = `number=${this.Number}&value=${this.Hours}`;
+
+		let xhr = new XMLHttpRequest();
+		xhr.open('POST', '../php/add_hour.php', true);
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhr.send(obj);
+
+		xhr.onreadystatechange = function() {
+  			if (xhr.readyState != 4) return;
+
+  			if (xhr.status != 200) {
+    				throw new Error(xhr.statusText);
+  			}
+		}
+	},
+
+	inputHours (e) {
+		this.format_time(e.target.value);
+	},
+
+	checkEnter (e) {
+		if (e.code == 'Enter' && this.Name) {
+			this.changeHours();
+		}
+	},
+
+	format_time (time) {
+		let text = time;
+
+		if (!Number(text)){
+        		text = text.toString().replace(/[^0-9 ]/g, '');
+        	}
+
+        	text = +text;
+
+    		if(text > this._elements._add_hours_value.max){
+    			text = this._elements._add_hours_value.max; 
+    		}
+
+    		if (text < this.Hours) {
+    			text = this.Hours;
+    		}
+
+    		if(text < this._elements._add_hours_value.min){
+    			text = this._elements._add_hours_value.min; 
+    		}
+
+    		this.Hours = text;
+
+    		this._elements._add_hours_value.value = this.Hours;
 	},
 
 	addHours (e) {
