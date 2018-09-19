@@ -60,10 +60,7 @@ AddClient.prototype = {
 						type: 'button',
 						save_name: '_close',
 						attr: {class: 'add-client__close'},
-						on: {
-							event: 'click',
-							callback: this.closePopup.bind(this)
-						}
+						on: {'click': this.closePopup.bind(this)}
 					}
 				}
 			},
@@ -92,12 +89,12 @@ AddClient.prototype = {
 											class: 'enter-name__input',
 											id: 'inputName',
 											type: 'text',
-											maxlength: 45
+											maxlength: this.controller.setting.name.maxlength
 										},
-										on: [
-											{event: 'input', callback: this.inputName.bind(this)},
-											{event: 'keyup', callback: this.checkKeyup.bind(this)}
-										]
+										on: {
+											'input': this.inputName.bind(this),
+											'keyup': this.checkKeyup.bind(this)
+										}
 									}
 								}
 							]
@@ -117,14 +114,14 @@ AddClient.prototype = {
 										class: 'enter-time__input',
 										id: 'inputHours',
 										type: 'number',
-										min: 1,
-										max: 10,
-										value: 1
+										min: this.controller.setting.hours.min,
+										max: this.controller.setting.hours.max,
+										value: this.controller.setting.hours.min
 									},
-									on: [
-										{event: 'input', callback: this.inputHours.bind(this)},
-										{event: 'keyup', callback: this.checkEnter.bind(this)}
-									]
+									on: {
+										'input': this.inputHours.bind(this),
+										'keyup': this.checkEnter.bind(this)
+									}
 								},
 								{
 									type: 'span',
@@ -143,10 +140,7 @@ AddClient.prototype = {
 								style: this._style_button_disabled,
 								disabled: 'disabled'
 							},
-							on: {
-								event: 'click',
-								callback: this.enterData.bind(this)
-							}
+							on: {'click': this.enterData.bind(this)}
 						}
 					]
 				}
@@ -170,7 +164,7 @@ AddClient.prototype = {
 			Object.keys(this._create)
 				.map((el) => this._create[el])
 				.forEach((el) => {
-					this._elements = Object.assign(this._elements, createElement(this.Body, el.setting));
+					createElement(this.Body, el.setting, this._elements);
 				})
 		}
 
@@ -291,7 +285,7 @@ AddClient.prototype = {
 	*/
 
 	enterData () {
-		//this.format_time(this.Hours);
+		this.format_time(this.Hours);
 
 		let now = new Date();
 		let date = `${this.formatTime(now.getHours())}:${this.formatTime(now.getMinutes())}:${this.formatTime(now.getSeconds())}`; 

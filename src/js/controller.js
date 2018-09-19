@@ -6,6 +6,16 @@ function Controller ({content = 'body', tabels}) {
 	this.clock = [];
 	this.pay = [];
 
+	this.setting = {
+		hours: {
+			min: 1,
+			max: 8
+		},
+		name: {
+			maxlength: 35
+		}
+	}
+
 	this.init(content, tabels);
 
 	return this;
@@ -122,8 +132,8 @@ Controller.prototype = {
 		this.showPay(number, hours, prise);
 	},
 
-	addHours(number, hours) {
-		this.clock[number].getHours(hours);
+	changeHours(number, hours) {
+		this.clock[number].changeHours(hours);
 		this.tabels[number].changeTimer(this.clock[number].getTime());
 	}
 }

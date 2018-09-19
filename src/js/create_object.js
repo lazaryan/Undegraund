@@ -9,9 +9,9 @@ function createElement (
 		save_name,
 		on,
 		elements,
-	}
+	},
+	_elements = {}
 	) {
-	let _elements = {};
 
 	create(body, {
 		type,
@@ -59,8 +59,10 @@ function create (
 		}
 
 		if (on) {
-			if (!(on instanceof Array)) on = [on];
-			on.forEach((el) => elem.addEventListener(el.event, (e) => el.callback(e)))
+			Object.keys(on)
+				.forEach((event) =>
+					elem.addEventListener(event, (e) => 
+						on[event](e)))
 		}
 
 		if (elements) {

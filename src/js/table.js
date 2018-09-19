@@ -53,7 +53,6 @@ Tabel.prototype = {
 
 		if(this.name) {
 			this._active = true;
-
 		}
 
 		this._create = {
@@ -64,10 +63,7 @@ Tabel.prototype = {
 					text: `Стол № ${this.Number}`,
 					generate: !this._active,
 					attr: {class: 'table__cap'},
-					on: {
-						event: 'click',
-						callback: this.showPopup.bind(this)
-					}
+					on: {'click': this.showPopup.bind(this)}
 				}
 			},
 			title: {
@@ -125,61 +121,40 @@ Tabel.prototype = {
 					elements: [
 						{
 							type: 'div',
+							save_name: '_add_hours_block',
 							attr: {class: 'information__checked'},
 							elements: [
 								{
 									type: 'button',
 									text: 'Добавить',
 									save_name: '_add_hours',
-									attr: {class: 'information__button'},
-									on: {
-										event: 'click',
-										callback: this.showAddHours.bind(this)
-									}
+									attr: {class: 'information__button information__button_absolute'},
+									on: {'click': this.showAddHours.bind(this)}
 								},
 								{
-									type: 'div',
-									save_name: '_add_hours_checked',
-									attr: {
-										class: 'information__add-hours',
-										style: 'transform: scaleY(0)'
-									},
+									save_name: '_add_hours_input',
+									attr: {class: 'information__button information__button_col_transp information__button_flex'},
 									elements: [
 										{
-											type: 'button',
-											text: '1 час',
+											type: 'input',
+											save_name: '_add_hours_value',
 											attr: {
-												class: 'information__button',
-												'data-value': 1
+												class: 'information__input-hours',
+												type: 'number',
+												min: this.controller.setting.hours.min,
+												max: this.controller.setting.hours.max,
+												value: this.Hours
 											},
 											on: {
-												event: 'click',
-												callback: this.addHours.bind(this)
+												'input': this.inputHours.bind(this),
+												'keyup': this.checkEnter.bind(this)
 											}
 										},
 										{
 											type: 'button',
-											text: '2 часа',
-											attr: {
-												class: 'information__button',
-												'data-value': 2
-											},
-											on: {
-												event: 'click',
-												callback: this.addHours.bind(this)
-											}
-										},
-										{
-											type: 'button',
-											text: '3 часа',
-											attr: {
-												class: 'information__button',
-												'data-value': 3
-											},
-											on: {
-												event: 'click',
-												callback: this.addHours.bind(this)
-											}
+											text: 'Изменить',
+											attr: {class: 'information__button-hours'},
+											on: {'click': this.changeHours.bind(this)}
 										}
 									]
 								}
@@ -190,10 +165,7 @@ Tabel.prototype = {
 							text: 'Убрать',
 							save_name: '_add_remove',
 							attr: {class: 'information__button'},
-							on: {
-								event: 'click',
-								callback: this.showPay.bind(this)
-							}
+							on: {'click': this.showPay.bind(this)}
 						}
 					]
 				}
@@ -233,7 +205,7 @@ Tabel.prototype = {
 			Object.keys(this._create)
 				.map((el) => this._create[el])
 				.forEach((el) => {
-					this._elements = Object.assign(this._elements, createElement(this.Body, el.setting));
+					createElement(this.Body, el.setting, this._elements);
 				})
 		}
 	},
@@ -274,7 +246,6 @@ Tabel.prototype = {
 	*/
 
 	showPopup () {
-
 		this.controller.showAddClient(this.Number);
 	},
 
@@ -286,7 +257,7 @@ Tabel.prototype = {
 		this._create.cap.setting.generate = true;
 		this._active = false;
 		
-		this._elements = Object.assign(this._elements, createElement(this.Body, this._create.cap.setting));
+		createElement(this.Body, this._create.cap.setting, this._elements);
 	},
 
 	/**
@@ -366,20 +337,20 @@ Tabel.prototype = {
 	},
 
 	showAddHours () {
-		this._active_add_hours = !this._active_add_hours;
-		if (this._active_add_hours) {
-			this._elements._add_hours_checked.setAttribute('style', 'transform: scaleY(1)');
-		} else {
-			this._elements._add_hours_checked.setAttribute('style', 'transform: scaleY(0)');
-		}
+		this._elements._add_hours_block
+			.removeChild(this._elements._add_hours);
+
+		this._elements._add_hours_value.value = this.Hours;
+
+		this._elements._add_hours_value.focus();	
 	},
 
-	addHours (e) {
-		let value = e.target.dataset.value;
-		this.showAddHours();
-		this.Hours = +this.Hours + +value;
+	changeHours () {
+		this.format_time(this._elements._add_hours_value.value);
 
-		this.controller.addHours(this.number, +value);
+		this.controller.changeHours(this.number, this.Hours - 1);
+
+		createElement(this._elements._add_hours_block, this._create.change.setting.elements[0].elements[0], this._elements);
 
 		let obj = `number=${this.Number}&value=${this.Hours}`;
 
@@ -395,5 +366,41 @@ Tabel.prototype = {
     				throw new Error(xhr.statusText);
   			}
 		}
+	},
+
+	inputHours (e) {
+		this.format_time(e.target.value);
+	},
+
+	checkEnter (e) {
+		if (e.code == 'Enter' && this.Name) {
+			this.changeHours();
+		}
+	},
+
+	format_time (time) {
+		let text = time;
+
+		if (!Number(text)){
+        		text = text.toString().replace(/[^0-9 ]/g, '');
+        	}
+
+        	text = +text;
+
+    		if(text > this._elements._add_hours_value.max){
+    			text = this._elements._add_hours_value.max; 
+    		}
+
+    		if (text < this.Hours) {
+    			text = this.Hours;
+    		}
+
+    		if(text < this._elements._add_hours_value.min){
+    			text = this._elements._add_hours_value.min; 
+    		}
+
+    		this.Hours = text;
+
+    		this._elements._add_hours_value.value = this.Hours;
 	}
 }

@@ -53,8 +53,8 @@ Clock.prototype = {
 		this.hours = Math.floor(seconds / 3600);
 	},
 
-	getHours (hours) {
-		this.hours = +this.hours + hours;
+	changeHours (hours) {
+		this.hours = +hours;
 	},
 
 	/**
