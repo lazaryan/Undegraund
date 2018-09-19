@@ -285,7 +285,7 @@ AddClient.prototype = {
 	*/
 
 	enterData () {
-		//this.format_time(this.Hours);
+		this.format_time(this.Hours);
 
 		let now = new Date();
 		let date = `${this.formatTime(now.getHours())}:${this.formatTime(now.getMinutes())}:${this.formatTime(now.getSeconds())}`; 

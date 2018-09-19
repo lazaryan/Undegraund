@@ -341,12 +341,14 @@ Tabel.prototype = {
 			.removeChild(this._elements._add_hours);
 
 		this._elements._add_hours_value.value = this.Hours;
+
+		this._elements._add_hours_value.focus();	
 	},
 
 	changeHours () {
 		this.format_time(this._elements._add_hours_value.value);
 
-		this.controller.changeHours(this.number, this.Hours);
+		this.controller.changeHours(this.number, this.Hours - 1);
 
 		createElement(this._elements._add_hours_block, this._create.change.setting.elements[0].elements[0], this._elements);
 
@@ -400,28 +402,5 @@ Tabel.prototype = {
     		this.Hours = text;
 
     		this._elements._add_hours_value.value = this.Hours;
-	},
-
-	addHours (e) {
-		let value = e.target.dataset.value;
-		this.showAddHours();
-		this.Hours = +this.Hours + +value;
-
-		this.controller.addHours(this.number, +value);
-
-		let obj = `number=${this.Number}&value=${this.Hours}`;
-
-		let xhr = new XMLHttpRequest();
-		xhr.open('POST', '../php/add_hour.php', true);
-		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-		xhr.send(obj);
-
-		xhr.onreadystatechange = function() {
-  			if (xhr.readyState != 4) return;
-
-  			if (xhr.status != 200) {
-    				throw new Error(xhr.statusText);
-  			}
-		}
 	}
 }
