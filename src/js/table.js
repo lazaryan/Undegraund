@@ -306,8 +306,6 @@ Tabel.prototype = {
 	showPay () {
 		let obj = `number=${this.Number}`;
 
-		console.log(this._elements);
-
 		this.controller.showPay(this.Number, this.Hours, this.prise);
 
 		if(!this._elements._add_hours) {
