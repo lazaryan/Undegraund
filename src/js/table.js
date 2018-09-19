@@ -122,7 +122,7 @@ Tabel.prototype = {
 						{
 							type: 'div',
 							save_name: '_add_hours_block',
-							attr: {class: 'information__checked'},
+							attr: {class: 'information__checked', id: 'hours_block'},
 							elements: [
 								{
 									type: 'button',
@@ -306,11 +306,12 @@ Tabel.prototype = {
 	showPay () {
 		let obj = `number=${this.Number}`;
 
+		console.log(this._elements);
+
 		this.controller.showPay(this.Number, this.Hours, this.prise);
 
-    		if (this._active_add_hours) {
-			this._elements._add_hours_checked.setAttribute('style', 'transform: scaleY(0)');
-			this._active_add_hours = false;
+		if(!this._elements._add_hours) {
+			this.addHoursCap()
 		}
 
 		let xhr = new XMLHttpRequest();
@@ -337,12 +338,22 @@ Tabel.prototype = {
 	},
 
 	showAddHours () {
-		this._elements._add_hours_block
-			.removeChild(this._elements._add_hours);
+		this.removeHoursCap();
 
 		this._elements._add_hours_value.value = this.Hours;
 
 		this._elements._add_hours_value.focus();	
+	},
+
+	removeHoursCap () {
+		this._elements._add_hours_block
+			.removeChild(this._elements._add_hours);
+
+		this._elements._add_hours = undefined;
+	},
+
+	addHoursCap () {
+		createElement(this._elements._add_hours_block, this._create.change.setting.elements[0].elements[0], this._elements);
 	},
 
 	changeHours () {
@@ -350,7 +361,7 @@ Tabel.prototype = {
 
 		this.controller.changeHours(this.number, this.Hours - 1);
 
-		createElement(this._elements._add_hours_block, this._create.change.setting.elements[0].elements[0], this._elements);
+		this.addHoursCap();
 
 		let obj = `number=${this.Number}&value=${this.Hours}`;
 
