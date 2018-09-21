@@ -288,8 +288,10 @@ AddClient.prototype = {
 		this.format_time(this.Hours);
 
 		let now = new Date();
-		let date = `${this.formatTime(now.getHours())}:${this.formatTime(now.getMinutes())}:${this.formatTime(now.getSeconds())}`; 
-		let obj = `number=${this.Number}&name=${this.Name}&hours=${this.Hours}&date=${date}`;
+		let time = `${this.formatTime(now.getHours())}:${this.formatTime(now.getMinutes())}:${this.formatTime(now.getSeconds())}`;
+		let date = `${now.getDay()}/${now.getMonth()}/${now.getFullYear()}`;
+		
+		let obj = `number=${this.Number}&name=${this.Name}&hours=${this.Hours}&date=${date}&time=${time}`;
 
 		this.controller.enterData(this.Number, this.Name, this.Hours);
 

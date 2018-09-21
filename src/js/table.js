@@ -126,7 +126,7 @@ Tabel.prototype = {
 							elements: [
 								{
 									type: 'button',
-									text: 'Добавить',
+									text: 'Изменить',
 									save_name: '_add_hours',
 									attr: {class: 'information__button information__button_absolute'},
 									on: {'click': this.showAddHours.bind(this)}
@@ -304,7 +304,8 @@ Tabel.prototype = {
 	*/
 
 	showPay () {
-		let obj = `number=${this.Number}`;
+		let prise = this.prise * this.Hours;
+		let obj = `number=${this.Number}&prise=${prise}`;
 
 		this.controller.showPay(this.Number, this.Hours, this.prise);
 
