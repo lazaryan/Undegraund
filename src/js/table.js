@@ -304,14 +304,15 @@ Tabel.prototype = {
 	*/
 
 	showPay () {
-		let prise = this.prise * this.Hours;
-		let obj = `number=${this.Number}&prise=${prise}`;
-
 		this.controller.showPay(this.Number, this.Hours, this.prise);
 
 		if(!this._elements._add_hours) {
 			this.addHoursCap()
 		}
+	},
+
+	sendClient(prise) {
+		let obj = `number=${this.Number}&prise=${prise.toFixed(1)}`;
 
 		let xhr = new XMLHttpRequest();
 		xhr.open('POST', '../php/remove_client.php', true);
@@ -356,6 +357,8 @@ Tabel.prototype = {
 	},
 
 	changeHours () {
+		this.addHoursCap();
+		
 		let hours = this.format_time(this._elements._add_hours_value.value);
 
 		if (hours == this.Hours) return;
@@ -364,8 +367,10 @@ Tabel.prototype = {
 
 		this.changeTime(hours);
 
-		this.addHoursCap();
+		this.sendNewHours();
+	},
 
+	sendNewHours () {
 		let obj = `number=${this.Number}&value=${this.Hours}`;
 
 		let xhr = new XMLHttpRequest();

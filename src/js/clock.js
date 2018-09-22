@@ -90,6 +90,10 @@ Clock.prototype = {
 		this.hours = +this.hours + +hours;
 	},
 
+	getMinutes() {
+		return +this.hours * 60 + +this.minutes;
+	},
+
 	/**
 	* change object's value and sends messages to the controller
 	*/

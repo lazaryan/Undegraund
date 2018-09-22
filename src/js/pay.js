@@ -128,7 +128,7 @@ Pay.prototype = {
 	*/
 
 	addPrise (prise, hours) {
-		this.prise = (prise * hours) || this.prise;
+		this.prise = prise.toFixed(1) || this.prise;
 
 		this._elements._value.innerText = `${this.prise} ${this.currency}`;
 	}
