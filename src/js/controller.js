@@ -113,8 +113,6 @@ Controller.prototype = {
 		let minutes = +hours * 60 - this.clock[number].getMinutes();
 		let prise_minute = (prise / 60).toFixed(4);
 
-		console.log(minutes, prise_minute);
-
 		this.pay[number] = new Pay(this, number);
 		this.pay[number].createPopup();
 		this.pay[number].addPrise(prise_minute * minutes, hours);
