@@ -135,5 +135,9 @@ Controller.prototype = {
 	changeHours(number, hours) {
 		this.clock[number].changeHours(hours);
 		this.tabels[number].changeTimer(this.clock[number].getTime());
+	},
+
+	addHours (number, hours) {
+		this.clock[number].addHours(hours);
 	}
 }

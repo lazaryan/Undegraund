@@ -345,7 +345,7 @@ Tabel.prototype = {
 	},
 
 	removeHoursCap () {
-		this._elements._add_hours_block
+		this.Body.querySelector('#hours_block')
 			.removeChild(this._elements._add_hours);
 
 		this._elements._add_hours = undefined;
@@ -356,9 +356,13 @@ Tabel.prototype = {
 	},
 
 	changeHours () {
-		this.format_time(this._elements._add_hours_value.value);
+		let hours = this.format_time(this._elements._add_hours_value.value);
 
-		this.controller.changeHours(this.number, this.Hours - 1);
+		if (hours == this.Hours) return;
+
+		this.controller.changeHours(this.number, +hours - this.Hours);
+
+		this.changeTime(hours);
 
 		this.addHoursCap();
 
@@ -409,8 +413,12 @@ Tabel.prototype = {
     			text = this._elements._add_hours_value.min; 
     		}
 
-    		this.Hours = text;
+    		this._elements._add_hours_value.value = text;
 
-    		this._elements._add_hours_value.value = this.Hours;
+    		return text;
+	},
+
+	changeTime(text) {
+		this.Hours = text;
 	}
 }

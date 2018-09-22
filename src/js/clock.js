@@ -86,6 +86,10 @@ Clock.prototype = {
 		this.second = 0;
 	},
 
+	addHours (hours) {
+		this.hours = +this.hours + +hours;
+	},
+
 	/**
 	* change object's value and sends messages to the controller
 	*/
