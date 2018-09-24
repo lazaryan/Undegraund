@@ -83,11 +83,15 @@
 
             @media @tablet {
                 order: 2;
-                width: 120px;
+                width: 90px;
+            }
+
+            @media @tablet-strict {
+                font-size: 13px;
             }
 
             @media @desktop {
-                width: 160px;
+                width: 145px;
             }
         }
     }
@@ -145,11 +149,15 @@
         box-sizing: border-box;
 
         @media @tablet {
-            width: 120px;
+            width: 90px;
+        }
+
+        @media @tablet-strict {
+            font-size: 13px;
         }
 
         @media @desktop {
-            width: 150px;
+            width: 145px;
         }
     }
 
@@ -164,11 +172,11 @@
 
         @media @tablet {
             order: 1;
-            width: 120px;
+            width: 90px;
         }
 
         @media @desktop {
-            width: 160px;
+            width: 145px;
         }
     }
 
@@ -207,10 +215,14 @@
         border-radius: 0 20px 20px 0;
         border: none;
         outline: none;
-        display: block;
         background-color: @color_bth;
         color: @color_text;
         cursor: pointer;
+        font-size: 11px;
+
+        @media @desktop {
+            font-size: 14px;
+        }
     }
 
     &__input-hours {

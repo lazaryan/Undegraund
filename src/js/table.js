@@ -126,7 +126,7 @@ Tabel.prototype = {
 							elements: [
 								{
 									type: 'button',
-									text: 'Добавить',
+									text: 'Изменить',
 									save_name: '_add_hours',
 									attr: {class: 'information__button information__button_absolute'},
 									on: {'click': this.showAddHours.bind(this)}
@@ -304,13 +304,15 @@ Tabel.prototype = {
 	*/
 
 	showPay () {
-		let obj = `number=${this.Number}`;
-
 		this.controller.showPay(this.Number, this.Hours, this.prise);
 
 		if(!this._elements._add_hours) {
 			this.addHoursCap()
 		}
+	},
+
+	sendClient(prise) {
+		let obj = `number=${this.Number}&prise=${prise.toFixed(1)}`;
 
 		let xhr = new XMLHttpRequest();
 		xhr.open('POST', '../php/remove_client.php', true);
@@ -344,7 +346,7 @@ Tabel.prototype = {
 	},
 
 	removeHoursCap () {
-		this._elements._add_hours_block
+		this.Body.querySelector('#hours_block')
 			.removeChild(this._elements._add_hours);
 
 		this._elements._add_hours = undefined;
@@ -355,12 +357,20 @@ Tabel.prototype = {
 	},
 
 	changeHours () {
-		this.format_time(this._elements._add_hours_value.value);
-
-		this.controller.changeHours(this.number, this.Hours - 1);
-
 		this.addHoursCap();
+		
+		let hours = this.format_time(this._elements._add_hours_value.value);
 
+		if (hours == this.Hours) return;
+
+		this.controller.changeHours(this.number, +hours - this.Hours);
+
+		this.changeTime(hours);
+
+		this.sendNewHours();
+	},
+
+	sendNewHours () {
 		let obj = `number=${this.Number}&value=${this.Hours}`;
 
 		let xhr = new XMLHttpRequest();
@@ -408,8 +418,12 @@ Tabel.prototype = {
     			text = this._elements._add_hours_value.min; 
     		}
 
-    		this.Hours = text;
+    		this._elements._add_hours_value.value = text;
 
-    		this._elements._add_hours_value.value = this.Hours;
+    		return text;
+	},
+
+	changeTime(text) {
+		this.Hours = text;
 	}
 }
