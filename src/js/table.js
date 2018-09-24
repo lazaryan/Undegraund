@@ -346,14 +346,11 @@ Tabel.prototype = {
 	},
 
 	removeHoursCap () {
-		this.Body.querySelector('#hours_block')
-			.removeChild(this._elements._add_hours);
-
-		this._elements._add_hours = undefined;
+		this._elements._add_hours.style = 'display: none;'
 	},
 
 	addHoursCap () {
-		createElement(this._elements._add_hours_block, this._create.change.setting.elements[0].elements[0], this._elements);
+		this._elements._add_hours.style = '';
 	},
 
 	changeHours () {
