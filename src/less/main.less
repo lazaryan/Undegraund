@@ -29,9 +29,12 @@ button::-moz-focus-inner {
     width: 100%;
     height: 80px;
     margin-bottom: 10px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+
+    @media @tablet {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
 
     &__link {
         width: 200px;
@@ -44,7 +47,15 @@ button::-moz-focus-inner {
         text-decoration: none;
         background-color: @color_bth;
         color: @color_text;
-        margin-right: 25px;
+        margin: auto;
+        margin-top: 10px;
+        display: block;
+
+        @media @tablet {
+            margin: 0;
+            margin-top: 0;
+            margin-right: 25px;
+        }
     }
 }
 
