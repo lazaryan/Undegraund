@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta   charset="UTF-8">
+    <meta   name="viewport"
+            content="width=device-width, user-scalable=no, 
+                    initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta   http-equiv="X-UA-Compatible"
+            content="ie=edge">
+
+    <title>Underground</title>
+
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/table.css">
+    <noscript id="deferred-styles">
+        <link rel="stylesheet" type="text/css" href="css/popup.css">
+        <link rel="stylesheet" type="text/css" href="css/popup_prise.css">
+    </noscript>
+</head>
+<body class="body">
+	<header class="header">
+        <a href="./report.html" target="_blank" class="header__link">Отчет</a>
+    </header>
+    <!--Основа сайта-->
+    <div class="content" id="content"></div>	
+    <!--Скрипты-->
+    <script src="js/create_object.js"></script>
+    <script src="js/error.js"></script>
+    <script defer src="js/apend_styles.js"></script>
+    <script src="js/add_client.js"></script>
+    <script src="js/clock.js"></script>
+    <script src="js/pay.js"></script>
+    <script src="js/table.js"></script>
+    <script src="js/controller.js"></script>
+    <script>
+        let content = document.querySelector('#content');
+
+        let tabels = [
+        	{
+                prise: 400, 
+                name: 'Сергей',
+                hours: 3,
+                order: '21:56:13'
+            }, 
+            {
+                name: '',
+                prise: 400,
+            }, 
+            {
+                prise: 400
+            },
+            {
+                prise: 450
+            }
+        ];
+
+		let data = {
+			content: content,
+			tabels: tabels
+		}
+
+        let controller = new Controller(data);
+    </script>
+</body>
+</html>
