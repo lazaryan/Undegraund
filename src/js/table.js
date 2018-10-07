@@ -319,11 +319,11 @@ Tabel.prototype = {
 		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xhr.send(obj);
 
-		xhr.onreadystatechange = function() {
+		xhr.onreadystatechange = () => {
   			if (xhr.readyState != 4) return;
 
-  			if (xhr.status != 200) {
-    				throw new Error(xhr.statusText);
+  			if (xhr.status != 200 || xhr.responseText != 'Ok') {
+    				this.controller.showError('Ошибка подключения');
   			}
   		}
 	},
@@ -375,11 +375,11 @@ Tabel.prototype = {
 		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xhr.send(obj);
 
-		xhr.onreadystatechange = function() {
+		xhr.onreadystatechange = () => {
   			if (xhr.readyState != 4) return;
 
-  			if (xhr.status != 200) {
-    				throw new Error(xhr.statusText);
+  			if (xhr.status != 200 || xhr.responseText != 'Ok') {
+    				this.controller.showError('Ошибка подключения');
   			}
 		}
 	},

@@ -145,5 +145,9 @@ Controller.prototype = {
 
 	addHours (number, hours) {
 		this.clock[number].addHours(hours);
+	},
+
+	showError (message) {
+		new Error(message);
 	}
 }

@@ -289,7 +289,7 @@ AddClient.prototype = {
 
 		let now = new Date();
 		let time = `${this.formatTime(now.getHours())}:${this.formatTime(now.getMinutes())}:${this.formatTime(now.getSeconds())}`;
-		let date = `${now.getDay()}/${now.getMonth()}/${now.getFullYear()}`;
+		let date = `${now.getDate()}/${(+now.getMonth() + +1)}/${now.getFullYear()}`;
 		
 		let obj = `number=${this.Number}&name=${this.Name}&hours=${this.Hours}&date=${date}&time=${time}`;
 
@@ -300,11 +300,11 @@ AddClient.prototype = {
 		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xhr.send(obj);
 
-		xhr.onreadystatechange = function() {
-  			if (xhr.readyState != 4) return;
+		xhr.onreadystatechange = () => {
+			if (xhr.readyState != 4) return;
 
-  			if (xhr.status != 200) {
-    				throw new Error(xhr.statusText);
+  			if (xhr.status != 200 || xhr.responseText != 'Ok') {
+    				this.controller.showError('Ошибка подключения');
   			}
 		}
 	},
