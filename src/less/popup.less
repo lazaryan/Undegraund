@@ -82,12 +82,14 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: 80%;
+        width: 95%;
         margin: 35px auto 0;
+        max-width: 350px;
 
         @media @tablet {
             margin: 55px 0 0 0;
             width: 270px;
+            max-width: none;
         }
 
         @media @desktop {
@@ -142,18 +144,20 @@
 
     &__block {
         height: 70px;
-        width: 80%;
+        width: 95%;
         margin: 20px auto 0;
         background-color: @color_bth;
         border-radius: 10px;
         display: flex;
         justify-content: center;
         align-items: center;
+        max-width: 350px;
 
         @media @tablet {
             width: 100%;
             margin: 0;
             height: 100px;
+            max-width: none;
         }
     }
 
@@ -163,12 +167,14 @@
         background-color: @color_bth;
         width: 80%;
         height: 45px;
-        font-size: 30px;
+        font-size: 15px;
+        text-align: center;
         color: #fff;
 
         @media @tablet {
             height: 60px;
             font-size: 35px;
+            text-align: left;
         }
 
         @media @desktop {
@@ -179,20 +185,22 @@
 
 .enter-time {
     &__title {
-        width: 50%;
+        width: 65%;
         background-color: @color_bth;
         border-radius: 10px 0 0 10px;
         color: @color_text;
-        font-size: 18px;
-        line-height: 40px;
+        font-size: 14px;
+        line-height: 45px;
         font-weight: bold;
         text-align: center;
         min-height: 50px;
+        padding: 4px;
 
         @media @tablet {
             font-size: 20px;
             width: 185px;
-            line-height: 65px;
+            line-height: 60px;
+            padding: 0;
         }
     }
 
@@ -203,14 +211,16 @@
         color: @color_text;
         background-color: transparent;
         text-align: center;
-        width: 44%;
+        width: 45%;
         display: block;
         height: 40px;
-        font-size: 15px;
+        font-size: 14px;
+        margin: 2px;
 
         @media @tablet {
             height: 40px;
             font-size: 17px;
+            margin: 0;
         }
 
         @media @desktop {
@@ -221,7 +231,8 @@
 
     &__hours {
         width: 50px;
-        font-size: 18px;
+        font-size: 14px;
         color: @color_text;
+        margin-left: 3px;
     }
 }
